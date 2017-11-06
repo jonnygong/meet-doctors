@@ -1,0 +1,61 @@
+// 主题色
+$themeBgColor: #66c2fd;
+$blue: #66adfd;
+// 深蓝
+$deepBlue: #5395e0;
+$white: #fff;
+// 标题色号
+$hColor: #626262;
+// 正文色号
+$pColor: #7d7d7d;
+$color4c: #4c4c4c;
+
+// button按钮
+@mixin btn {
+  font-size: 1.6rem;
+  color: $white;
+  background: linear-gradient(to bottom right, $deepBlue, $themeBgColor 80%);
+  box-shadow: 0 .8rem 2rem -.8rem $themeBgColor;
+  border: 0;
+}
+// a标签按钮
+@mixin a{
+  display: block;
+  font-size: 1.6rem;
+  text-align: center;
+  color: $white;
+  background: linear-gradient(to bottom right, $deepBlue, $themeBgColor 80%);
+  box-shadow: 0 .8rem 2rem -.8rem $themeBgColor;
+  margin: 0 auto;
+}
+
+// 遇见专家--预约信息填写--单选框
+.mint-radiolist{
+  padding: 0 20px;
+  
+}
+.mint-radiolist-title{
+  width: 85px;
+  font-size: 1.2rem;
+  color: #535353;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.mint-cell-wrapper{
+  font-size: 1.2rem;
+  padding: 0 2rem;
+}
+.mint-radiolist .mint-cell-wrapper{
+  padding-left: 10px;
+}
+.mint-radiolist .mint-cell-wrapper .mint-radio-core{
+  width: 1rem;
+  height: 1rem;
+}
+.mint-radio-core::after{
+  width: .6rem;
+  height: .6rem;
+  top: 1px;
+  left: 1px;
+}
