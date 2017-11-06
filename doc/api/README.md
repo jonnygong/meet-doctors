@@ -38,5 +38,16 @@
 
 
 # 接口文档
-
-[ 接口文档 ](/doc/api/README.md)
+[ 医院接口 ](/doc/api/admin/Place.md)
+[ 分类接口 ](/doc/api/admin/Category.md)
+[ 专家接口 ](/doc/api/admin/Expert.md)
+[ 专家收入明细接口 ](/doc/api/README.md)
+[ 导诊接口 ](/doc/api/admin/Guide.md)
+[ 视频接口 ](/doc/api/admin/Video.md)
+[ 题库接口 ](/doc/api/admin/Question.md)
+[ 成绩单接口 ](/doc/api/admin/Report.md)
+[ 药膳产品接口 ](/doc/api/admin/Goods.md)
+[ 药膳图库接口 ](/doc/api/admin/Imgs.md)
+[ 药膳领取用户接口 ](/doc/api/admin/Recipient.md)
+[ 广告位接口 ](/doc/api/admin/Place.md)
+[ 广告接口 ](/doc/api/admin/Ads.md)
