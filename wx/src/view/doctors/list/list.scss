@@ -1,0 +1,82 @@
+.doc-list{
+  .search{
+    width: 100%;
+    padding: 1.2rem 2rem;
+    box-sizing: border-box;
+    background: $themeBgColor;
+    input{
+      width: 20.5rem;
+      height: 2.5rem;
+      background: $white;
+      border-radius: .4rem;
+      border: 0;
+    }
+  }
+  .mint-navbar{
+    .mint-tab-item{
+      &.is-selected{
+        margin-bottom: 0;
+        padding-bottom: 14px;
+        border-color: $deepBlue;
+        color: $deepBlue;
+      }
+    }
+  }
+  .mint-tab-container{
+    .card{
+      width: 100%;
+      box-sizing: border-box;
+      background: $white;
+      padding: 2.5rem 2.5rem;
+      margin-top: .6rem;
+      &-info{
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        img{
+          width: 6rem;
+          height: 6rem;
+          border-radius: 50%;
+          vertical-align: top;
+        }
+        .info{
+          margin-left: 2.5rem;
+          h1{
+            font-size: 1.5rem;
+            font-weight: normal;
+            color: $hColor;
+          }
+          p{
+            font-size: 1.2rem;
+            color: $pColor;
+            line-height: 1.6rem;
+            &:nth-child(2){
+              margin-top: .6rem;
+            }
+          }
+        }
+      }
+      .advantage{
+        width: 100%;
+        margin-top: 1.5rem;
+        .tips{
+          background: $deepBlue;
+          border-radius: .2rem .8rem .8rem .2rem;
+          font-size: 1.2rem;
+          color: $white;
+          text-align: center;
+          padding: .3rem .3rem .3rem 1rem;
+          display: inline-block;
+          i{
+            vertical-align: middle;
+          }
+        }
+        p{
+          font-size: 1.2rem;
+          color: $pColor;
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+}
