@@ -1,0 +1,73 @@
+.pra-report{
+  background: $white;
+  padding: 3.8rem 0;
+  .bg{
+    background: $themeBgColor;
+    padding: 3.3rem 2.4rem;
+    border-radius: .8rem;
+    .report{
+      width: 100%;
+      min-height: 41.7rem;
+      background: url('./../../../assets/score.png') no-repeat;
+      background-size: 100% 100%;
+      padding: 3.5rem 5.8rem;
+      box-sizing: border-box;
+      position: relative;
+      h1{
+        font-size: 2.6rem;
+        color: #0f0424;
+        font-weight: normal;
+        text-align: center;
+        letter-spacing: .4rem;
+      }
+      dl{
+        margin-top: 2.5rem;
+        dd{
+          display: flex;
+          h3{
+            text-align: right;
+            font-size: 1.6rem;
+            color: #0f0424;
+            line-height: 2;
+            &:first-child{
+              width: 10rem;
+            }
+            &:last-child{
+              width: 12.6rem;
+            }
+          }
+        }
+      }
+      img{
+        width: 14rem;
+        vertical-align: top;
+        position: absolute;
+        left: 6.9rem;
+        bottom: 5.7rem;
+      }
+      .info{
+        position: absolute;
+        bottom: 4rem;
+        right: 5.8rem;
+        h4{
+          color: #0f0424;
+          font-size: 1.2rem;
+          text-align: right;
+          line-height: 1.5;
+        }
+      }
+    }
+    .btn{
+      text-align: center;
+      margin-top: 3.3rem;
+      button{
+        @include btn;
+        padding: 0 3rem;
+        height: 3.2rem;
+        border-radius: 1.6rem;
+        background: #229ae7;
+        // letter-spacing: .2rem;
+      }
+    }
+  }
+}

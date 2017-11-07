@@ -3,7 +3,9 @@
     <!-- 轮播图 -->
     <mt-swipe :auto="4000">
       <mt-swipe-item>
-        <img src="./../../../assets/banner01.jpg">
+        <router-link to="/medicine/list">
+          <img src="./../../../assets/banner01.jpg">
+        </router-link>
       </mt-swipe-item>
     </mt-swipe>
     <!-- 科室 -->

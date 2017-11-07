@@ -7,8 +7,18 @@
 </template>
 
 <script>
+import { MessageBox } from 'mint-ui'
 export default {
-
+  mounted() {
+    this.handleMsgBox();
+  },
+  methods: {
+    handleMsgBox() {
+      MessageBox.confirm('前往答题，可免费领取药膳一份').then(action => {
+        this.$router.push('/gravida/question');
+      })
+    }
+  }
 }
 </script>
 
