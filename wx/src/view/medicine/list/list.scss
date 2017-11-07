@@ -1,0 +1,40 @@
+.med-list{
+  ul{
+    padding: .5rem .8rem;
+    li{
+      width: 100%;
+      background: $white;
+      padding: .5rem;
+      box-sizing: border-box;
+      margin-bottom: .5rem;
+      a{
+        display: block;
+        position: relative;
+        font-size: 0;
+        img{
+          width: 100%;
+          height: 17rem;
+          vertical-align: top;
+        }
+        span{
+          width: 100%;
+          line-height: 1.5;
+          padding: .3rem 1.5rem;
+          box-sizing: border-box;
+          background: rgba(0, 0, 0, .5);
+          position: absolute;
+          bottom: 0;
+          color: $white;
+          font-size: 1.2rem;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+      }
+      &:last-child{
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}

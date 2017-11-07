@@ -1,0 +1,45 @@
+.med-detail{
+  .mint-swipe{
+    height: 17rem;
+    &-items-wrap{
+      .mint-swipe-item{
+        img{
+          width: 100%;
+          height: 100%;
+          vertical-align: top;
+        }
+      }
+    }
+  }
+  h2{
+    font-size: 1.6rem;
+    color: $color4c;
+    border-bottom: 1px solid #dddde1;
+    padding: 1.5rem .8rem;
+    background: $white;
+    span{
+      float: right;
+      font-size: 1.6rem;
+      color: #5495e0;
+      em{
+        font-size: 1.2rem;
+        color: #808080;
+        font-style: normal;
+        margin-left: 1rem;
+      }
+    }
+  }
+  .info{
+    margin-top: .6rem;
+    background: $white;
+  }
+  .btn{
+    text-align: center;
+    button{
+      @include btn;
+      width: 11.7rem;
+      height: 3.2rem;
+      border-radius: 1.6rem;
+    }
+  }
+}

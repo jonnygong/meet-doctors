@@ -11,6 +11,11 @@ import Doc_Guide from '@/view/doctors/guide/guide.vue'
 
 import Gravida from '@/view/gravida/index/index.vue'
 import Gra_Detail from '@/view/gravida/detail/detail.vue'
+import Gra_Guestion from '@/view/gravida/question/question.vue'
+import Gra_Report from '@/view/gravida/report/report.vue'
+
+import Med_List from '@/view/medicine/list/list.vue'
+import Med_Detail from '@/view/medicine/detail/detail.vue'
 
 import Personal from '@/view/personal/index/index.vue'
 
@@ -51,6 +56,27 @@ const router = new Router({
           path: '/gravida/detail', 
           component: Gra_Detail, 
           meta: { title: '视频观看' }
+        },
+        {
+          path: '/gravida/question',
+          component: Gra_Guestion,
+          meta: { title: '答题中...' }
+        },
+        {
+          path: '/gravida/report',
+          component: Gra_Report,
+          meta: { title: '成绩单' }
+        },
+        // 药膳
+        {
+          path: '/medicine/list',
+          component: Med_List,
+          meta: { title: '药膳' }
+        },
+        {
+          path: '/medicine/detail',
+          component: Med_Detail,
+          meta: { title: '药膳介绍' }
         },
         // 个人中心
         { 
