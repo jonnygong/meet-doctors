@@ -1,15 +1,29 @@
 .doc-list{
-  .search{
+  header{
     width: 100%;
     padding: 1.2rem 2rem;
     box-sizing: border-box;
     background: $themeBgColor;
+  }
+  .search{
+    width: 20.5rem;
+    position: relative;
+    display: flex;
+    background: $white;
+    border-radius: .4rem;
+    i{
+      position: absolute;
+      color: #bfbfbf;
+      font-size: 1.8rem;
+      top: .2rem;
+      left: .3rem;
+    }
     input{
-      width: 20.5rem;
       height: 2.5rem;
-      background: $white;
-      border-radius: .4rem;
       border: 0;
+      padding-left: 2.5rem;
+      box-sizing: border-box;
+      border-radius: .4rem;
     }
   }
   .mint-navbar{
