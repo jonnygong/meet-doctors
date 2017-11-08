@@ -40,7 +40,7 @@
 
 
 # 接口文档
-- [ 医院接口 ](/doc/api/admin/Place.md)
+- [ 医院接口 ](/doc/api/admin/Hospital.md)
 - [ 分类接口 ](/doc/api/admin/Category.md)
 - [ 专家接口 ](/doc/api/admin/Expert.md)
 - [ 专家收入明细接口 ](/doc/api/README.md)
