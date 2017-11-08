@@ -11,16 +11,12 @@
     </div>
     <!-- 专家介绍、预约说明 -->
     <div class="introduce">
-      <dl>
-        <dd v-for="(item, index) in menu" 
-          :key="index"
-          :class="{ check: isActive == index }"
-          @click="handleTab(index)">
-          {{ item.name }}
-        </dd>
-      </dl>
       <!-- 医生介绍 -->
       <div class="introduce-content">
+        <div class="introduce-content-title">
+          <i class="iconfont icon-yishengjieshao"></i>
+          <h2>医生介绍</h2>
+        </div>
         <!-- 擅长领域 -->
         <div class="advantage">
           <div class="tips">擅长领域 <i class="iconfont icon-shanchanglingyu"></i></div>
@@ -30,6 +26,14 @@
         <div class="advantage">
           <div class="tips">出诊时间 <i class="iconfont icon-shanchanglingyu"></i></div>
           <p>周二上午</p>
+        </div>
+        <!-- 预约须知 -->
+        <div class="introduce-know">
+          <div class="introduce-know-title">
+            <i class="iconfont icon-yuyuexuzhi"></i>
+            <h2>预约须知</h2>
+          </div>
+          <p>预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、</p>
         </div>
       </div>
     </div>
@@ -45,17 +49,11 @@
 export default {
   data() {
     return {
-      menu: [
-        { name: '医生介绍' },
-        { name: '预约须知' }
-      ],
-      isActive: 0
+      
     }
   },
   methods: {
-    handleTab(index) {
-      this.isActive = index;
-    }
+    
   }
 }
 </script>

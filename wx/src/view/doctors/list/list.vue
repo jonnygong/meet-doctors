@@ -1,8 +1,13 @@
 <template>
   <div class="doc-list">
-    <div class="search">
-      <input type="text" placeholder="搜索医院或医生">
-    </div>
+    <!-- 搜索框 -->
+    <header>
+      <div class="search">
+        <i class="iconfont icon-sousuo"></i>
+        <input type="text" placeholder="搜索医院或医生">
+      </div>
+    </header>
+    
     <mt-navbar v-model="selected">
       <mt-tab-item v-for="(item, index) in types" :key="index" :id="item.id">
         {{ item.name }}

@@ -12,7 +12,7 @@
     <div class="keshi">
       <div class="keshi-title">
         <h2>科室</h2>
-        <h3>查看更多 <i class="iconfont icon-youjiantou"></i></h3>
+        <h3 @click="toList">查看更多 <i class="iconfont icon-youjiantou"></i></h3>
       </div>
       <ul>
         <li v-for="(item, index) in type" :key="index">
@@ -62,6 +62,9 @@ export default {
   methods: {
     toDetail() {
       this.$router.push('/doctor/detail')
+    },
+    toList() {
+      this.$router.push('/doctor/list')
     }
   }
 }
