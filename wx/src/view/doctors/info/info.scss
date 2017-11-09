@@ -18,6 +18,9 @@
         color: #535353;
       }
     }
+    &-two{
+      margin-top: 1.5rem;
+    }
     &-three{
       margin-top: 1.5rem;
       .mint-cell{
@@ -30,27 +33,28 @@
       box-sizing: border-box;
       margin-top: 1.5rem;
       background: $white;
-      padding: 1.6rem 2.6rem;
+      padding: 1.6rem 2rem;
       textarea{
         width: 100%;
         height: 10.6rem;
         box-sizing: border-box;
         resize: none;
-        border: 1px solid #bfbfbf;
+        border-color: #bfbfbf;
         padding: .5rem;
+        -webkit-appearance: none;
+        border-radius: 0;
       }
     }
     &-five{
       margin-top: 1.5rem;
       background: $white;
       text-align: center;
-      padding: 1.6rem 2.6rem;
+      padding: 1.6rem 2rem 2rem;
       .upload-img_up{
-        padding: .15rem 0 .7rem;
         overflow: hidden;
         li{
-          width: 12.5rem;
-          height: 12.5rem;
+          width: 8.8rem;
+          height: 8.8rem;
           float: left;
           margin-right: .5rem;
           margin-bottom: .2rem;
@@ -58,13 +62,12 @@
           img{
             width: 100%;
             height: 100%;
-            border-radius: 1.6rem;
           }
           i{
             position: absolute;
-            top: -.12rem;
-            right: -.12rem;
-            font-size: .36rem;
+            top: -.6rem;
+            right: -.6rem;
+            font-size: 1.8rem;
             color: rgba(0,0,0, .7);
           }
           &:nth-child(4n){
@@ -77,6 +80,7 @@
         width: 11.7rem;
         height: 3.2rem;
         border-radius: 1.6rem;
+        margin-top: 2.5rem;
       }
     }
   }

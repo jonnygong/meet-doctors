@@ -33,4 +33,11 @@ li{
 a{
   text-decoration: none;
 }
+/* 时间选择器字号 */
+.picker-slot{
+  font-size: 1.5rem;
+}
+.mint-cell:last-child{
+  background-image: none;
+}
 </style>

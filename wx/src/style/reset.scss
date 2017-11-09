@@ -44,6 +44,7 @@ $color4c: #4c4c4c;
 .mint-cell-wrapper{
   font-size: 1.2rem;
   padding: 0 2rem;
+  background-image: none;
 }
 .mint-radiolist .mint-cell-wrapper{
   padding-left: 10px;
@@ -51,6 +52,9 @@ $color4c: #4c4c4c;
 .mint-radiolist .mint-cell-wrapper .mint-radio-core{
   width: 1rem;
   height: 1rem;
+}
+.mint-radio-core, .mint-radio-core::after{
+  border-radius: 50%;
 }
 .mint-radio-core::after{
   width: .6rem;

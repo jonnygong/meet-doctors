@@ -1,14 +1,12 @@
-@import './../../style/reset.scss';
 li{
-    border: .01rem dashed #ededed;
-    border-radius: .16rem;
+    border: 1px solid #bfbfbf;
     i{
         position: absolute;
         top: 0;
-        left: .06rem;
+        left: 0;
         right: 0;
-        font-size: 1.12rem;
-        color: #ededed;
+        font-size: 8.1rem;
+        color: #bfbfbf;
     }
     input[type="file"]{
         width: 100%;

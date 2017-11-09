@@ -1,8 +1,8 @@
 <template>
-    <li>
-        <input type="file" ref="inputer" @change="toBase" :multiple="true">
-        <!-- <i class="iconfont">&#xe614;</i> -->
-    </li>
+  <li>
+    <input type="file" @change="toBase" multiple>
+    <i class="iconfont icon-add"></i>
+  </li>
 </template>
 
 <script>
@@ -38,5 +38,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './../../style/iconfont/iconfont.css';
 @import "./upload.scss";
 </style>
