@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { MessageBox } from 'mint-ui'
+import { MessageBox, Toast } from 'mint-ui'
 export default {
   data() {
     return {
@@ -50,7 +50,9 @@ export default {
     // 提交支付审核
     applyPay() {
       MessageBox.confirm('是否申请支付审核？', '提示').then(() => {
-
+        Toast({
+          message: '等待医导通过审核...'
+        })
       })
     }
   }

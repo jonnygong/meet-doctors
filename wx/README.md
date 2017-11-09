@@ -2,20 +2,36 @@
 
 > For Meet-Doctors
 
-## Build Setup
+## 目录
 
-``` bash
-# install dependencies
-npm install
+--| src
+  --| assets
+  --| components
+  --| router
+  --| style
+  --| view
+    --| doctors   患者模块 - 遇见名医
+      --| detail    专家详情
+      --| guide     联系医导
+      --| index     首页
+      --| info      预约信息填写
+      --| list      专家列表
 
-# serve with hot reload at localhost:8080
-npm run dev
+    --| expert    专家模块
+    
+    --| gravida   患者模块 - 孕妇课堂
+      --| detail    课堂详情<观看视频>
+      --| index     首页
+      --| question  问答页
+      --| report    成绩单
 
-# build for production with minification
-npm run build
+    --| index     入口页面
+    --| login     登录页面
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+    --| medicine  患者模块 - 药膳
+      --| detail    药膳详情
+      --| list      药膳列表
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+    --| personal  患者模块 - 个人中心
+  --| App.vue
+  --| main.js

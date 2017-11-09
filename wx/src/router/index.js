@@ -19,6 +19,10 @@ import Med_Detail from '@/view/medicine/detail/detail.vue'
 
 import Personal from '@/view/personal/index/index.vue'
 
+// 专家模块
+import Expert from '@/view/expert/index/index.vue'
+import Expert_Order from '@/view/expert/order/order.vue'
+
 import Login from '@/view/login/login.vue'
 
 Vue.use(Router)
@@ -103,6 +107,17 @@ const router = new Router({
       path: '/doctor/guide',
       component: Doc_Guide,
       meta: { title: '联系医导' }
+    },
+    // 专家模块
+    {
+      path: '/expert',
+      component: Expert,
+      meta: { title: '专家' }
+    },
+    {
+      path: '/expert/order',
+      component: Expert_Order,
+      meta: { title: '预约单' }
     },
     {
       path: '*',

@@ -2,49 +2,74 @@
   <div class="doc-info">
     <h1>预约信息填写</h1>
     <div class="part-one">
-      <mt-field label="患者姓名" placeholder="请输入患者姓名" v-model="params.username"></mt-field>
+      <mt-field label="姓名" placeholder="请输入姓名" :attr="{ maxlength: 5 }" v-model="params.username"></mt-field>
       <mt-radio
-        title="患者性别"
+        title="性别"
         v-model="params.sex"
         :options="['男', '女']">
       </mt-radio>
-      <mt-field label="联系电话" placeholder="请输入联系电话" v-model="params.tel"></mt-field>
-      <mt-field label="联系地址" placeholder="请输入联系地址" v-model="params.address"></mt-field>
+      <mt-field label="联系电话" placeholder="请输入联系电话" :attr="{ maxlength: 11 }" type="tel" v-model="params.tel"></mt-field>
+    </div>
+    <div class="part-two">
+      <mt-field 
+        label="预约时间" 
+        placeholder="请选择预约时间" 
+        v-model="params.yuyuetime" 
+        readonly  
+        @click.native="open('picker')">
+      </mt-field>
     </div>
     <div class="part-three">
-      <mt-field label="体重" placeholder="请输入体重(kg)" v-model="params.weight"></mt-field>
-      <mt-field label="身高" placeholder="请输入身高(cm)" v-model="params.height"></mt-field>
-      <mt-field label="年龄" placeholder="请输入年龄" v-model="params.age"></mt-field>
+      <mt-field label="体重" placeholder="请输入体重(kg)" type="number" v-model="params.weight">
+        <span>kg</span>
+      </mt-field>
+      <mt-field label="身高" placeholder="请输入身高(cm)" type="number" v-model="params.height">
+        <span>cm</span>
+      </mt-field>
+      <mt-field label="年龄" placeholder="请输入年龄" type="number" v-model="params.age"></mt-field>
     </div>
     <div class="part-four">
       <textarea placeholder="请输入病情描述" v-model="params.desc"></textarea>
     </div>
     <div class="part-five">
-      <!-- <ul class="upload-img_up">
-        <upload @input="handleUplaodImage( $event )"></upload>
+      <ul class="upload-img_up">
+        <upload-img @input="handleUplaodImage( $event )"></upload-img>
         <li v-for="(img, index) in params.uploadImgs" :key="index">
           <img :src="img" >
-          <i class="iconfont" @click="DelImg(index)">&#xe724;</i>
+          <i class="iconfont icon-guanbi" @click="DelImg(index)"></i>
         </li>
-      </ul> -->
-      <button @click="handleMsgBox">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+      </ul>
+      <button @click="handleMsgBox">提 交</button>
     </div>
+
+    <!-- 时间选择器 -->
+    <mt-datetime-picker
+      ref="picker"
+      v-model="value"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      @confirm="handleChange">
+    </mt-datetime-picker>
+
   </div>
 </template>
 
 <script>
-import { MessageBox } from 'mint-ui'
+import { MessageBox, Toast } from 'mint-ui'
+import uploadImg from '@/components/upload/upload'
 export default {
   components: {
-    upload: require('@/components/upload/upload')
+    uploadImg
   },
   data() {
     return {
+      value: new Date(),
       params: { 
         username: '',
         sex: '男',
         tel: '',
-        address: '',
+        yuyuetime: '',
         weight: '',
         height: '',
         age: '',
@@ -54,6 +79,18 @@ export default {
     }
   },
   methods: {
+    // 时间选择器
+    open(picker) {
+        this.$refs[picker].open();
+    },
+    // 处理时间格式
+    handleChange(value) {
+      // console.log(value.getTime());  转时间戳
+      let hour = value.getHours() > 10 ? value.getHours() : '0' + value.getHours();
+      let minute = value.getMinutes() > 10 ? value.getMinutes() : '0' + value.getMinutes();
+      this.params.yuyuetime = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
+    },
+    // 删除图片
     DelImg(index) {
       this.params.uploadImgs.splice(index, 1);
     },
