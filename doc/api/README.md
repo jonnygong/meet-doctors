@@ -51,3 +51,4 @@
 - [ 药膳领取用户接口 ](/doc/api/admin/Recipient.md)
 - [ 广告位接口 ](/doc/api/admin/Place.md)
 - [ 广告接口 ](/doc/api/admin/Ads.md)
+- [ 统计接口 ](/doc/api/admin/Count.md)
