@@ -57,6 +57,8 @@
 | update_time | int(11) |  |
 | status | tinyint(1) | 0离职1在职 |
 | hospital_id | int(11) | 医院id |
+| img | varchar(255) | 头像 |
+| code | varchar(255) | 导诊微信二维码 |
 
 
 
@@ -110,6 +112,8 @@
 | update_time | int(11) |  |
 | status | tinyint(1) | 0离职1在职 |
 | hospital_id | int(11) | 医院id |
+| img | varchar(255) | 头像 |
+| code | varchar(255) | 导诊微信二维码 |
 
 
 
@@ -128,6 +132,8 @@
 | sex | tinyint(1) | 1男2女性别 |
 | age | int(11) | 年龄 |
 | hospital_id | int(11) | 医院id |
+| img | varchar(255) | 头像 |
+| code | varchar(255) | 导诊微信二维码 |
 
 
 + __响应参数__
@@ -152,6 +158,8 @@
 | sex | tinyint(1) | 1男2女性别 |
 | age | int(11) | 年龄 |
 | hospital_id | int(11) | 医院id |
+| img | varchar(255) | 头像 |
+| code | varchar(255) | 导诊微信二维码 |
 
 
 + __响应参数__
