@@ -37,7 +37,7 @@
 - 正式部署接口： http://mtd.api.kfw001.com/admin
 
 
-# 接口文档
+# 后台接口文档
 - [ 医院接口 ](/doc/api/admin/Hospital.md)
 - [ 分类接口 ](/doc/api/admin/Category.md)
 - [ 专家接口 ](/doc/api/admin/Expert.md)
@@ -52,5 +52,6 @@
 - [ 广告位接口 ](/doc/api/admin/Place.md)
 - [ 广告接口 ](/doc/api/admin/Ads.md)
 - [ 统计接口 ](/doc/api/admin/Count.md)
+# 微信端接口文档
 - [ 微信端首页接口 ](/doc/api/wx/Home.md)
 - [ 微信端专家列表接口 ](/doc/api/wx/Elist.md)
