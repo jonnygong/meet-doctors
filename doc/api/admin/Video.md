@@ -62,6 +62,7 @@
 | img | varchar(1000) | 图片 |
 | content | text | 文字 |
 | hospital_id | int(11) | 归属医院  0 全部医院都可以显示 |
+| long_time | varchar(10) | 视频时长 |
 
 
 
@@ -120,6 +121,7 @@
 | img | varchar(1000) | 图片 |
 | content | text | 文字 |
 | hospital_id | int(11) | 归属医院  0 全部医院都可以显示 |
+| long_time | varchar(10) | 视频时长 |
 
 
 
@@ -142,6 +144,7 @@
 | img | varchar(1000) | 多张图片 |
 | content | text | 文字 |
 | hospital_id | int(11) | 归属医院  0 全部医院都可以显示 |
+| long_time | varchar(10) | 视频时长 |
 
 
 + __响应参数__
@@ -170,6 +173,7 @@
 | img | varchar(1000) | 多张图片 |
 | content | text | 文字 |
 | hospital_id | int(11) | 归属医院  0 全部医院都可以显示 |
+| long_time | varchar(10) | 视频时长 |
 
 
 + __响应参数__

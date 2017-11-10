@@ -58,6 +58,7 @@
 | update_time | int(11) |  |
 | openid | varchar(50) |  |
 | user_img | varchar(255) | 用户头像 |
+| img | varchar(255) | 用户上传待产证明 |
 
 
 
@@ -112,6 +113,7 @@
 | update_time | int(11) |  |
 | openid | varchar(50) |  |
 | user_img | varchar(255) | 用户头像 |
+| img | varchar(255) | 用户上传待产证明 |
 
 
 
@@ -129,6 +131,7 @@
 | name | varchar(50) | 用户名称 |
 | tel | varchar(50) | 用户电话号码 |
 | address | varchar(255) | 用户地址 |
+| img | varchar(255) | 用户上传待产证明 |
 
 
 + __响应参数__
@@ -152,6 +155,7 @@
 | name | varchar(50) | 用户名称 |
 | tel | varchar(50) | 用户电话号码 |
 | address | varchar(255) | 用户地址 |
+| img | varchar(255) | 用户上传待产证明 |
 
 
 + __响应参数__
