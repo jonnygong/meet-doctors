@@ -26,17 +26,15 @@
 # 项目部署
 
 - 测试服务器： 192.168.220.247
-- 接口：微信： mtd.api.kfw001.ts/wx
-- 接口：后台： mtd.api.kfw001.ts/admin
+- 测试部署微信： mtd.api.kfw001.ts/wx
+- 测试部署接口： mtd.api.kfw001.ts/admin
 
 - 测试部署微信： mtd.kfw001.ts/wx
-- 测试部署后台： mtd.kfw001.ts/admin
+- 测试部署接口： mtd.kfw001.ts/admin
 
-- 正式部署：     http://mtd.kfw001.com/wx
-- 正式部署：     http://mtd.kfw001.com/admin
-
-- 正式部署微信：  http://mtd.api.kfw001.com/wx
-- 正式部署：     http://mtd.api.kfw001.com/admin
+- 正式部署：     http://mtd.kfw001.com
+- 正式部署微信： http://mtd.api.kfw001.com/wx
+- 正式部署接口： http://mtd.api.kfw001.com/admin
 
 
 # 后台接口文档
@@ -54,6 +52,8 @@
 - [ 广告位接口 ](/doc/api/admin/Place.md)
 - [ 广告接口 ](/doc/api/admin/Ads.md)
 - [ 统计接口 ](/doc/api/admin/Count.md)
+
+
 # 微信端接口文档
 - [ 微信端首页接口 ](/doc/api/wx/Home.md)
 - [ 微信端专家列表接口 ](/doc/api/wx/Elist.md)
