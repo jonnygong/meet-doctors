@@ -71,6 +71,7 @@
 | pos_name | varchar(50) | 职称 |
 | visit_time | varchar(50) | 出诊时间 |
 | specialty | varchar(255) | 特长 |
+| img | varchar(255) | 图片 |
 
 
 
@@ -138,6 +139,7 @@
 | pos_name | varchar(50) | 职称 |
 | visit_time | varchar(50) | 出诊时间 |
 | specialty | varchar(255) | 特长 |
+| img | varchar(255) | 图片 |
 
 
 
@@ -161,13 +163,13 @@
 | tel | varchar(50) | 手机号码 |
 | scale | decimal(10,2) | 收入比例 |
 | price | decimal(10,2) | 价格 |
-| income | decimal(10,2) | 收入 |
 | sort | int(11) | 排序 |
 | hospital_id | int(11) | 医院id |
 | position | varchar(50) | 职位 |
 | pos_name | varchar(50) | 职称 |
 | visit_time | varchar(50) | 出诊时间 |
 | specialty | varchar(255) | 特长 |
+| img | varchar(255) | 图片 |
 
 
 + __响应参数__
@@ -198,13 +200,13 @@
 | tel | varchar(50) | 手机号码 |
 | scale | decimal(10,2) | 收入比例 |
 | price | decimal(10,2) | 价格 |
-| income | decimal(10,2) | 收入 |
 | sort | int(11) | 排序 |
 | hospital_id | int(11) | 医院id |
 | position | varchar(50) | 职位 |
 | pos_name | varchar(50) | 职称 |
 | visit_time | varchar(50) | 出诊时间 |
 | specialty | varchar(255) | 特长 |
+| img | varchar(255) | 图片 |
 
 
 + __响应参数__
