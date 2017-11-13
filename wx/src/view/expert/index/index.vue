@@ -23,7 +23,7 @@
 
       <mt-tab-container v-model="selected">
         <mt-tab-container-item v-for="(item, index) in types" :key="index" :id="item.id">
-          <div class="item">
+          <div class="item" v-for="(list, i) in 2" :key="i">
             <div class="item-left">
               <span>预约人：张久久</span>
               <span>联系方式：18888888888</span>

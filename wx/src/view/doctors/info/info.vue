@@ -86,8 +86,8 @@ export default {
     // 处理时间格式
     handleChange(value) {
       // console.log(value.getTime());  转时间戳
-      let hour = value.getHours() > 10 ? value.getHours() : '0' + value.getHours();
-      let minute = value.getMinutes() > 10 ? value.getMinutes() : '0' + value.getMinutes();
+      let hour = value.getHours() < 10 ? '0' + value.getHours() : value.getHours();
+      let minute = value.getMinutes() < 10 ? '0' + value.getMinutes() : value.getMinutes();
       this.params.yuyuetime = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
     },
     // 删除图片

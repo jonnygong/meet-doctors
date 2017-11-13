@@ -23,6 +23,10 @@ import Personal from '@/view/personal/index/index.vue'
 import Expert from '@/view/expert/index/index.vue'
 import Expert_Order from '@/view/expert/order/order.vue'
 
+// 医导模块
+import Guide from '@/view/guide/index/index.vue'
+import Guide_Order from '@/view/guide/order/order.vue'
+
 import Login from '@/view/login/login.vue'
 
 Vue.use(Router)
@@ -118,6 +122,17 @@ const router = new Router({
       path: '/expert/order',
       component: Expert_Order,
       meta: { title: '预约单' }
+    },
+    // 医导模块
+    {
+      path: '/guide',
+      component: Guide,
+      meta: { title: '医导' }
+    },
+    {
+      path: '/guide/order',
+      component: Guide_Order,
+      meta: { title: '预约详情' }
     },
     {
       path: '*',

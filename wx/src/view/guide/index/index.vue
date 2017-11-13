@@ -1,0 +1,122 @@
+<template>
+  <div class="exp-index">
+    <header>
+      <img src="./../../../assets/headurl.png">
+      <div class="nickname">夏日驿站</div>
+    </header>
+
+    <div class="exp-index-nav">
+      <ul>
+        <li v-for="(i, index) in orders" :key="index">
+          <h4>{{ i.title }}</h4>
+          <b>{{ i.num }}</b>
+        </li>
+      </ul>
+    </div>
+
+    <div class="exp-index-content">
+      <mt-navbar v-model="selected">
+        <mt-tab-item v-for="(item, index) in types" :key="index" :id="item.id">
+          {{ item.name }}
+        </mt-tab-item>
+      </mt-navbar>
+
+      <mt-tab-container v-model="selected">
+        <mt-tab-container-item v-for="(item, index) in types" :key="index" :id="item.id">
+          <div class="item" v-if="item.id === '1'" v-for="(list, i) in 2" :key="i">
+            <div class="item-left">
+              <span>就医地点/专家：杭州妇保医院/**医生</span>
+              <span>预约人：张久久 <a :href="`tel:18888888888`">电 话</a></span>
+              <span>预约时间：2017年12月11日</span>
+            </div>
+            <div class="item-right">
+              <button @click="toOrder">查 看</button>
+              <button>支 付</button>
+              <button>关 闭</button>
+            </div>
+          </div>
+          <div class="item" v-if="item.id === '2'" v-for="(list, i) in 2" :key="i">
+            <div class="item-left">
+              <span>就医地点/专家：杭州妇保医院/**医生</span>
+              <span>预约人：张久久</span>
+              <span>联系电话：18888888888</span>
+              <span>预约时间：2017年12月11日</span>
+            </div>
+            <div class="item-right">
+              <button @click="toOrder">查 看</button>
+              <button>支付审核</button>
+            </div>
+          </div>
+          <div class="item" v-if="item.id === '3'" v-for="(list, i) in 2" :key="i">
+            <div class="item-left">
+              <span>就医地点/专家：杭州妇保医院/**医生</span>
+              <span>预约人：张久久</span>
+              <span>联系电话：18888888888</span>
+              <span>预约时间：2017年12月11日</span>
+            </div>
+            <div class="item-right">
+              <button @click="toOrder">查 看</button>
+              <button>就医确认</button>
+            </div>
+          </div>
+          <div class="item" v-if="item.id === '4'" v-for="(list, i) in 2" :key="i">
+            <div class="item-left">
+              <span>就医地点/专家：杭州妇保医院/**医生</span>
+              <span>预约人：张久久</span>
+              <span>联系电话：18888888888</span>
+              <span>预约时间：2017年12月11日</span>
+            </div>
+            <div class="item-right">
+              <button @click="toOrder">查 看</button>
+            </div>
+          </div>
+          <div class="item" v-if="item.id === '5'" v-for="(list, i) in 2" :key="i">
+            <div class="item-left">
+              <span>就医地点/专家：杭州妇保医院/**医生</span>
+              <span>预约人：张久久</span>
+              <span>联系电话：18888888888</span>
+              <span>预约时间：2017年12月11日</span>
+              <span>预约关闭</span>
+            </div>
+            <div class="item-right">
+              <button @click="toOrder">查 看</button>
+              <button>恢复</button>
+            </div>
+          </div>
+        </mt-tab-container-item>
+      </mt-tab-container>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      orders: [
+        { title: '今日预约总量', num: '20' },
+        { title: '本周完成', num: '20' },
+        { title: '本月完成', num: '20' }
+      ],
+      selected: '1',
+      types: [
+        { id: '1', name: '未支付' },
+        { id: '2', name: '支付审核' },
+        { id: '3', name: '专家待看' },
+        { id: '4', name: '已完成' },
+        { id: '5', name: '已关闭' },
+      ]
+    }
+  },
+  methods: {
+    toOrder() {
+      this.$router.push('/guide/order')
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import './../../../style/reset.scss';
+@import 'index.scss';
+</style>
