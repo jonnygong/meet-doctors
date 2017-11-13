@@ -64,3 +64,5 @@
 | pos_name | varchar | 职称 |
 | name | varchar | 医生名称 |
 | hospital_name | varchar | 医院名称 |
+| img | varchar | 专家头像 |
+| category_name | varchar | 所属分类 |
