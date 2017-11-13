@@ -7,11 +7,12 @@
         <mt-field label="状态" v-model="params.status" readonly></mt-field>
       </div>
       
-      <div class="exp-order-content-two" v-for="(i, index) in 3" :key="index">
+      <div class="exp-order-content-two" v-for="(i, index) in 4" :key="index">
         <div class="exp-order-content-two-title" @click="handleSelect(index)">
           <span v-if="index == 0">1. 会员基本信息</span>
           <span v-if="index == 1">2. 患者自述</span>
           <span v-if="index == 2">3. 最近就诊图片</span>
+          <span v-if="index == 3">4. 医生信息</span>
           <i class="iconfont icon-xiala"></i>
         </div>
         <div class="exp-order-content-two-options" v-show="show == index">
@@ -29,21 +30,32 @@
           <div class="option" v-if="index == 2">
             
           </div>
+          <div class="option" v-if="index == 3">
+            <dl>
+              <dd>姓名：刘欢欢</dd>
+              <dd>医院：杭州妇保</dd>
+              <dd>主治：儿科</dd>
+            </dl>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="btn">
+      <button @click="openMsgBox">填写就诊时间</button>
     </div>
   </div>
 </template>
 
 <script>
+import { MessageBox } from 'mint-ui'
 export default {
   data() {
     return {
       params: {
         num: '20175652231',
-        status: '未就诊'
+        status: '未支付'
       },
-      show: 0
+      show: -1
     }
   },
   methods: {
@@ -51,8 +63,13 @@ export default {
       if(this.show == index) {
         this.show = -1
       }else {
-        this.show = index
+        this.show = index;
       }
+    },
+    openMsgBox() {
+      MessageBox.alert('你是否与协调人沟通过？', '温馨提示').then(() => {
+
+      })
     }
   }
 }
