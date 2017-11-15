@@ -36,7 +36,7 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | id | int | id |
-| img_url | varchar | 封面图片 |
+| cover | varchar | 封面图片 |
 | content | varchar | 详情 |
 
 
@@ -59,12 +59,14 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | id | int | id |
-| img_url | varchar | 封面图片 |
+| img_url | varchar | 产品图片，多张 |
 | content | varchar | 详情 |
 | name | int | 药膳名称 |
 | good_type | varchar | 产品类别1销售2赠品 |
 | price | varchar | 价格 |
-| imgs | varchar | 三证 |
+| imgs | varchar | 三证图片 |
+| material | varchar | 材料 |
+| effect | varchar | 功效 |
 
 
 
