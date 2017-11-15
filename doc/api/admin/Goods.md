@@ -50,7 +50,7 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | category_id | int(11) | 产品分类id |
-| img_url | varchar(1000) | 产品头图 |
+| img_url | varchar(1000) | 产品图片多张 |
 | name | varchar(50) | 产品名称 |
 | content | text | 产品介绍 |
 | status | tinyint(1) | -1删除0不上线1上线 |
@@ -61,6 +61,9 @@
 | price | decimal(10,2) | 价格 |
 | total | int(11) | 库存量 |
 | clicks | int(11) | 点击量 |
+| cover | varchar(255) | 产品封面图片 |
+| material | varchar(1000) | 材料 |
+| effect | varchar(1000) | 功效 |
 
 
 
@@ -107,7 +110,7 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | category_id | int(11) | 产品分类id |
-| img_url | varchar(1000) | 产品头图 |
+| img_url | varchar(1000) | 产品图片多张 |
 | name | varchar(50) | 产品名称 |
 | content | text | 产品介绍 |
 | status | tinyint(1) | -1删除0不上线1上线 |
@@ -118,6 +121,9 @@
 | price | decimal(10,2) | 价格 |
 | total | int(11) | 库存量 |
 | clicks | int(11) | 点击量 |
+| cover | varchar(255) | 产品封面图片 |
+| material | varchar(1000) | 材料 |
+| effect | varchar(1000) | 功效 |
 
 
 
@@ -132,12 +138,15 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | category_id | int(11) | 产品分类id |
-| img_url | varchar(1000) | 产品头图 |
+| img_url | varchar(1000) | 产品图片多张 |
 | name | varchar(50) | 产品名称 |
 | content | text | 产品介绍 |
 | good_type | tinyint(1) | 产品类别1销售2赠品 |
 | price | decimal(10,2) | 价格 |
 | total | int(11) | 库存量 |
+| cover | varchar(255) | 产品封面图片 |
+| material | varchar(1000) | 材料 |
+| effect | varchar(1000) | 功效 |
 
 
 + __响应参数__
@@ -158,12 +167,15 @@
 | --------- | -------- | ------- |
 | id | int(11) | 产品id |
 | category_id | int(11) | 产品分类id |
-| img_url | varchar(1000) | 产品头图 |
+| img_url | varchar(1000) | 产品图片多张 |
 | name | varchar(50) | 产品名称 |
 | content | text | 产品介绍 |
 | good_type | tinyint(1) | 产品类别1销售2赠品 |
 | price | decimal(10,2) | 价格 |
 | total | int(11) | 库存量 |
+| cover | varchar(255) | 产品封面图片 |
+| material | varchar(1000) | 材料 |
+| effect | varchar(1000) | 功效 |
 
 
 + __响应参数__
