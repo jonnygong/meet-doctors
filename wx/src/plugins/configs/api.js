@@ -26,6 +26,24 @@ export default {
     // 患者：孕妇-获取题目
     patientGraVideoQuestion: '/Wx/Video/question',
     // 患者：孕妇-保存成绩单
-    patientGraVideoSave: '/Wx/Video/save'
+    patientGraVideoSave: '/Wx/Video/save',
+    // 患者：个人中心-预约信息
+    patientPerOrder: '/Wx/Personal/order',
+    // 患者：个人中心-预约信息-预约单
+    patientPerDetails: '/Wx/Personal/details',
+    // 患者：个人中心-预约信息-保存预约单
+    patientPerSave: '/Wx/Personal/save',
+    // 患者：个人中心-就诊记录
+    patientPerRecord: '/Wx/Personal/record',
+    // 患者：个人中心-药膳记录
+    patientPerGoods: '/Wx/Personal/goods',
+    // 患者：个人中心-成绩单
+    patientPerReport: '/Wx/Personal/report',
+    // 患者：药膳列表
+    patientGooList: '/Wx/Goods/list',
+    // 患者：药膳详情
+    patientGooDetails: '/Wx/Goods/details',
+    // 患者：保存领取药膳的用户信息
+    patientGooSave: '/Wx/Goods/save'
   }
 };

@@ -1,10 +1,10 @@
 <template>
   <div class="med-list">
     <ul>
-      <li v-for="i in 3">
-        <router-link to="/medicine/detail">
-          <img src="./../../../assets/med01.jpg">
-          <span>药膳是在中医学、烹饪学和营养学理论指导下，严格按药膳配方，将中药与某些具有药用价值药膳是在中医学、烹饪学和营养学理论指导下，严格按药膳配方，将中药与某些具有药用价值......</span>
+      <li v-for="(item, index) in lists" :key="index">
+        <router-link :to="`/medicine/detail/${item.id}`">
+          <img :src="item.img_url">
+          <span>{{ item.content }}</span>
         </router-link>
       </li>
     </ul>
@@ -13,7 +13,22 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      lists: []
+    }
+  },
+  methods: {
+    async apiForList() {
+      const res = await this.$http.post('patientGooList', {
+        page: 1
+      });
+      this.lists = res.param.list
+    }
+  },
+  mounted() {
+    this.apiForList()
+  }
 }
 </script>
 

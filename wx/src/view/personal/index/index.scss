@@ -113,6 +113,23 @@
             }
           }
         }
+        // 成绩单
+        ul{
+          width: 100%;
+          background: $white;
+          padding: .8rem 1.7rem;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          li{
+            width: 5.6rem;
+            text-align: center;
+            span{
+              font-size: 1.4rem;
+              color: #808080;
+            }
+          }
+        }
       }
     }
   }
