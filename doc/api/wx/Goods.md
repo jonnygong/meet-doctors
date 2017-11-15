@@ -67,6 +67,7 @@
 | imgs | varchar | 三证图片 |
 | material | varchar | 材料 |
 | effect | varchar | 功效 |
+| status | int | 0为未看视频或成绩没达到及格需重新看，1为已看并达到及格可领取药膳 |
 
 
 
