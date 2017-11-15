@@ -32,9 +32,11 @@
   .info{
     margin-top: .6rem;
     background: $white;
+    padding: 1rem;
   }
   .btn{
     text-align: center;
+    margin: 4.4rem 0;
     button{
       @include btn;
       width: 11.7rem;

@@ -16,8 +16,10 @@ import Gra_Report from '@/view/gravida/report/report.vue'
 
 import Med_List from '@/view/medicine/list/list.vue'
 import Med_Detail from '@/view/medicine/detail/detail.vue'
+import Med_Info from '@/view/medicine/info/info.vue'
 
 import Personal from '@/view/personal/index/index.vue'
+import Per_Info from '@/view/personal/info/info.vue'
 
 // 专家模块
 import Expert from '@/view/expert/index/index.vue'
@@ -83,7 +85,7 @@ const router = new Router({
           meta: { title: '药膳' }
         },
         {
-          path: '/medicine/detail',
+          path: '/medicine/detail/:id',
           component: Med_Detail,
           meta: { title: '药膳介绍' }
         },
@@ -112,6 +114,18 @@ const router = new Router({
       path: '/doctor/guide/:id',
       component: Doc_Guide,
       meta: { title: '联系医导' }
+    },
+    // 药膳 --- 填写个人信息
+    {
+      path: '/medicine/info/:id',
+      component: Med_Info,
+      meta: { title: '个人信息填写' }
+    },
+    // 个人中心 --- 预约单信息
+    {
+      path: '/personal/info/:id',
+      component: Per_Info,
+      meta: { title: '预约单' }
     },
     // 专家模块
     {

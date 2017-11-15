@@ -67,7 +67,7 @@ export default {
         }else{
           // 获取答对题数
           this.questions.forEach(item => {
-            Number(item.correct) === item.result ? this.sum ++ : this.sum;
+            Number(item.correct) === Number(item.result) ? this.sum ++ : this.sum;
           })
           this.apiForSave();
           MessageBox.confirm('继续前进，离惊喜更近一步哦！', '提示').then(() => {

@@ -1,8 +1,8 @@
 <template>
   <div class="doc-info">
-    <h1>预约信息填写</h1>
+    <h1>预约单</h1>
     <div class="part-one">
-      <mt-field label="姓名" placeholder="请输入姓名" :attr="{ maxlength: 5 }" v-model="params.name"></mt-field>
+      <mt-field label="姓名" placeholder="请输入姓名" :attr="{ maxlength: 5 }" v-model="params.name" readonly></mt-field>
       <mt-radio
         title="性别"
         v-model="params.sex"
@@ -34,8 +34,8 @@
     <div class="part-five">
       <ul class="upload-img_up">
         <upload-img @input="handleUplaodImage( $event )"></upload-img>
-        <li v-for="(img, index) in params.img" :key="index">
-          <img :src="img" >
+        <li v-for="(item, index) in imgs" :key="index">
+          <img :src="item" >
           <i class="iconfont icon-guanbi" @click="DelImg(index)"></i>
         </li>
       </ul>
@@ -58,6 +58,7 @@
 <script>
 import { MessageBox, Toast } from 'mint-ui'
 import uploadImg from '@/components/upload/upload'
+import { formatDateTime } from '@/plugins/formatDateTime.js'
 export default {
   components: {
     uploadImg
@@ -65,34 +66,34 @@ export default {
   data() {
     return {
       value: new Date(),
-      params: { 
-        name: '',
-        sex: '1',
-        tel: '',
-        bespeak_time: '',
-        weight: '',
-        height: '',
-        age: '',
-        content: '',
-        img: [],
-        hospital_id: 1,
-        expert_id: this.$route.params.id
-      },
+      params: {},
       sexs: [
         { label: '男', value: '1' },
         { label: '女', value: '2' }
       ],
-      yuyue_time: ''
+      yuyue_time: '',
+      imgs: []
     }
   },
   methods: {
+    // 获取预约单信息
+    async apiForDetails() {
+      const res = await this.$http.post('patientPerDetails', {
+        id: this.$route.params.id
+      });
+      this.params = res.param;
+      this.params.sex = this.params.sex.toString();
+      this.yuyue_time = formatDateTime(res.param.bespeak_time)
+      // 处理多张图片
+      this.imgs = this.params.img.split(',');
+    },
     // 时间选择器
     open(picker) {
         this.$refs[picker].open();
     },
     // 处理时间格式
     handleChange(value) {
-      // console.log(value.getTime()/1000);  //转时间戳
+      // console.log(value.getTime());  转时间戳
       let hour = value.getHours() < 10 ? '0' + value.getHours() : value.getHours();
       let minute = value.getMinutes() < 10 ? '0' + value.getMinutes() : value.getMinutes();
       this.yuyue_time = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
@@ -100,25 +101,29 @@ export default {
     },
     // 删除图片
     DelImg(index) {
-      this.params.img.splice(index, 1);
+      this.imgs.splice(index, 1);
     },
     handleUplaodImage ( $event ){
-      this.params.img.push( $event );
+      this.imgs.push( $event );
     },
     // 提交表单
     async apiForSubmit() {
-      const res = await this.$http.post('patientDocElistRegister', this.params);
-      this.handleMsgBox(res.param);
+      this.params.img = this.imgs;
+      const res = await this.$http.post('patientPerSave', this.params);
+      this.handleMsgBox();
     },
     // 表单提交成功后执行
-    handleMsgBox(id) {
+    handleMsgBox() {
       MessageBox({
         message: '提交成功!', 
-        confirmButtonText: '点击前往联系医导'
+        confirmButtonText: '返回个人中心'
       }).then(action => {
-        this.$router.push(`/doctor/guide/${id}`);
+        this.$router.push(`/personal`);
       })
     }
+  },
+  mounted() {
+    this.apiForDetails()
   }
 }
 </script>
