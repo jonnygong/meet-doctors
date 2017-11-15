@@ -48,7 +48,7 @@
 
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
-| good_id | int(11) | 产品ID |
+| goods_id | int(11) | 产品ID |
 | name | varchar(50) | 用户名称 |
 | tel | varchar(50) | 用户电话号码 |
 | address | varchar(255) | 用户地址 |
@@ -103,7 +103,7 @@
 
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
-| good_id | int(11) | 产品ID |
+| goods_id | int(11) | 产品ID |
 | name | varchar(50) | 用户名称 |
 | tel | varchar(50) | 用户电话号码 |
 | address | varchar(255) | 用户地址 |
@@ -127,7 +127,7 @@
 
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
-| good_id | int(11) | 产品ID |
+| goods_id | int(11) | 产品ID |
 | name | varchar(50) | 用户名称 |
 | tel | varchar(50) | 用户电话号码 |
 | address | varchar(255) | 用户地址 |
@@ -151,7 +151,7 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | id | int(11) | 信息ID |
-| good_id | int(11) | 产品ID |
+| goods_id | int(11) | 产品ID |
 | name | varchar(50) | 用户名称 |
 | tel | varchar(50) | 用户电话号码 |
 | address | varchar(255) | 用户地址 |

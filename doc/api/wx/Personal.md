@@ -69,7 +69,7 @@
 | hospital_name | varchar | 医院名字 |
 | tel | varchar | 导诊电话 |
 | expert_name | varchar | 专家名字 |
-| create_time | int | 预约信息创建时间 |
+| bespeak_time | int | 预约时间 |
 
 
 
@@ -94,6 +94,7 @@
 | hospital_name | varchar | 医院名字 |
 | tel | varchar | 导诊电话 |
 | expert_name | varchar | 专家名字 |
+| bespeak_time | int | 预约时间 |
 
 
 
@@ -162,15 +163,18 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | id | int | 预约单id |
-| reg_sn | int | 订单编号 |
-| name | int | 患者名称 |
-| status | int | 1交易关闭2未付款3已付款4已经完成 |
+| reg_sn | varchar | 订单编号 |
+| name | varchar | 患者名称 |
+| status | tinyint | 1交易关闭2未付款3已付款4已经完成 |
 | bespeak_time | int | 预约时间 |
-| weight | int | 体重 |
-| height | int | 身高 |
-| img | int | 患者就诊图片 |
-| expert_name | int | 专家名称 |
-| category_name | int | 科室 |
+| weight | decimal | 体重 |
+| height | decimal | 身高 |
+| img | varchar | 患者就诊图片 |
+| expert_name | varchar | 专家名称 |
+| sex | tinyint | 患者性别1男2女 |
+| tel | varchar | 患者电话 |
+| age | int | 年龄 |
+| content | varchar | 患者自述 |
 
 
 
