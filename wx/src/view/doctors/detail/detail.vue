@@ -2,11 +2,11 @@
   <div class="doc-detail">
     <!-- 专家信息 -->
     <div class="card-info">
-      <img src="./../../../assets/thumb.jpg">
+      <img :src="info.img">
       <div class="info">
-        <h1>刘广忠</h1>
-        <p>副主任医师</p>
-        <p>浙江大学医学院附属第一医院&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;精神外科</p>
+        <h1>{{ info.name }}</h1>
+        <p>{{ info.pos_name }}</p>
+        <p>{{ info.hospital_name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ info.category_name }}</p>
       </div>
     </div>
     <!-- 专家介绍、预约说明 -->
@@ -20,12 +20,12 @@
         <!-- 擅长领域 -->
         <div class="advantage">
           <div class="tips">擅长领域 <i class="iconfont icon-shanchanglingyu"></i></div>
-          <p>抢救工作、抢救工作、抢救工作、抢救工作、抢救工作、抢救工作</p>
+          <p>{{ info.specialty }}</p>
         </div>
         <!-- 出诊时间 -->
         <div class="advantage">
-          <div class="tips">出诊时间 <i class="iconfont icon-shanchanglingyu"></i></div>
-          <p>周二上午</p>
+          <div class="tips">意向预约时间 <i class="iconfont icon-shanchanglingyu"></i></div>
+          <p>{{ info.visit_time }}</p>
         </div>
         <!-- 预约须知 -->
         <div class="introduce-know">
@@ -33,27 +33,42 @@
             <i class="iconfont icon-yuyuexuzhi"></i>
             <h2>预约须知</h2>
           </div>
-          <p>预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、预约须知、</p>
+          <p>
+            Dear：<br>您所预约遇见名医是行业学术专家，为了您能第一时间遇见名医，我们会根椐名医专家时间来调整本次遇见时间。预祝健康快乐！
+          </p>
         </div>
       </div>
     </div>
     <!-- 预约button -->
     <div class="btn">
-      <router-link to="/doctor/info">预&nbsp;&nbsp;&nbsp;&nbsp;约</router-link>
+      <router-link :to="`/doctor/info/${id}`">预 约</router-link>
     </div>
     
   </div>
 </template>
 
 <script>
+import { formatDateTime } from '@/plugins/formatDateTime.js';
 export default {
   data() {
     return {
-      
+      info: {},
+      id: this.$route.params.id
     }
   },
   methods: {
-    
+    // 获取专家信息
+    async apiForInfo() {
+      const res = await this.$http.post('patientDocElistDetails', {
+        expert_id: this.id
+      });
+      // console.log(res.param);
+      this.info = res.param;
+      this.info.visit_time = formatDateTime(res.param.visit_time);
+    }
+  },
+  mounted() {
+    this.apiForInfo();
   }
 }
 </script>

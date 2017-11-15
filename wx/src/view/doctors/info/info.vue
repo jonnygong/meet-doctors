@@ -2,7 +2,7 @@
   <div class="doc-info">
     <h1>预约信息填写</h1>
     <div class="part-one">
-      <mt-field label="姓名" placeholder="请输入姓名" :attr="{ maxlength: 5 }" v-model="params.username"></mt-field>
+      <mt-field label="姓名" placeholder="请输入姓名" :attr="{ maxlength: 5 }" v-model="params.name"></mt-field>
       <mt-radio
         title="性别"
         v-model="params.sex"
@@ -14,7 +14,7 @@
       <mt-field 
         label="预约时间" 
         placeholder="请选择预约时间" 
-        v-model="params.yuyuetime" 
+        v-model="params.bespeak_time" 
         readonly  
         @click.native="open('picker')">
       </mt-field>
@@ -29,17 +29,17 @@
       <mt-field label="年龄" placeholder="请输入年龄" type="number" v-model="params.age"></mt-field>
     </div>
     <div class="part-four">
-      <textarea placeholder="请输入病情描述" v-model="params.desc"></textarea>
+      <textarea placeholder="请输入病情描述" v-model="params.content"></textarea>
     </div>
     <div class="part-five">
       <ul class="upload-img_up">
         <upload-img @input="handleUplaodImage( $event )"></upload-img>
-        <li v-for="(img, index) in params.uploadImgs" :key="index">
+        <li v-for="(img, index) in params.img" :key="index">
           <img :src="img" >
           <i class="iconfont icon-guanbi" @click="DelImg(index)"></i>
         </li>
       </ul>
-      <button @click="handleMsgBox">提 交</button>
+      <button @click="apiForSubmit">提 交</button>
     </div>
 
     <!-- 时间选择器 -->
@@ -66,15 +66,17 @@ export default {
     return {
       value: new Date(),
       params: { 
-        username: '',
+        name: '',
         sex: '男',
         tel: '',
-        yuyuetime: '',
+        bespeak_time: '',
         weight: '',
         height: '',
         age: '',
-        desc: '',
-        uploadImgs: []
+        content: '',
+        img: [],
+        hospital_id: 1,
+        expert_id: this.$route.params.id
       }
     }
   },
@@ -88,22 +90,27 @@ export default {
       // console.log(value.getTime());  转时间戳
       let hour = value.getHours() < 10 ? '0' + value.getHours() : value.getHours();
       let minute = value.getMinutes() < 10 ? '0' + value.getMinutes() : value.getMinutes();
-      this.params.yuyuetime = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
+      this.params.bespeak_time = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
     },
     // 删除图片
     DelImg(index) {
-      this.params.uploadImgs.splice(index, 1);
+      this.params.img.splice(index, 1);
     },
     handleUplaodImage ( $event ){
-      this.params.uploadImgs.push( $event );
+      this.params.img.push( $event );
+    },
+    // 提交表单
+    async apiForSubmit() {
+      const res = await this.$http.post('patientDocElistRegister', this.params);
+      this.handleMsgBox(res.param);
     },
     // 表单提交成功后执行
-    handleMsgBox() {
+    handleMsgBox(id) {
       MessageBox({
         message: '提交成功!', 
         confirmButtonText: '点击前往联系医导'
       }).then(action => {
-        this.$router.push('/doctor/guide');
+        this.$router.push(`/doctor/guide/${id}`);
       })
     }
   }

@@ -8,19 +8,23 @@
     </mt-swipe>
     <!-- 孕期 -->
     <mt-navbar v-model="selected">
-      <mt-tab-item v-for="(item, index) in types" :key="index" :id="item.id">
+      <mt-tab-item 
+        v-for="(item, index) in categorys" 
+        :key="index" 
+        :id="item.id" 
+        @click.native="apiForList(item.id)">
         {{ item.name }}
       </mt-tab-item>
     </mt-navbar>
-    <!-- 医生列表 -->
+    <!-- 视频列表 -->
     <mt-tab-container v-model="selected">
-      <mt-tab-container-item v-for="(item, index) in types" :key="index" :id="item.id">
+      <mt-tab-container-item v-for="(item, index) in categorys" :key="index" :id="item.id">
         <ul>
-          <li v-for="(li, lindex) in item.lists" :key="lindex">
-            <router-link to="/gravida/detail">
-              <img src="./../../../assets/mama.png">
+          <li v-for="(li, lindex) in lists" :key="lindex">
+            <router-link :to="{ path: '/gravida/detail/' + li.id}">
+              <img :src="li.cover">
               <h4>{{ li.title }}</h4>
-              <h4><i class="iconfont icon-shijian"></i> {{ li.time }}</h4>
+              <h4><i class="iconfont icon-shijian"></i> {{ li.long_time }}</h4>
             </router-link>
           </li>
         </ul>
@@ -33,14 +37,29 @@
 export default {
   data() {
     return {
-      selected: '1',
-      types: [
-        { id: '1', name: '孕前', lists: [{ title: '准妈妈待产的注意点', time: '00:36:45'}] },
-        { id: '2', name: '孕中', lists: [] },
-        { id: '3', name: '孕后', lists: [{ title: '准妈妈待产的注意点', time: '00:53:45'}] },
-        { id: '4', name: '康复', lists: [] },
-      ]
+      selected: '',
+      categorys: [],
+      lists: []
     }
+  },
+  methods: {
+    // 获取视频分类
+    async apiForCategory() {
+      const res = await this.$http.post('patientGraVideoCategory', {});
+      this.categorys = res.param;
+      this.selected = res.param[0].id;
+      this.apiForList(this.selected);
+    },
+    // 获取视频列表
+    async apiForList(id) {
+      const res = await this.$http.post('patientGraVideoList', {
+        category_id: id
+      });
+      this.lists = res.param;
+    }
+  },
+  mounted() {
+    this.apiForCategory();
   }
 }
 </script>

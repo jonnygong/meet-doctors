@@ -1,0 +1,39 @@
+.gui-time{
+  h1{
+    width: 100%;
+    padding: 1.5rem 0;
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: $white;
+    background: $themeBgColor;
+    text-align: center;
+  }
+  .tip{
+    border: 1px dashed #e05353;
+    margin: 1rem .9rem 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    color: #e05353;
+    display: flex;
+    align-items: center;
+    background: $white;
+    i{
+      font-size: 1.8rem;
+      margin-right: 1rem;
+    }
+  }
+  .mint-cell{
+    margin-top: 1rem;
+  }
+  .btn{
+    text-align: center;
+    margin-top: 2rem;
+    button{
+      @include btn;
+      padding: 0 2rem;
+      height: 3.2rem;
+      border-radius: 1.6rem;
+    }
+  }
+}

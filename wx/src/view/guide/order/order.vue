@@ -67,9 +67,8 @@ export default {
       }
     },
     openMsgBox() {
-      MessageBox.alert('你是否与协调人沟通过？', '温馨提示').then(() => {
-
-      })
+      // MessageBox.alert('你是否与协调人沟通过？', '温馨提示').then(() => {})
+      this.$router.push('/guide/time');
     }
   }
 }
