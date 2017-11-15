@@ -86,6 +86,7 @@
 | img | varchar | 视频介绍图片 |
 | title | varchar | 视频标题 |
 | category_id | int | 视频分类id |
+| is_receive | tinyint | 是否可以领取药膳0不能1能 |
 
 
 
@@ -107,8 +108,8 @@
 | --------- | -------- | ------- |
 | id | varchar | 用户微信名 |
 | question | varchar | 问题 |
-| answer | varchar | 答案选择 |
-| result | varchar | 答案 |
+| answer | varchar | 答案选择|
+| result | varchar | 答案 1为A，2为B|
 | category_id | int | 视频分类id |
 
 

@@ -58,3 +58,5 @@
 - [ 微信端首页接口 ](/doc/api/wx/Home.md)
 - [ 微信端专家列表接口 ](/doc/api/wx/Elist.md)
 - [ 微信端视频列表接口 ](/doc/api/wx/Video.md)
+- [ 微信端个人中心接口 ](/doc/api/wx/Personal.md)
+
