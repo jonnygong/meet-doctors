@@ -26,6 +26,7 @@ import Expert_Order from '@/view/expert/order/order.vue'
 // 医导模块
 import Guide from '@/view/guide/index/index.vue'
 import Guide_Order from '@/view/guide/order/order.vue'
+import Guide_Time from '@/view/guide/time/time.vue'
 
 import Login from '@/view/login/login.vue'
 
@@ -45,12 +46,12 @@ const router = new Router({
           meta: { title: '遇见名医' }
         },
         { 
-          path: '/doctor/list', 
+          path: '/doctor/list/:id', 
           component: Doc_List, 
           meta: { title: '专家列表' }
         },
         { 
-          path: '/doctor/detail', 
+          path: '/doctor/detail/:id', 
           component: Doc_Detail, 
           meta: { title: '专家信息' }
         },
@@ -61,12 +62,12 @@ const router = new Router({
           meta: { title: '孕妇课堂' }
         },
         { 
-          path: '/gravida/detail', 
+          path: '/gravida/detail/:id', 
           component: Gra_Detail, 
           meta: { title: '视频观看' }
         },
         {
-          path: '/gravida/question',
+          path: '/gravida/question/:id',
           component: Gra_Guestion,
           meta: { title: '答题中...' }
         },
@@ -102,13 +103,13 @@ const router = new Router({
     },
     // 遇见名医 --- 预约信息填写
     {
-      path: '/doctor/info',
+      path: '/doctor/info/:id',
       component: Doc_Info,
       meta: { title: '预约信息填写' }
     },
     // 遇见名医 --- 联系医导
     {
-      path: '/doctor/guide',
+      path: '/doctor/guide/:id',
       component: Doc_Guide,
       meta: { title: '联系医导' }
     },
@@ -133,6 +134,11 @@ const router = new Router({
       path: '/guide/order',
       component: Guide_Order,
       meta: { title: '预约详情' }
+    },
+    {
+      path: '/guide/time',
+      component: Guide_Time,
+      meta: { title: '填写就诊时间' }
     },
     {
       path: '*',

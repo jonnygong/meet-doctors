@@ -9,7 +9,8 @@
             <h3>70</h3>
           </dd>
         </dl>
-        <img src="./../../../assets/great.png">
+        <img src="./../../../assets/rabbit.gif" class="rabbit">
+        <img src="./../../../assets/great.png" class="great">
         <div class="info">
           <h4>张久久</h4>
           <h4>2017.11.02</h4>

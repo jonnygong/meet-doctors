@@ -1,4 +1,5 @@
 .doc-index{
+  padding-bottom: 4.4rem;
   .mint-swipe{
     height: 16.6rem;
     &-items-wrap{
@@ -67,27 +68,12 @@
           width: 4.7rem;
           height: 4.7rem;
           border-radius: 50%;
-          background: $themeBgColor;
           margin: 1rem auto 0;
-          i{
-            color: $white;
-            font-size: 2.4rem;
-            line-height: 4.7rem;
-          }
-        }
-        &:nth-child(2){
-          a{
-            background: #ff9898;
-          }
-        }
-        &:nth-child(3){
-          a{
-            background: #ffcb71;
-          }
-        }
-        &:last-child{
-          a{
-            background: #66adfd;
+          img{
+            width: 4.7rem;;
+            height: 100%;
+            border-radius: 50%;
+            vertical-align: top;
           }
         }
         h2{
