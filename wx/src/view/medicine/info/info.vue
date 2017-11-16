@@ -49,15 +49,15 @@ export default {
     // 提交表单
     async apiForSubmit() {
       const res = await this.$http.post('patientGooSave', this.params);
-      this.handleMsgBox(res.param);
+      this.handleMsgBox();
     },
     // 表单提交成功后执行
-    handleMsgBox(id) {
+    handleMsgBox() {
       MessageBox({
         message: '提交成功!', 
         confirmButtonText: '确定'
       }).then(action => {
-        this.$router.go(-1);
+        this.$router.replace('/personal');
       })
     }
   }

@@ -2,8 +2,10 @@
   <div class="gra-index">
     <!-- 轮播图 -->
     <mt-swipe :auto="4000">
-      <mt-swipe-item>
-        <img src="./../../../assets/banner01.jpg">
+      <mt-swipe-item v-for="(banner, i) in banners" :key="i">
+        <router-link :to="banner.link">
+          <img :src="banner.cover">
+        </router-link>
       </mt-swipe-item>
     </mt-swipe>
     <!-- 孕期 -->
@@ -37,12 +39,17 @@
 export default {
   data() {
     return {
+      banners: [],
       selected: '',
       categorys: [],
       lists: []
     }
   },
   methods: {
+    async apiForAds() {
+      const res = await this.$http.post('patientGraVideoAds', {});
+      this.banners = res.param;
+    },
     // 获取视频分类
     async apiForCategory() {
       const res = await this.$http.post('patientGraVideoCategory', {});
@@ -59,6 +66,7 @@ export default {
     }
   },
   mounted() {
+    this.apiForAds();
     this.apiForCategory();
   }
 }

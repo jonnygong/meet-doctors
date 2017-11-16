@@ -24,7 +24,7 @@
             <div class="item-right" v-if="li.status == 2">
               <span>{{ li.bespeak_time}}</span>
               <button @click="handleToInfo(li.id)">查看预约信息</button>
-              <button @click="applyPay(li.is_audit)">申请支付审核</button>
+              <button @click="applyPay(li.is_audit, li.id)">申请支付审核</button>
             </div>
             <div class="item-right" v-else>
               <span>{{ li.bespeak_time}}</span>
@@ -88,6 +88,8 @@ export default {
     }
   },
   methods: {
+    // 获取微信头像及微信昵称
+    
     // 下拉功能
     openOptions(index) {
       if(this.show == index) {
@@ -104,19 +106,26 @@ export default {
         item.bespeak_time = formatDate(item.bespeak_time)
       })
     },
+    // 提交申请支付审核
+    async apiForAudit(id) {
+      const res = await this.$http.post('patientPerAudit', {
+        id: id
+      })
+    },
     // 预约信息-跳转至预约详情
     handleToInfo(id) {
       this.$router.push(`/personal/info/${id}`)
     },
     // 预约信息-提交支付审核
-    applyPay(audit) {
+    applyPay(audit, id) {
       if(audit == 0) {
         MessageBox.confirm('是否申请支付审核？', '提示').then(() => {
           Toast({
             message: '等待医导通过审核...'
-          })
+          });
+          this.apiForAudit(id);
+          this.$set('', audit, 1);
         });
-        audit = 1;
       }else {
         MessageBox.alert('您已提交申请，请勿重复提交', '提示')
       }

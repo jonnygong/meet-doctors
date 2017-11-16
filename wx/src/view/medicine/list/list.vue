@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(item, index) in lists" :key="index">
         <router-link :to="`/medicine/detail/${item.id}`">
-          <img :src="item.img_url">
+          <img :src="item.cover">
           <span>{{ item.content }}</span>
         </router-link>
       </li>

@@ -2,13 +2,30 @@
   <div class="med-detail">
     <!-- 轮播图 -->
     <mt-swipe :auto="4000">
-      <mt-swipe-item>
-        <img src="./../../../assets/med01.jpg">
+      <mt-swipe-item v-for="(img, index) in info.img_url" :key="index">
+        <img :src="img">
       </mt-swipe-item>
     </mt-swipe>
     <h2 v-if="info.good_type === 2">{{ info.name }} <span>免费<em>￥{{ info.price }}</em></span></h2>
     <h2 v-else>{{ info.name }} <span>{{ info.price }}</span></h2>
-    <div class="info" v-html="info.content"></div>
+    <div class="info">
+      <div class="info-one">
+        <div class="info-one-title">配料</div>
+        <p v-html="info.material"></p>
+      </div>
+      <div class="info-two">
+        <div class="info-two-title">食材说明</div>
+        <p v-html="info.content"></p>
+      </div>
+      <div class="info-three">
+        <div class="info-three-title">三证信息</div>
+        <ul>
+          <li v-for="(item, i) in info.imgs" :key="i">
+            <img :src="item.img_url">
+          </li>
+        </ul>
+      </div>
+    </div>
     <!-- 1.填写领取信息  2.引导学习视频 -->
     <div class="btn">
       <button @click="handleTo(info.status, info.id)">领 取</button>
@@ -32,6 +49,8 @@ export default {
         id: this.$route.params.id
       });
       this.info = res.param;
+      // 处理轮播图
+      this.info.img_url = res.param.img_url.split(',')
     },
     // 引导学习视频
     openConfirm() {
