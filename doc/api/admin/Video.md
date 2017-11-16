@@ -63,6 +63,7 @@
 | content | text | 文字 |
 | hospital_id | int(11) | 归属医院  0 全部医院都可以显示 |
 | long_time | varchar(10) | 视频时长 |
+| is_receive | tinyint(1) | 是否可以领取药膳,0不可以1可以 |
 
 
 
@@ -122,6 +123,7 @@
 | content | text | 文字 |
 | hospital_id | int(11) | 归属医院  0 全部医院都可以显示 |
 | long_time | varchar(10) | 视频时长 |
+| is_receive | tinyint(1) | 是否可以领取药膳,0不可以1可以 |
 
 
 
@@ -145,6 +147,7 @@
 | content | text | 文字 |
 | hospital_id | int(11) | 归属医院  0 全部医院都可以显示 |
 | long_time | varchar(10) | 视频时长 |
+| is_receive | tinyint(1) | 是否可以领取药膳,0不可以1可以 |
 
 
 + __响应参数__
@@ -174,6 +177,7 @@
 | content | text | 文字 |
 | hospital_id | int(11) | 归属医院  0 全部医院都可以显示 |
 | long_time | varchar(10) | 视频时长 |
+| is_receive | tinyint(1) | 是否可以领取药膳,0不可以1可以 |
 
 
 + __响应参数__

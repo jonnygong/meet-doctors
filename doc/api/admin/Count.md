@@ -264,4 +264,7 @@
 
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
-| guide | Object | 导诊信息 |
+| expert | Object | 专家列表 |
+| status | Object | 预约单状态信息 |
+| guide | Object | 导诊列表 |
+| hospital | Object | 医院信息 |
