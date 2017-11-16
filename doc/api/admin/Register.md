@@ -62,7 +62,6 @@
 | height | decimal(5,2) | 身高 |
 | age | int(11) | 年龄 |
 | content | varchar(255) | 患者自述 |
-| pmi | varchar(10) |  |
 | status | tinyint(1) | 1交易关闭2未付款3已付款4已经完成 |
 | create_time | int(11) |  |
 | update_time | int(11) |  |
@@ -97,6 +96,8 @@
 | --------- | -------- | ------- |
 | expert | Object | 专家列表 |
 | status | Object | 预约单状态信息 |
+| guide | Object | 导诊列表 |
+| hospital | Object | 医院信息 |
 
 
 
@@ -130,7 +131,6 @@
 | height | decimal(5,2) | 身高 |
 | age | int(11) | 年龄 |
 | content | varchar(255) | 患者自述 |
-| pmi | varchar(10) |  |
 | status | tinyint(1) | 1交易关闭2未付款3已付款4已经完成 |
 | create_time | int(11) |  |
 | update_time | int(11) |  |
@@ -166,7 +166,6 @@
 | height | decimal(5,2) | 身高 |
 | age | int(11) | 年龄 |
 | content | varchar(255) | 患者自述 |
-| pmi | varchar(10) |  |
 | img | varchar(1000) | 就诊图片,多张 |
 | visit_time | int(11) | 就诊时间 |
 | visit_address | varchar(255) | 就诊地址 |
