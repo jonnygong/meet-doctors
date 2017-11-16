@@ -17,6 +17,8 @@ export default {
     patientDocElistRegister: '/Wx/Elist/register',
     // 患者：名医-获取医导微信二维码
     patientDocElistCode: '/Wx/Elist/code',
+    // 患者：孕妇-视频列表-广告
+    patientGraVideoAds: '/Wx/Video/ads',
     // 患者：孕妇-视频分类
     patientGraVideoCategory: '/Wx/Video/category',
     // 患者：孕妇-视频列表
@@ -33,6 +35,8 @@ export default {
     patientPerDetails: '/Wx/Personal/details',
     // 患者：个人中心-预约信息-保存预约单
     patientPerSave: '/Wx/Personal/save',
+    // 患者：个人中心-预约信息-申请支付审核
+    patientPerAudit: '/Wx/Personal/audit',
     // 患者：个人中心-就诊记录
     patientPerRecord: '/Wx/Personal/record',
     // 患者：个人中心-药膳记录
