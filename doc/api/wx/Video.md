@@ -137,6 +137,7 @@
 | after_score | int | 产后成绩 |
 | recovery_score | int | 康复成绩 |
 | score | int | 总成绩 |
+| goodS_id | int | 月子药膳id |
 
 
 
