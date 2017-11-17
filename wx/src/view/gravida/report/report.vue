@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="btn">
-        <button @click="toDetail">查看可领药膳</button>
+        <router-link :to="`/medicine/detail/${score.goods_id}`">查看可领药膳</router-link>
       </div>
     </div>
   </div>
@@ -53,11 +53,6 @@ export default {
         score: '',
         create_time: ''
       }
-    }
-  },
-  methods: {
-    toDetail() {
-      this.$router.push(`/medicine/detail/${this.score.goods_id}`)
     }
   },
   mounted() {

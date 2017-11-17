@@ -66,10 +66,11 @@
     .btn{
       text-align: center;
       margin-top: 3.3rem;
-      button{
-        @include btn;
-        padding: 0 3rem;
+      a{
+        @include a;
+        width: 15rem;
         height: 3.2rem;
+        line-height: 3.2rem;
         border-radius: 1.6rem;
         background: #229ae7;
         // letter-spacing: .2rem;
