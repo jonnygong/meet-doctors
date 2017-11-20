@@ -75,6 +75,7 @@
 | bespeak_address | varchar(255) | 预约地址 |
 | is_audit | tinyint(1) | 用户申请审核0没申请1申请 |
 | guide_id | int(11) | 导诊id |
+| visit_report | varchar(255) | 就诊报告 |
 
 
 
@@ -144,6 +145,7 @@
 | bespeak_address | varchar(255) | 预约地址 |
 | is_audit | tinyint(1) | 用户申请审核0没申请1申请 |
 | guide_id | int(11) | 导诊id |
+| visit_report | varchar(255) | 就诊报告 |
 
 
 
@@ -171,6 +173,7 @@
 | visit_address | varchar(255) | 就诊地址 |
 | bespeak_time | int(11) | 预约时间 |
 | is_audit | tinyint(1) | 用户申请审核0没申请1申请 |
+| visit_report | varchar(255) | 就诊报告 |
 
 
 + __响应参数__
