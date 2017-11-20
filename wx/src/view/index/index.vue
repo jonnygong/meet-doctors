@@ -2,15 +2,11 @@
   <div class="container">
     <router-view/>
     <footer>
-      <ul>
-        <li v-for="(item, index) in menus" 
-          :key="index" 
-          @click="handlePath(item.path, index)"
-          :class="{ check: isActive == index }">
-          <i :class="`iconfont icon-${item.icon}`"></i>
-          {{ item.name }}
-        </li>     
-      </ul>
+      <router-link v-for="(item, index) in menus"  :to="{ path: item.path }"
+        :key="index">
+        <i :class="`iconfont icon-${item.icon}`"></i>
+        {{ item.name }}
+      </router-link>
     </footer>
   </div>
 </template>
@@ -23,14 +19,7 @@ export default {
         { name: '遇见名医', icon: 'yisheng', path: '/doctor' },
         { name: '孕妇课堂', icon: 'yunfu', path: '/gravida' },
         { name: '个人中心', icon: 'gerenzhongxinxia', path: '/personal' }
-      ],
-      isActive: 0
-    }
-  },
-  methods: {
-    handlePath(path, index) {
-      this.$router.replace({ path: path });
-      this.isActive = index;
+      ]
     }
   }
 }

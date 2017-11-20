@@ -2,8 +2,21 @@
   <div class="doc-info">
     <h1>个人信息填写</h1>
     <div class="part-one">
-      <mt-field label="姓名" placeholder="请输入姓名" :attr="{ maxlength: 5 }" v-model="params.name"></mt-field>
-      <mt-field label="电话" placeholder="请输入联系电话" :attr="{ maxlength: 11 }" type="tel" v-model="params.tel"></mt-field>
+      <mt-field label="姓名" placeholder="请输入姓名" :attr="{ maxlength: 15 }" v-model="params.name"></mt-field>
+      <div class="part-one-wrapper">
+        <div class="part-one-wrapper-title">
+          电话
+        </div>
+        <div class="part-one-wrapper-value">
+          <input 
+            type="tel" 
+            placeholder="请输入联系电话" 
+            maxlength="11"  
+            v-model="params.tel" 
+            @blur="validatemobile">
+          <i class="mintui mintui-field-error" v-show="hide" @click="clear"></i>
+        </div>
+      </div>
       <mt-field label="地址" placeholder="请输入地址" v-model="params.address"></mt-field>
     </div>
     <div class="part-five">
@@ -35,21 +48,31 @@ export default {
         tel: '',
         address: '',
         img: []
-      }
+      },
+      hide: false
     }
   },
   methods: {
+    // 校验手机格式
+    validatemobile() {
+      let tel = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+      if(!tel.test(this.params.tel)) {
+        Toast({
+          message: this.params.tel.length == 0 ? '请输入联系电话！' : '请输入正确的联系电话！'
+        });
+      }
+    },
+    // icon点击事件，清除tel表单
+    clear() {
+      this.params.tel = '';
+      this.hide =false;
+    },
     // 删除图片
     DelImg(index) {
       this.params.img.splice(index, 1);
     },
     handleUplaodImage ( $event ){
       this.params.img.push( $event );
-    },
-    // 提交表单
-    async apiForSubmit() {
-      const res = await this.$http.post('patientGooSave', this.params);
-      this.handleMsgBox();
     },
     // 表单提交成功后执行
     handleMsgBox() {
@@ -59,6 +82,23 @@ export default {
       }).then(action => {
         this.$router.replace('/personal');
       })
+    },
+    // 提交表单
+    async apiForSubmit() {
+      const res = await this.$http.post('patientGooSave', this.params);
+      if(res.status === "200") {
+        this.handleMsgBox();
+      }
+    }
+  },
+  watch: {
+    params: {
+      handler(item) {
+        if(item.tel.length !== 0) {
+          this.hide = true;
+        }
+      },
+      deep: true
     }
   }
 }

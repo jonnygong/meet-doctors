@@ -17,6 +17,34 @@
         background: $white;
         color: #535353;
       }
+      &-wrapper{
+        height: 4.8rem;
+        background: $white;
+        padding: 0 2rem;
+        box-sizing: border-box;
+        margin-bottom: .5rem;
+        display: flex;
+        align-items: center;
+        &-title{
+          width: 10.5rem;
+          text-align: left;
+          font-size: 1.2rem;
+          color: #535353;
+        }
+        &-value{
+          width: 23rem;
+          -webkit-box-flex: 1;
+          flex: 1;
+          display: flex;
+          color: #d9d9d9;
+          input{
+            width: 100%;
+            border: 0;
+            outline: none;
+            font-size: 1.2rem;
+          }
+        }
+      }
     }
     &-five{
       margin-top: 1.5rem;
