@@ -61,4 +61,5 @@
 - [ 微信端个人中心接口 ](/doc/api/wx/Personal.md)
 - [ 微信端药膳接口 ](/doc/api/wx/Goods.md)
 - [ 微信端导诊接口 ](/doc/api/wx/Guide.md)
+- [ 微信端专家接口 ](/doc/api/wx/Expert.md)
 
