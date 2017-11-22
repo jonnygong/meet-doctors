@@ -62,3 +62,4 @@
 - [ 微信端药膳接口 ](/doc/api/wx/Goods.md)
 - [ 微信端导诊接口 ](/doc/api/wx/Guide.md)
 - [ 微信端专家接口 ](/doc/api/wx/Expert.md)
+- [ 微信端登录接口 ](/doc/api/wx/Login.md)
