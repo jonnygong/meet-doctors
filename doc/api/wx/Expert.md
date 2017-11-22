@@ -126,3 +126,5 @@
 | age | int | 年龄 |
 | content | varchar | 患者自述 |
 | category_name | varchar | 科室 |
+| visit_time | int | 就诊时间 |
+| visit_address | varchar | 就诊地址 |
