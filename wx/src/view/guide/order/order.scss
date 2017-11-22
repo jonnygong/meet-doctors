@@ -67,6 +67,9 @@
               padding-left: 2rem;
               box-sizing: border-box;
             }
+            &:nth-last-child(1) {
+              border: 0;
+            }
           }
           // 患者自述
           p{
@@ -76,6 +79,23 @@
             padding: 1rem;
             line-height: 1.5;
             text-indent: 2em;
+          }
+          // 最近就诊图片
+          ul{
+            overflow: hidden;
+            padding: 1rem 2rem 0;
+            li{
+              float: left;
+              margin-bottom: 1rem;
+              margin-right: 1rem;
+              img{
+                width: 10.5rem;
+                vertical-align: top;
+              }
+              &:nth-child(3n){
+                margin-right: 0;
+              }
+            }
           }
           // 医生信息
           dl{
@@ -99,9 +119,9 @@
   .btn{
     text-align: center;
     margin: 2rem 0;
-    button{
+    a{
       @include btn;
-      padding: 0 2rem;
+      padding: .8rem 2rem;
       height: 3.2rem;
       border-radius: 1.6rem;
       font-size: 1.4rem;

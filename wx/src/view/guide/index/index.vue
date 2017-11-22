@@ -23,117 +23,217 @@
 
       <mt-tab-container v-model="selected">
         <mt-tab-container-item v-for="(item, index) in types" :key="index" :id="item.id">
-          <div class="item" v-if="item.id === 1" v-for="(list, i) in 2" :key="i">
+          <div class="item" v-if="item.id === 1" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
-              <span>就医地点/专家：杭州妇保医院/**医生</span>
-              <span>预约人：张久久 <a :href="`tel:18888888888`">电 话</a></span>
-              <span>预约时间：2017年12月11日</span>
+              <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
+              <span>预约人：{{ list.name }} <a :href="`tel:${list.tel}`">电 话</a></span>
+              <span>预约时间：{{ list.bespeak_time }}</span>
             </div>
             <div class="item-right">
-              <button @click="toOrder">查 看</button>
-              <button @click="apply(item.id)">支 付</button>
-              <button @click="closeOrder">关 闭</button>
+              <button @click="toOrder(list.id)">查 看</button>
+              <button @click="apply(item.id, list.id)" class="green">支 付</button>
+              <button @click="closeOrder(list.id)" class="red">关 闭</button>
             </div>
           </div>
-          <div class="item" v-if="item.id === 2" v-for="(list, i) in 2" :key="i">
+
+          <div class="item" v-if="item.id === 2" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
-              <span>就医地点/专家：杭州妇保医院/**医生</span>
-              <span>预约人：张久久</span>
-              <span>联系电话：18888888888</span>
-              <span>预约时间：2017年12月11日</span>
+              <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
+              <span>预约人：{{ list.name }}</span>
+              <span>联系电话：{{ list.tel }}</span>
+              <span>预约时间：{{ list.bespeak_time }}</span>
             </div>
             <div class="item-right">
-              <button @click="toOrder">查 看</button>
-              <button @click="apply(item.id)">支付审核</button>
+              <button @click="toOrder(list.id)">查 看</button>
+              <button @click="apply(item.id, list.id)" class="blue">支付审核</button>
             </div>
           </div>
-          <div class="item" v-if="item.id === 3" v-for="(list, i) in 2" :key="i">
+
+          <div class="item" v-if="item.id === 3" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
-              <span>就医地点/专家：杭州妇保医院/**医生</span>
-              <span>预约人：张久久</span>
-              <span>联系电话：18888888888</span>
-              <span>预约时间：2017年12月11日</span>
+              <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
+              <span>预约人：{{ list.name }}</span>
+              <span>联系电话：{{ list.tel }}</span>
+              <span>预约时间：{{ list.bespeak_time }}</span>
             </div>
             <div class="item-right">
-              <button @click="toOrder">查 看</button>
-              <button @click="apply(item.id)">就医确认</button>
+              <button @click="toOrder(list.id)">查 看</button>
+              <button @click="apply(item.id, list.id)" class="blue">就医确认</button>
             </div>
           </div>
-          <div class="item" v-if="item.id === 4" v-for="(list, i) in 2" :key="i">
+
+          <div class="item" v-if="item.id === 4" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
-              <span>就医地点/专家：杭州妇保医院/**医生</span>
-              <span>预约人：张久久</span>
-              <span>联系电话：18888888888</span>
-              <span>预约时间：2017年12月11日</span>
+              <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
+              <span>预约人：{{ list.name }}</span>
+              <span>联系电话：{{ list.tel }}</span>
+              <span>预约时间：{{ list.bespeak_time }}</span>
             </div>
             <div class="item-right">
-              <button @click="toOrder">查 看</button>
+              <button @click="toOrder(list.id)">查 看</button>
             </div>
           </div>
-          <div class="item" v-if="item.id === 5" v-for="(list, i) in 2" :key="i">
+
+          <div class="item" v-if="item.id === 5" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
-              <span>就医地点/专家：杭州妇保医院/**医生</span>
-              <span>预约人：张久久</span>
-              <span>联系电话：18888888888</span>
-              <span>预约时间：2017年12月11日</span>
+              <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
+              <span>预约人：{{ list.name }}</span>
+              <span>联系电话：{{ list.tel }}</span>
+              <span>预约时间：{{ list.bespeak_time }}</span>
               <span>预约关闭</span>
             </div>
             <div class="item-right">
-              <button @click="toOrder">查 看</button>
-              <button>恢复</button>
+              <button @click="toOrder(list.id)">查 看</button>
+              <button @click="apply(item.id, list.id)" class="green">恢复</button>
             </div>
           </div>
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
+
+    <!-- 弹窗，上传图片 -->
+    <div v-show="mask">
+      <div class="mask" @click="mask = false"></div>
+      <div class="msgbox">
+        <i class="iconfont icon-guanbi close" @click="mask = false"></i>
+        <h1>上传就诊报告</h1>
+        <ul class="upload-img_up">
+          <upload-img @input="handleUplaodImage( $event )"></upload-img>
+          <li v-for="(img, index) in img" :key="index">
+            <img :src="img" >
+            <i class="iconfont icon-guanbi" @click="DelImg(index)"></i>
+          </li>
+        </ul>
+        <div class="btn">
+          <button @click="apiForConfirm()">提 交</button>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </template>
 
 <script>
-import { MessageBox } from 'mint-ui'
+import { MessageBox, Toast } from 'mint-ui'
+import { formatFullDate } from '@/plugins/formatDateTime.js'
+import uploadImg from '@/components/upload/upload'
 export default {
+  components: {
+    uploadImg
+  },
   data() {
     return {
       orders: [
-        { title: '今日预约总量', num: '20' },
-        { title: '本周完成', num: '20' },
-        { title: '本月完成', num: '20' }
+        { title: '今日预约总量', num: '' },
+        { title: '本周完成', num: '' },
+        { title: '本月完成', num: '' }
       ],
       selected: 1,
       types: [
-        { id: 1, name: '未支付' },
-        { id: 2, name: '支付审核' },
-        { id: 3, name: '专家待看' },
-        { id: 4, name: '已完成' },
-        { id: 5, name: '已关闭' },
+        { id: 1, name: '未支付', lists: [] },
+        { id: 2, name: '支付审核', lists: [] },
+        { id: 3, name: '专家待看', lists: [] },
+        { id: 4, name: '已完成', lists: [] },
+        { id: 5, name: '已关闭', lists: [] },
       ],
-      // 提示信息
-      msg: ''
+      img: [],
+      mask: false,
+      // 上传就诊报告id,
+      id: ''
     }
   },
   methods: {
-    toOrder() {
-      this.$router.push('/guide/order')
+    toOrder(id) {
+      this.$router.push(`/guide/order/${id}`)
     },
-    // 确认客户支付 || 协助客户做支付确认
-    apply(id) {
+    // id === 1确认客户支付,未支付 || id === 2协助客户做支付确认,支付审核
+    apply(id, orderid) {
       if(id === 1) {
-        this.msg = '是否协助客户做支付确认？';
+        MessageBox.confirm('是否协助客户做支付确认？', '提示').then(() => {
+          this.apiForBtn('guideAudit', orderid)
+        });
       }else if(id === 2) {
-        this.msg = '是否确认客户已经支付？';
+        MessageBox.confirm('是否确认客户已经支付？', '提示').then(() => {
+          this.apiForBtn('guideAudit', orderid)
+        });
+      }else if(id === 3) {
+        this.mask = true;
+        this.id = orderid;
+      }else if(id === 5) {
+        MessageBox.confirm('是否确认恢复预约单？', '提示').then(() => {
+          this.apiForBtn('guideRecovery', orderid);
+          Toast({
+            message: '请刷新页面...'
+          })
+        });
       }
-      MessageBox.confirm(this.msg, '提示').then(() => {});
     },
-    closeOrder() {
-      MessageBox.confirm('是否确认关闭预约单', '提示').then(() => {
-        // 删除该数据
+    // 获取今日预约量，本周完成量，本月完成量
+    async apiForCount() {
+      const res = await this.$http.post('guideCount', {
+        guide_id: this.$route.params.id
       });
-    }
+      this.orders[0].num = res.param.today;
+      this.orders[1].num = res.param.tswk;
+      this.orders[2].num = res.param.tsmonth;
+    },
+    // 预约单各个状态下调用的接口
+    async apiForGuide(api, index) {
+      const res = await this.$http.post(api, {
+        guide_id: this.$route.params.id
+      });
+      this.types[index].lists = res.param;
+      this.types[index].lists.forEach(item => {
+        item.bespeak_time = formatFullDate(item.bespeak_time)
+      })
+    },
+    // 按钮功能接口
+    async apiForBtn(api, id) {
+      const res = await this.$http.post(api, {
+        id: id
+      })
+    },
+    // 关闭预约单
+    closeOrder(id) {
+      MessageBox.confirm('是否确认关闭预约单', '提示').then(() => {
+        this.apiForBtn('guideIsClose', id)
+      });
+    },
+    // 专家待看-就医确认
+    async apiForConfirm() {
+      const res = await this.$http.post('guideConfirm', {
+        id: this.id,
+        visit_report: this.img
+      });
+      this.mask = false;
+    },
+    // 删除图片
+    DelImg(index) {
+      this.img.splice(index, 1);
+    },
+    // 获取图片路径
+    handleUplaodImage ( $event ){
+      this.img.push( $event );
+    },
+  },
+  mounted() {
+    this.apiForCount();
+    // 未支付
+    this.apiForGuide('guideUnpaid', 0);
+    // 支付审核
+    this.apiForGuide('guidePayAudit', 1);
+    // 专家待看
+    this.apiForGuide('guideToSee', 2);
+    // 已完成
+    this.apiForGuide('guideFinish', 3);
+    // 已关闭
+    this.apiForGuide('guideClose', 4);
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import './../../../style/reset.scss';
+@import './../../../style/iconfont/iconfont.css';
 @import 'index.scss';
 </style>
