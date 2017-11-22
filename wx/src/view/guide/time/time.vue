@@ -8,11 +8,11 @@
     <mt-field 
       label="就诊时间" 
       placeholder="请选择就诊时间" 
-      v-model="params.cure" 
+      v-model="params.visit_time" 
       readonly  
       @click.native="open('picker')">
     </mt-field>
-    <mt-field label="地址" placeholder="请输入地址" v-model="params.address"></mt-field>
+    <mt-field label="地址" placeholder="请输入地址" v-model="params.visit_address"></mt-field>
     <!-- 时间选择器 -->
     <mt-datetime-picker
       ref="picker"
@@ -23,21 +23,22 @@
       @confirm="handleChange">
     </mt-datetime-picker>
     <div class="btn">
-      <button @click="openMsgBox">提 交</button>
+      <button @click="apiForVisit">提 交</button>
     </div>
   </div>
 </template>
 
 <script>
-import { formatDateTime } from './../../../plugins/formatDateTime.js'
+import { formatDateTime } from '@/plugins/formatDateTime.js'
 import { MessageBox } from 'mint-ui'
 export default {
   data() {
     return {
       value: new Date(),
       params: {
-        cure: '',
-        address: ''
+        id: this.$route.params.id,
+        visit_time: '',
+        visit_address: ''
       }
     }
   },
@@ -51,12 +52,19 @@ export default {
       // console.log(value.getTime());  转时间戳
       let hour = value.getHours() < 10 ? '0' + value.getHours() : value.getHours();
       let minute = value.getMinutes() < 10 ? '0' + value.getMinutes() : value.getMinutes();
-      this.params.cure = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
+      this.params.visit_time = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
     },
     openMsgBox() {
       MessageBox.alert('提交成功！', '提示').then(() => {
-        this.$router.push('/personal');
+        this.$router.go(-2);
       })
+    },
+    // 提交确认急诊时间
+    async apiForVisit() {
+      const res = await this.$http.post('guideVisit', this.params);
+      if(res.status === '200') {
+        this.openMsgBox()
+      }
     }
   }
 }

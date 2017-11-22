@@ -129,28 +129,28 @@ const router = new Router({
     },
     // 专家模块
     {
-      path: '/expert',
+      path: '/expert/:id',
       component: Expert,
       meta: { title: '专家' }
     },
     {
-      path: '/expert/order',
+      path: '/expert/order/:id',
       component: Expert_Order,
       meta: { title: '预约单' }
     },
     // 医导模块
     {
-      path: '/guide',
+      path: '/guide/:id',
       component: Guide,
       meta: { title: '医导' }
     },
     {
-      path: '/guide/order',
+      path: '/guide/order/:id',
       component: Guide_Order,
       meta: { title: '预约详情' }
     },
     {
-      path: '/guide/time',
+      path: '/guide/time/:id',
       component: Guide_Time,
       meta: { title: '填写就诊时间' }
     },

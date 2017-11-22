@@ -98,7 +98,7 @@
               text-align: right;
               padding-left: 1.5rem;
             }
-            button{
+            a{
               width: 100%;
               font-size: 1.2rem;
               border-radius: .4rem;
@@ -106,6 +106,14 @@
               border: 1px solid $deepBlue;
               color: $deepBlue;
               background: rgba($color: $deepBlue, $alpha: .2);
+              text-align: center;
+            }
+            button{
+              width: 100%;
+              font-size: 1.2rem;
+              border-radius: .4rem;
+              padding: .5rem 0;
+              border: 1px solid #808080;
               &:disabled{
                 border-color: #808080;
                 background: rgba($color: #808080, $alpha: .1);

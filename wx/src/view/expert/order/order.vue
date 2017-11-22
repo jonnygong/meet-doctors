@@ -3,8 +3,11 @@
     <h1>预约单</h1>
     <div class="exp-order-content">
       <div class="exp-order-content-one">
-        <mt-field label="编号" v-model="params.num" readonly></mt-field>
-        <mt-field label="状态" v-model="params.status" readonly></mt-field>
+        <mt-field label="编号" v-model="params.reg_sn" readonly></mt-field>
+        <mt-field label="状态" readonly v-if="params.status === 1" value="交易关闭"></mt-field>
+        <mt-field label="状态" readonly v-if="params.status === 2" value="未付款"></mt-field>
+        <mt-field label="状态" readonly v-if="params.status === 3" value="已付款"></mt-field>
+        <mt-field label="状态" readonly v-if="params.status === 4" value="已经完成"></mt-field>
       </div>
       
       <div class="exp-order-content-two" v-for="(i, index) in 3" :key="index">
@@ -16,18 +19,21 @@
         </div>
         <div class="exp-order-content-two-options" v-show="show == index">
           <div class="option" v-if="index == 0">
-            <span>患者姓名：张久久</span>
-            <span>联系电话：18888888888</span>
-            <span>身高：165cm</span>
-            <span>体重：50kg</span>
-            <span>年龄：22</span>
-            <span>预约时间：2017年11月15日</span>
+            <span>患者姓名：{{ params.name }}</span>
+            <span>性别：{{ params.sex === 1 ? '男' : '女' }}</span>
+            <span>联系电话：{{ params.tel }}</span>
+            <span>身高：{{ params.height }}cm</span>
+            <span>体重：{{ params.weight }}kg</span>
+            <span>年龄：{{ params.age }}</span>
+            <span>预约时间：{{ params.bespeak_time }}</span>
           </div>
           <div class="option" v-if="index == 1">
-            <p>我是一名32周的孕妇，从前天开始胃里反吐酸水，烧的胃和胸口疼，前天我吃了一包汤圆，和一碗面，晚上吃的是稀饭和酸萝卜，昨天吃的也是稀饭酸萝卜，到了晚上八点左右就一直吐酸水然后开始胃里和胸口被酸水经过烧的痛我现在还一样很难受，又不敢吃药</p>
+            <p v-html="params.content"></p>
           </div>
           <div class="option" v-if="index == 2">
-            
+            <ul v-for="(item, index)  in params.img" :key="index">
+              <li><img :src="item"></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -36,13 +42,11 @@
 </template>
 
 <script>
+import { formatFullDate } from '@/plugins/formatDateTime.js'
 export default {
   data() {
     return {
-      params: {
-        num: '20175652231',
-        status: '未就诊'
-      },
+      params: {},
       show: 0
     }
   },
@@ -53,7 +57,19 @@ export default {
       }else {
         this.show = index
       }
+    },
+    // 获取预约单详情
+    async apiForDetail() {
+      const res = await this.$http.post('expertDetails', {
+        id: this.$route.params.id
+      });
+      this.params = res.param;
+      this.params.bespeak_time = formatFullDate(this.params.bespeak_time);
+      this.params.img = res.param.img.split(',')
     }
+  },
+  mounted() {
+    this.apiForDetail();
   }
 }
 </script>

@@ -7,7 +7,7 @@
 
     <div class="exp-index-nav">
       <ul>
-        <li v-for="(i, index) in orders" :key="index">
+        <li v-for="(i, orderIndex) in orders" :key="orderIndex">
           <h4>{{ i.title }}</h4>
           <b>{{ i.num }}</b>
         </li>
@@ -23,15 +23,15 @@
 
       <mt-tab-container v-model="selected">
         <mt-tab-container-item v-for="(item, index) in types" :key="index" :id="item.id">
-          <div class="item" v-for="(list, i) in 2" :key="i">
+          <div class="item" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
-              <span>预约人：张久久</span>
-              <span>联系方式：18888888888</span>
-              <span>预约时间：2017年12月11日</span>
-              <span>就医地点：杭州妇保医院</span>
+              <span>预约人：{{ list.name }}</span>
+              <span>联系方式：{{ list.tel }}</span>
+              <span>预约时间：{{ list.bespeak_time }}</span>
+              <span>就医地点：{{ list.hospital_name }}</span>
             </div>
             <div class="item-right">
-              <button v-if="item.id === '1'" @click="toOrder">查 看</button>
+              <router-link :to="`/expert/order/${list.id}`" v-if="item.id === 1">查 看</router-link>
               <button v-else disabled>查 看</button>
             </div>
           </div>
@@ -42,25 +42,50 @@
 </template>
 
 <script>
+import { formatFullDate } from '@/plugins/formatDateTime.js'
 export default {
   data() {
     return {
       orders: [
-        { title: '今日预约总量', num: '20' },
-        { title: '本周完成', num: '20' },
-        { title: '本月完成', num: '20' }
+        { title: '今日预约总量', num: '' },
+        { title: '本周完成', num: '' },
+        { title: '本月完成', num: '' }
       ],
-      selected: '1',
+      selected: 1,
       types: [
-        { id: '1', name: '专家待看' },
-        { id: '2', name: '已完成' }
+        { id: 1, name: '专家待看', lists: [] },
+        { id: 2, name: '已完成', lists: [] }
       ]
     }
   },
   methods: {
-    toOrder() {
-      this.$router.push('/expert/order')
+    // 预约单列表
+    async apiForCount() {
+      const res = await this.$http.post('expertCount', {
+        expert_id: this.$route.params.id
+      });
+      this.orders[0].num = res.param.today;
+      this.orders[1].num = res.param.tswk;
+      this.orders[2].num = res.param.tsmonth;
+    },
+    // 预约单列表
+    async apiForOrders(api, index) {
+      const res = await this.$http.post(api, {
+        expert_id: this.$route.params.id
+      });
+      this.types[index].lists = res.param;
+      this.types[index].lists.forEach(item => {
+        item.bespeak_time = formatFullDate(item.bespeak_time);
+      })
     }
+  },
+  mounted() {
+    // 获取今日预约量，本周完成量，本月完成量
+    this.apiForCount();
+    // 专家待看
+    this.apiForOrders('expertToSee', 0);
+    // 已完成
+    this.apiForOrders('expertFinish', 1);
   }
 }
 </script>
