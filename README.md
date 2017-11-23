@@ -26,15 +26,15 @@
 # 项目部署
 
 - 测试服务器： 192.168.220.247
-- 测试部署微信： mtd.api.kfw001.ts/wx
-- 测试部署接口： mtd.api.kfw001.ts/admin
+- 测试部署微信： api.mtd.kfw001.ts/wx
+- 测试部署接口： api.mtd.kfw001.ts/admin
 
 - 测试部署微信： mtd.kfw001.ts/wx
 - 测试部署接口： mtd.kfw001.ts/admin
 
 - 正式部署：     http://mtd.kfw001.com
-- 正式部署微信： http://mtd.api.kfw001.com/wx
-- 正式部署接口： http://mtd.api.kfw001.com/admin
+- 正式部署微信： http://api.mtd.kfw001.com/wx
+- 正式部署接口： http://api.mtd.kfw001.com/admin
 
 
 # 后台接口文档
