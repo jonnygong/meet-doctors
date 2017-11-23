@@ -25,7 +25,9 @@
             <span>身高：{{ params.height }}cm</span>
             <span>体重：{{ params.weight }}kg</span>
             <span>年龄：{{ params.age }}</span>
-            <span>预约时间：{{ params.bespeak_time }}</span>
+            <!-- 就诊时间为0，显示预约时间。就诊时间不为0，显示就诊时间 -->
+            <span v-if="visit_time == 0">预约时间：{{ params.bespeak_time }}</span>
+            <span v-else>就诊时间：{{ params.visit_time }}</span>
           </div>
           <div class="option" v-if="index == 1">
             <p v-html="params.content"></p>
@@ -47,7 +49,8 @@ export default {
   data() {
     return {
       params: {},
-      show: 0
+      show: 0,
+      visit_time: ''
     }
   },
   methods: {
@@ -65,6 +68,8 @@ export default {
       });
       this.params = res.param;
       this.params.bespeak_time = formatFullDate(this.params.bespeak_time);
+      this.visit_time = res.param.visit_time;
+      this.params.visit_time = formatFullDate(this.params.visit_time);
       this.params.img = res.param.img.split(',')
     }
   },
@@ -75,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/iconfont/iconfont.css';
-@import './../../../style/reset.scss';
+@import '~@/style/iconfont/iconfont.css';
+@import '~@/style/reset.scss';
 @import 'order.scss';
 </style>

@@ -14,6 +14,10 @@ const patient = {
   patientDocHomeCategory: '/Wx/Home/category',
   // 患者：名医-首页-推荐专家
   patientDocHomeExpert: '/Wx/Home/expert',
+  // 患者：名医-列表-专家分类
+  patientDocElistCategory: '/Wx/Elist/category',
+  // 患者：名医-列表-推荐专家
+  patientDocElistExpert: '/Wx/Elist/expert',
   // 患者：名医-专家详情
   patientDocElistDetails: '/Wx/Elist/details',
   // 上传患者图片
@@ -98,7 +102,7 @@ const api = Object.assign({}, login, patient, guide, expert)
 
 export default {
   // 接口请求baseUrl
-  baseUrl: 'http://api.mtd.kfw001.ts',
+  baseUrl: 'http://api.mtd.kfw001.com',
   // 接口文档地址
   api: api
 };
