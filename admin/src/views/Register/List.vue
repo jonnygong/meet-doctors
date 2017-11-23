@@ -44,6 +44,9 @@
                             type="date"
                             placeholder="选择预约日期">
                     </el-date-picker>
+                    <!--<el-button type="primary"-->
+                               <!--@click="this.filters.bespeak_time = ''">清空-->
+                    <!--</el-button>-->
                 </el-form-item>
 
                 <el-form-item>
@@ -61,7 +64,7 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新
+                               @click="getDataList">刷新
                     </el-button>
                 </el-form-item>
             </el-form>
@@ -273,7 +276,7 @@
         list: [],
         sexList: {},
         is_audit: {},
-        
+
         total: 0,
         page: 1,
         pagesize: 10,
@@ -298,8 +301,21 @@
           status: this.filters.status, // 可选参数查询
           expert_id: this.filters.expert_id, // 可选参数查询
           guide_id: this.filters.guide_id, // 可选参数查询
-          bespeak_time: this.filters.bespeak_time, // 可选参数查询
-          visit_time: this.filters.visit_time, // 可选参数查询
+          bespeak_time: new Date(this.filters.bespeak_time) / 1000, // 可选参数查询
+          visit_time: new Date(this.filters.visit_time) / 1000, // 可选参数查询
+        };
+        const res = await this.$http.post(`${MODEL_NAME}/list`, params);
+        this.listLoading = false;
+        if (res === null) return;
+        this.total = res.param.pages.total;
+        this.pagesize = res.param.pages.pagesize;
+        this.list = res.param.list;
+      },
+      //获列表
+      async getDataList() {
+        this.listLoading = true;
+        let params = {
+          page: this.page,
         };
         const res = await this.$http.post(`${MODEL_NAME}/list`, params);
         this.listLoading = false;

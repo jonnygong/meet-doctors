@@ -20,7 +20,7 @@
    * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
    */
   // 生产环境
-  // window.UEDITOR_HOME_URL = "/admin/house_map/static/ueditor/";
+  // window.UEDITOR_HOME_URL = "/admin/static/ueditor/";
 
   // 开发环境
   window.UEDITOR_HOME_URL = "/static/ueditor/";
