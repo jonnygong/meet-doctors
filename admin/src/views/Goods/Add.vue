@@ -131,48 +131,43 @@
          * placeholder 对应提示信息
          */
         formItems: [
-            {
-                type: 'select',
-                prop: 'category_id',
-                label: '产品分类',
-                option: 'category', // 下拉列表数据别名
-                labelProp: 'name', // 下拉列表数组内元素 label 别名
-                valueProp: 'id', // 下拉列表数组内元素 value 别名
-                placeholder: '请输入内容'
-            },
+          {
+            type: 'select',
+            prop: 'category_id',
+            label: '产品分类',
+            option: 'category', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
           {
             type: 'text',
             prop: 'name',
             label: '产品名称'
           },
-            {
-                type: 'select',
-                prop: 'good_type',
-                label: '产品类别',
-                option: 'good_type', // 下拉列表数据别名
-                labelProp: 'label', // 下拉列表数组内元素 label 别名
-                valueProp: 'value', // 下拉列表数组内元素 value 别名
-                placeholder: '请输入内容'
-            },
+          {
+            type: 'select',
+            prop: 'good_type',
+            label: '产品类别',
+            option: 'good_type', // 下拉列表数据别名
+            labelProp: 'label', // 下拉列表数组内元素 label 别名
+            valueProp: 'value', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
           {
             type: 'number',
             prop: 'price',
             label: '价格',
           },
-            {
-                type: 'number',
-                prop: 'total',
-                label: '库存量',
-            },
+          {
+            type: 'number',
+            prop: 'total',
+            label: '库存量',
+          },
           {
             type: 'textarea',
             prop: 'material',
             label: '材料',
-          },
-          {
-            type: 'textarea',
-            prop: 'effect',
-            label: '功效',
           },
           {
             type: 'upload',
@@ -182,7 +177,7 @@
         ],
         // 下拉列表数据
         options: {
-            good_type: [],
+          good_type: [],
           category: []
         },
         formLoading: false,
@@ -197,7 +192,7 @@
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           content: [
-              {validator: validateContent, trigger: 'blur'}
+            {validator: validateContent, trigger: 'blur'}
           ],
           price: [
             {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
@@ -205,13 +200,10 @@
           total: [
             {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
-            good_type: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-          material: [
-            {required: true, message: '请输入内容', trigger: 'blur'}
+          good_type: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
-          effect: [
+          material: [
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           cover: [
@@ -229,7 +221,6 @@
           total: '',
           cover: '',
           material: '',
-          effect: '',
 
         }
       }
@@ -246,8 +237,8 @@
       async getArrayData() {
         const res = await this.$http.post(`${MODEL_NAME}/array`);
         if (res === null) return;
-          this.options.category = res.param.category;
-          this.options.good_type = this.formateOptions(res.param.good_type);
+        this.options.category = res.param.category;
+        this.options.good_type = this.formateOptions(res.param.good_type);
       },
       formateOptions(source) {
         let _data = [];
@@ -282,19 +273,19 @@
       getUEContent(ele) {
         return this.$refs[ele].getUEContent();
       },
-    // 多图上传获取内容，传入 ref 的值
-          getImageList(ele) {
-              return this.$refs[ele].getImageList();
-  },
+      // 多图上传获取内容，传入 ref 的值
+      getImageList(ele) {
+        return this.$refs[ele].getImageList();
+      },
     },
     mounted() {
-        this.getArrayData();
+      this.getArrayData();
     },
     components: {
       UE,
       'i-uploader': Uploader,
       'i-baidu-map': BaiduMap,
-        "i-muti-uploader": MutiUploader
+      "i-muti-uploader": MutiUploader
     },
   }
 </script>

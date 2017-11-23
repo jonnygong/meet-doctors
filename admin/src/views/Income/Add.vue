@@ -87,9 +87,9 @@
                 <UE :defaultMsg="formData.detail" ref="ue"></UE>
             </el-form-item>
             <!-- 多图片上传 -->
-                        <el-form-item label="多图片上传" prop="images">
-                            <i-muti-uploader :value="formData.images" ref="album"></i-muti-uploader>
-                        </el-form-item>
+            <el-form-item label="多图片上传" prop="images">
+                <i-muti-uploader :value="formData.images" ref="album"></i-muti-uploader>
+            </el-form-item>
             <!-- 自定义表单项目 -->
             <!-- ... -->
         </el-form>
@@ -264,7 +264,7 @@
 
               let params = Object.assign({}, this.formData);
               params.detail = this.getUEContent('detail'); // 富文本内容
-                params.images = this.getImageList("album"); // 多图上传
+              params.images = this.getImageList("album"); // 多图上传
               const res = await this.$http.post(`${MODEL_NAME}/add`, params);
               this.formLoading = false;
               if (res === null) return;
@@ -281,10 +281,10 @@
       getUEContent(ele) {
         return this.$refs[ele].getUEContent();
       },
-    // 多图上传获取内容，传入 ref 的值
-          getImageList(ele) {
-              return this.$refs[ele].getImageList();
-  },
+      // 多图上传获取内容，传入 ref 的值
+      getImageList(ele) {
+        return this.$refs[ele].getImageList();
+      },
     },
     mounted() {
 
@@ -294,7 +294,7 @@
       'i-uploader': Uploader,
       'i-baidu-map': BaiduMap,
       'i-baidu-map': BaiduMap,
-        "i-muti-uploader": MutiUploader
+      "i-muti-uploader": MutiUploader
     },
   }
 </script>

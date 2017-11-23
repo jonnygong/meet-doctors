@@ -84,7 +84,7 @@
             </el-form-item>
             <!--&lt;!&ndash; 富文本 &ndash;&gt;-->
             <!--<el-form-item label="富文本" prop="name">-->
-                <!--<UE :defaultMsg="formData.detail" ref="ue"></UE>-->
+            <!--<UE :defaultMsg="formData.detail" ref="ue"></UE>-->
             <!--</el-form-item>-->
             <!-- 多图片上传 -->
             <el-form-item label="就诊图片" prop="img">
@@ -101,27 +101,27 @@
 </template>
 
 <script>
-import util from "@/utils/js";
-import UE from "@/components/UEditor";
-import Uploader from "@/components/Uploader";
-import BaiduMap from "@/components/BaiduMap";
-import MutiUploader from "@/components/MutiUploader";
+  import util from "@/utils/js";
+  import UE from "@/components/UEditor";
+  import Uploader from "@/components/Uploader";
+  import BaiduMap from "@/components/BaiduMap";
+  import MutiUploader from "@/components/MutiUploader";
 
-const MODEL_NAME = "Register"; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
+  const MODEL_NAME = "Register"; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
 
-export default {
-  data() {
-    // 富文本校验
-    var validateContent = (rule, value, callback) => {
-      value = this.$refs["ue"].getUEContent();
-      if (value === "") {
-        callback(new Error("请输入内容"));
-      } else {
-        callback();
-      }
-    };
-    return {
-      /**
+  export default {
+    data() {
+      // 富文本校验
+      var validateContent = (rule, value, callback) => {
+        value = this.$refs["ue"].getUEContent();
+        if (value === "") {
+          callback(new Error("请输入内容"));
+        } else {
+          callback();
+        }
+      };
+      return {
+        /**
          * type 'text'(普通文本) 'number'(数值) 'textarea'(文本域)
          *      'period'(时间段)  --> start_prop / end_prop 对应 开始 / 结束 时间字段名称
          *      'time'(时间选择) 'upload'(图片上传) 'location'(经纬度)
@@ -130,250 +130,255 @@ export default {
          * label 对应表单名称
          * placeholder 对应提示信息
          */
-      formItems: [
-        {
-          type: "text",
-          prop: "name",
-          label: "患者姓名"
-        },
-        {
-          type: "text",
-          prop: "tel",
-          label: "患者手机号",
-        },
+        formItems: [
           {
-              type: "select",
-              prop: "sex",
-              label: "患者性别",
-              option: "sex", // 下拉列表数据别名
-              labelProp: "label", // 下拉列表数组内元素 label 别名
-              valueProp: "value", // 下拉列表数组内元素 value 别名
-              placeholder: "请输入内容"
+            type: "text",
+            prop: "name",
+            label: "患者姓名"
           },
           {
-              type: "text",
-              prop: "address",
-              label: "患者地址",
+            type: "text",
+            prop: "tel",
+            label: "患者手机号",
           },
           {
-              type: "number",
-              prop: "weight",
-              label: "体重(kg)",
+            type: "select",
+            prop: "sex",
+            label: "患者性别",
+            option: "sex", // 下拉列表数据别名
+            labelProp: "label", // 下拉列表数组内元素 label 别名
+            valueProp: "value", // 下拉列表数组内元素 value 别名
+            placeholder: "请输入内容"
           },
           {
-              type: "number",
-              prop: "height",
-              label: "身高(cm)",
+            type: "text",
+            prop: "address",
+            label: "患者地址",
           },
           {
-              type: "number",
-              prop: "age",
-              label: "年龄",
+            type: "number",
+            prop: "weight",
+            label: "体重(kg)",
+          },
+          {
+            type: "number",
+            prop: "height",
+            label: "身高(cm)",
+          },
+          {
+            type: "number",
+            prop: "age",
+            label: "年龄",
           },
 
-        {
-          type: "textarea",
-          prop: "content",
-          label: "患者自述",
-          placeholder: "请输入内容"
-        },
-        {
-          type: "time",
-          prop: "visit_time",
-          label: "就诊时间",
-        },
           {
-              type: "textarea",
-              prop: "visit_address",
-              label: "就诊地址",
-              placeholder: "请输入内容"
+            type: "textarea",
+            prop: "content",
+            label: "患者自述",
+            placeholder: "请输入内容"
           },
           {
-              type: "time",
-              prop: "bespeak_time",
-              label: "预约时间",
-              placeholder: "选择日期"
+            type: "time",
+            prop: "visit_time",
+            label: "就诊时间",
           },
-        {
-          type: "select",
-          prop: "is_audit",
-          label: "用户申请审核",
-          option: "is_audit", // 下拉列表数据别名
-          labelProp: "label", // 下拉列表数组内元素 label 别名
-          valueProp: "value", // 下拉列表数组内元素 value 别名
-          placeholder: "请输入内容"
-        },
-      ],
-      // 下拉列表数据
-      options: {
+          {
+            type: "textarea",
+            prop: "visit_address",
+            label: "就诊地址",
+            placeholder: "请输入内容"
+          },
+          {
+            type: "time",
+            prop: "bespeak_time",
+            label: "预约时间",
+            placeholder: "选择日期"
+          },
+          {
+            type: "select",
+            prop: "is_audit",
+            label: "用户申请审核",
+            option: "is_audit", // 下拉列表数据别名
+            labelProp: "label", // 下拉列表数组内元素 label 别名
+            valueProp: "value", // 下拉列表数组内元素 value 别名
+            placeholder: "请输入内容"
+          },
+          {
+            type: "upload",
+            prop: "visit_report",
+            label: "就诊报告",
+          },
+        ],
+        // 下拉列表数据
+        options: {
           sex: [
-              {value: 1, label: '男'},
-              {value: 2, label: '女'},
+            {value: 1, label: '男'},
+            {value: 2, label: '女'},
           ],
           is_audit: [
-              {value: 0, label: '没申请'},
-              {value: 1, label: '申请'},
+            {value: 0, label: '没申请'},
+            {value: 1, label: '申请'},
           ],
           expert: [],
           status: [],
-      },
+        },
         sexList: {},
         is_audit: {},
-      formLoading: false,
-      formRules: {
-        name: [
-          {required: true, message: "请输入内容", trigger: "blur" }
-        ],
+        formLoading: false,
+        formRules: {
+          name: [
+            {required: true, message: "请输入内容", trigger: "blur"}
+          ],
           tel: [
-              {required: true, message: "请输入内容", trigger: "blur" }
+            {required: true, message: "请输入内容", trigger: "blur"}
           ],
           sex: [
-              { type: "number", required: true, message: "请输入内容", trigger: "blur" }
+            {type: "number", required: true, message: "请输入内容", trigger: "blur"}
           ],
           address: [
-              {required: true, message: "请输入内容", trigger: "blur" }
+            {required: true, message: "请输入内容", trigger: "blur"}
           ],
           weight: [
-              { type: "number", required: true, message: "请输入内容", trigger: "blur" }
+            {type: "number", required: true, message: "请输入内容", trigger: "blur"}
           ],
           height: [
-              { type: "number", required: true, message: "请输入内容", trigger: "blur" }
+            {type: "number", required: true, message: "请输入内容", trigger: "blur"}
           ],
           age: [
-              { type: "number", required: true, message: "请输入内容", trigger: "blur" }
+            {type: "number", required: true, message: "请输入内容", trigger: "blur"}
           ],
           content: [
-              {required: true, message: "请输入内容", trigger: "blur" }
+            {required: true, message: "请输入内容", trigger: "blur"}
           ],
           img: [
-              {required: true, message: "请输入内容", trigger: "blur" }
+            {required: true, message: "请输入内容", trigger: "blur"}
           ],
           visit_time: [
-              { type: "date", required: true, message: "请输入内容", trigger: "blur" }
+            {type: "date", required: true, message: "请输入内容", trigger: "blur"}
           ],
           visit_address: [
-              {required: true, message: "请输入内容", trigger: "blur" }
+            {required: true, message: "请输入内容", trigger: "blur"}
           ],
           bespeak_time: [
-              { type: "date", required: true, message: "请输入内容", trigger: "blur" }
+            {type: "date", required: true, message: "请输入内容", trigger: "blur"}
           ],
           is_audit: [
-              { type: "number", required: true, message: "请输入内容", trigger: "blur" }
+            {type: "number", required: true, message: "请输入内容", trigger: "blur"}
           ],
-      },
-      //新增界面数据
-      formData: {
-        name: "",
-        tel: "",
-        sex: "",
-        address: "",
-        weight: "",
-        height: "",
-        age: "",
+        },
+        //新增界面数据
+        formData: {
+          name: "",
+          tel: "",
+          sex: "",
+          address: "",
+          weight: "",
+          height: "",
+          age: "",
           content: "",
-        img: "",
+          img: "",
           visit_time: "",
           visit_address: "",
           bespeak_time: "",
           is_audit: "",
 
-      }
-    };
-  },
-  methods: {
-    // 百度地图定位成功后的回调
-    locationSuccess(data) {
-      this.formData.longitude = data.lng;
-      this.formData.latitude = data.lat;
-    },
-    handleCancel() {
-      this.$router.back();
-    },
-    //显示编辑界面
-    async handleEdit(index, row) {
-      let params = {
-        id: this.$route.params.id
+        }
       };
-      const res = await this.$http.post(`${MODEL_NAME}/info`, params);
-      if (res === null) return;
-      this.formData = Object.assign({}, res.param);
+    },
+    methods: {
+      // 百度地图定位成功后的回调
+      locationSuccess(data) {
+        this.formData.longitude = data.lng;
+        this.formData.latitude = data.lat;
+      },
+      handleCancel() {
+        this.$router.back();
+      },
+      //显示编辑界面
+      async handleEdit(index, row) {
+        let params = {
+          id: this.$route.params.id
+        };
+        const res = await this.$http.post(`${MODEL_NAME}/info`, params);
+        if (res === null) return;
+        this.formData = Object.assign({}, res.param);
         this.formData.visit_time = new Date(this.formData.visit_time * 1000);
         this.formData.bespeak_time = new Date(this.formData.bespeak_time * 1000);
         this.formData.weight = Number(this.formData.weight);
         this.formData.height = Number(this.formData.height);
-    },
-    async getArrayData() {
-      const res = await this.$http.post(`${MODEL_NAME}/array`);
-      if (res === null) return;
-      this.options.expert = res.param.expert;
-      this.options.status = res.param.status;
+      },
+      async getArrayData() {
+        const res = await this.$http.post(`${MODEL_NAME}/array`);
+        if (res === null) return;
+        this.options.expert = res.param.expert;
+        this.options.status = res.param.status;
 
-    },
-    formateOptions(source) {
-      let _data = [];
-      for (let key in source) {
-        _data.push({ label: source[key], value: key * 1 });
-      }
-      return _data.slice(0);
-    },
-    //编辑
-    formSubmit() {
-      this.$refs.formData.validate(valid => {
-        if (valid) {
-          this.$confirm("确认提交吗？", "提示", {}).then(async () => {
-            this.formLoading = true;
-            // 处理时间为时间戳
-                          let _bespeak_time_ = this.formData.bespeak_time;
-                          if(typeof this.formData.bespeak_time === 'number') {
-                            _bespeak_time_ = this.formData.bespeak_time / 1000
-                          } else {
-                            _bespeak_time_ = new Date(this.formData.bespeak_time).getTime() / 1000
-                          }
-              let _visit_time_ = this.formData.visit_time;
-              if(typeof this.formData.visit_time === 'number') {
-                  _visit_time_ = this.formData.visit_time / 1000
-              } else {
-                  _visit_time_ = new Date(this.formData.visit_time).getTime() / 1000
-              }
-            let params = Object.assign({}, this.formData);
-                          params.bespeak_time = _bespeak_time_; // 后台接收10位时间戳，需要转换
-                          params.visit_time = _visit_time_; // 后台接收10位时间戳，需要转换
-              params.img = this.getImageList("album"); // 多图上传
-            const res = await this.$http.post(`${MODEL_NAME}/update`, params);
-            this.formLoading = false;
-            if (res === null) return;
-            this.$message({
-              message: "修改成功",
-              type: "success"
-            });
-            this.handleCancel();
-          });
+      },
+      formateOptions(source) {
+        let _data = [];
+        for (let key in source) {
+          _data.push({label: source[key], value: key * 1});
         }
-      });
-    },
-    selsChange(sels) {
-      this.sels = sels;
-    },
-    // UEditor 获取内容，传入 ref 的值
-    getUEContent(ele) {
-      return this.$refs[ele].getUEContent();
-    },
+        return _data.slice(0);
+      },
+      //编辑
+      formSubmit() {
+        this.$refs.formData.validate(valid => {
+          if (valid) {
+            this.$confirm("确认提交吗？", "提示", {}).then(async () => {
+              this.formLoading = true;
+              // 处理时间为时间戳
+              let _bespeak_time_ = this.formData.bespeak_time;
+              if (typeof this.formData.bespeak_time === 'number') {
+                _bespeak_time_ = this.formData.bespeak_time / 1000
+              } else {
+                _bespeak_time_ = new Date(this.formData.bespeak_time).getTime() / 1000
+              }
+              let _visit_time_ = this.formData.visit_time;
+              if (typeof this.formData.visit_time === 'number') {
+                _visit_time_ = this.formData.visit_time / 1000
+              } else {
+                _visit_time_ = new Date(this.formData.visit_time).getTime() / 1000
+              }
+              let params = Object.assign({}, this.formData);
+              params.bespeak_time = _bespeak_time_; // 后台接收10位时间戳，需要转换
+              params.visit_time = _visit_time_; // 后台接收10位时间戳，需要转换
+              params.img = this.getImageList("album"); // 多图上传
+              const res = await this.$http.post(`${MODEL_NAME}/update`, params);
+              this.formLoading = false;
+              if (res === null) return;
+              this.$message({
+                message: "修改成功",
+                type: "success"
+              });
+              this.handleCancel();
+            });
+          }
+        });
+      },
+      selsChange(sels) {
+        this.sels = sels;
+      },
+      // UEditor 获取内容，传入 ref 的值
+      getUEContent(ele) {
+        return this.$refs[ele].getUEContent();
+      },
       // 多图上传获取内容，传入 ref 的值
       getImageList(ele) {
-          return this.$refs[ele].getImageList();
+        return this.$refs[ele].getImageList();
       },
-  },
-  mounted() {
-    this.getArrayData();
-    this.handleEdit();
-  },
-  components: {
-    UE,
-    "i-uploader": Uploader,
-    "i-baidu-map": BaiduMap,
+    },
+    mounted() {
+      this.getArrayData();
+      this.handleEdit();
+    },
+    components: {
+      UE,
+      "i-uploader": Uploader,
+      "i-baidu-map": BaiduMap,
       "i-muti-uploader": MutiUploader
-  }
-};
+    }
+  };
 </script>
 
 <style lang="scss" scoped>

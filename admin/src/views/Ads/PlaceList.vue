@@ -5,11 +5,13 @@
             <el-form :inline="true" :model="filters">
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="handleAdd">新增</el-button>
+                               @click="handleAdd">新增
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -60,13 +62,16 @@
         <el-col :span="24" class="toolbar">
             <el-button type="danger"
                        @click="batchAction('remove')"
-                       :disabled="this.sels.length===0">批量删除</el-button>
+                       :disabled="this.sels.length===0">批量删除
+            </el-button>
             <el-button type="warning"
                        @click="batchAction('disable')"
-                       :disabled="this.sels.length===0">批量禁用</el-button>
+                       :disabled="this.sels.length===0">批量禁用
+            </el-button>
             <el-button type="primary"
                        @click="batchAction('active')"
-                       :disabled="this.sels.length===0">批量启用</el-button>
+                       :disabled="this.sels.length===0">批量启用
+            </el-button>
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -91,30 +96,30 @@
             width: 150,
             sortable: false
           },
-            {
-                prop: 'width',
-                label: '宽度',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'height',
-                label: '高度',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'min_sum',
-                label: '推荐最小数量',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'max_sum',
-                label: '限制最大数量',
-                width: 120,
-                sortable: false
-            },
+          {
+            prop: 'width',
+            label: '宽度',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'height',
+            label: '高度',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'min_sum',
+            label: '推荐最小数量',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'max_sum',
+            label: '限制最大数量',
+            width: 120,
+            sortable: false
+          },
 
         ],
         // 搜索条件

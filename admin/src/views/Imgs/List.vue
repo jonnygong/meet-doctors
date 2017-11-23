@@ -46,9 +46,9 @@
             <el-table-column type="selection" width="55">
             </el-table-column>
             <!--<el-table-column prop="goods_id" label="产品" min-width="120">-->
-                <!--<template scope="scope">-->
-                    <!--{{ options.goods[scope.row.goods_id] }}-->
-                <!--</template>-->
+            <!--<template scope="scope">-->
+            <!--{{ options.goods[scope.row.goods_id] }}-->
+            <!--</template>-->
             <!--</el-table-column>-->
             <el-table-column prop="img_type" label="图片类型" min-width="120">
                 <template scope="scope">
@@ -197,7 +197,7 @@
         if (res === null) return;
         this.filters.options = this.formateOptions(res.param.img_type);
         // 搜索选项
-        this.filters.options.unshift({ name: "全部类型", id: "" });
+        this.filters.options.unshift({name: "全部类型", id: ""});
 //        console.log(img_type);
         this.formateOptions(res.param.img_type).forEach(item => {
           this.options.img_type[item.id] = item.name;

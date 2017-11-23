@@ -3,27 +3,66 @@
         <!--工具条-->
         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
             <el-form :inline="true" :model="filters">
+                <!--<el-form-item>-->
+                <!--<el-input v-model="filters.value" placeholder="关键词"></el-input>-->
+                <!--</el-form-item>-->
                 <el-form-item>
-                    <el-input v-model="filters.value" placeholder="关键词"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-select v-model="filters.key" placeholder="请选择搜索字段">
+                    <el-select v-model="filters.status" placeholder="请选择订单状态">
                         <el-option
-                                v-for="(item,index) in filters.options"
+                                v-for="(item,index) in filters.options.status"
                                 :key="index"
-                                :label="item.label"
-                                :value="item.value">
+                                :label="item.name"
+                                :value="item.id">
                         </el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary"
-                               icon="search"
-                               @click="getListData">搜索</el-button>
+                    <el-select v-model="filters.expert_id" placeholder="请选择专家">
+                        <el-option
+                                v-for="(item,index) in filters.options.expert_id"
+                                :key="index"
+                                :label="item.name"
+                                :value="item.id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item>
+                    <el-select v-model="filters.guide_id" placeholder="请选择导诊">
+                        <el-option
+                                v-for="(item,index) in filters.options.guide_id"
+                                :key="index"
+                                :label="item.name"
+                                :value="item.id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+                <el-form :inline="true" :model="filters">
+                <el-form-item>
+                    <el-date-picker
+                            v-model="filters.bespeak_time"
+                            type="date"
+                            placeholder="选择预约日期">
+                    </el-date-picker>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-date-picker
+                            v-model="filters.visit_time"
+                            type="date"
+                            placeholder="选择就诊日期">
+                    </el-date-picker>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               icon="search"
+                               @click="getListData">搜索
+                    </el-button>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary"
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -84,6 +123,21 @@
                     {{ options.guide[scope.row.guide_id] }}
                 </template>
             </el-table-column>
+            <!-- 图片显示 -->
+            <el-table-column prop="visit_report" label="就诊报告" width="130">
+                <template scope="scope">
+                    <el-popover trigger="hover" placement="top">
+                        <div class="ad-img">
+                            <img :src="scope.row.visit_report" :alt="scope.row.name" width="200" height="auto"
+                                 v-if="scope.row.visit_report !== ''">
+                            <p v-else>暂无图片</p>
+                        </div>
+                        <div slot="reference" class="name-wrapper">
+                            <el-tag>查看图片</el-tag>
+                        </div>
+                    </el-popover>
+                </template>
+            </el-table-column>
             <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
             </el-table-column>
             <el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">
@@ -91,16 +145,17 @@
             <el-table-column prop="status" label="状态" width="100">
                 <template scope="scope">
                     <el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : scope.row.status === 2 ? 'warning' : scope.row.status === 3 ? 'success' : 'primary' ">
-                        {{ scope.row.status === 1 ? '交易关闭' : scope.row.status === -1 ? '已删除' : scope.row.status === 2 ? '未付款' : scope.row.status === 3 ? '已付款' : '已完成' }}
+                        {{ scope.row.status === 1 ? '交易关闭' : scope.row.status === -1 ? '已删除' : scope.row.status === 2 ? '未付款' : scope.row.status === 3 ? '已付款' : '已完成'
+                        }}
                     </el-tag>
                 </template>
             </el-table-column>
             <el-table-column label="操作" width="150" fixed="right">
                 <template scope="scope">
                     <!--<el-button size="small"-->
-                               <!--@click="statusSubmit(scope.$index, scope.row)"-->
-                               <!--:disabled="scope.row.status === -1">-->
-                        <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
+                    <!--@click="statusSubmit(scope.$index, scope.row)"-->
+                    <!--:disabled="scope.row.status === -1">-->
+                    <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
                     <!--</el-button>-->
                     <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
@@ -112,19 +167,24 @@
         <el-col :span="24" class="toolbar">
             <el-button type="danger"
                        @click="batchAction('remove')"
-                       :disabled="this.sels.length===0">批量删除</el-button>
+                       :disabled="this.sels.length===0">批量删除
+            </el-button>
             <el-button type="danger"
                        @click="batchAction('close')"
-                       :disabled="this.sels.length===0">交易关闭</el-button>
+                       :disabled="this.sels.length===0">交易关闭
+            </el-button>
             <el-button type="warning"
                        @click="batchAction('notPay')"
-                       :disabled="this.sels.length===0">未付款</el-button>
+                       :disabled="this.sels.length===0">未付款
+            </el-button>
             <el-button type="success"
                        @click="batchAction('pay')"
-                       :disabled="this.sels.length===0">已付款</el-button>
+                       :disabled="this.sels.length===0">已付款
+            </el-button>
             <el-button type="primary"
                        @click="batchAction('finish')"
-                       :disabled="this.sels.length===0">已经完成</el-button>
+                       :disabled="this.sels.length===0">已经完成
+            </el-button>
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -143,69 +203,77 @@
       return {
         // 列表表头数据
         tableColumn: [
-            {
-                prop: 'tel',
-                label: '患者手机号',
-                width: 130,
-                sortable: false
-            },
-            {
-                prop: 'address',
-                label: '患者地址',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'weight',
-                label: '体重',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'height',
-                label: '身高',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'age',
-                label: '年龄',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'content',
-                label: '患者自述',
-                width: 120,
-                sortable: false
-            },
+          {
+            prop: 'tel',
+            label: '患者手机号',
+            width: 130,
+            sortable: false
+          },
+          {
+            prop: 'address',
+            label: '患者地址',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'weight',
+            label: '体重',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'height',
+            label: '身高',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'age',
+            label: '年龄',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'content',
+            label: '患者自述',
+            width: 120,
+            sortable: false
+          },
 
         ],
         // 搜索条件
         filters: {
-          value: '',
-          key: 'name',
-          options: [
-            {value: 'name', label: '名称'},
-          ]
-        },
+          status: '',
+          expert_id: '',
+          guide_id: '',
+          bespeak_time: '',
+          visit_time: '',
           options: {
-            expert: [],
             status: [],
-              guide: [],
-              hospital: [],
-              sex: [
-                  {value: 1, label: '男'},
-                  {value: 2, label: '女'},
-              ],
-            is_audit: [
-              {value: 0, label: '未申请'},
-              {value: 1, label: '申请'},
-            ],
+            expert_id: [],
+            guide_id: [],
+            bespeak_time: [],
+            visit_time: [],
           },
+        },
+        options: {
+          expert: [],
+          status: [],
+          guide: [],
+          hospital: [],
+          sex: [
+            {value: 1, label: '男'},
+            {value: 2, label: '女'},
+          ],
+          is_audit: [
+            {value: 0, label: '未申请'},
+            {value: 1, label: '申请'},
+          ],
+        },
         list: [],
-          sexList: {},
+        sexList: {},
         is_audit: {},
+        
         total: 0,
         page: 1,
         pagesize: 10,
@@ -227,8 +295,11 @@
         this.listLoading = true;
         let params = {
           page: this.page,
-          key: this.filters.key, // 可选参数查询
-          value: this.filters.value // 可选参数查询
+          status: this.filters.status, // 可选参数查询
+          expert_id: this.filters.expert_id, // 可选参数查询
+          guide_id: this.filters.guide_id, // 可选参数查询
+          bespeak_time: this.filters.bespeak_time, // 可选参数查询
+          visit_time: this.filters.visit_time, // 可选参数查询
         };
         const res = await this.$http.post(`${MODEL_NAME}/list`, params);
         this.listLoading = false;
@@ -237,36 +308,49 @@
         this.pagesize = res.param.pages.pagesize;
         this.list = res.param.list;
       },
-        //获列表
-        async getListArray() {
-            this.listLoading = true;
-            let params = {};
-            const res = await this.$http.post(`${MODEL_NAME}/array`, params);
-            this.listLoading = false;
-            if (res === null) return;
-//            this.options.expert = res.param.expert;
-//            this.options.hospital = res.param.hospital;
-//            this.options.guide = res.param.guide;
-            this.options.status = res.param.status;
-            res.param.expert.forEach(item => {
-                this.options.expert[item.id] = item.name
-            });
-            res.param.hospital.forEach(item => {
-                this.options.hospital[item.id] = item.name
-            });
-            res.param.guide.forEach(item => {
-                this.options.guide[item.id] = item.name
-            });
+      //获列表
+      async getListArray() {
+        this.listLoading = true;
+        let params = {};
+        const res = await this.$http.post(`${MODEL_NAME}/array`, params);
+        this.listLoading = false;
+        if (res === null) return;
+
+        this.options.status = res.param.status;
+        res.param.expert.forEach(item => {
+          this.options.expert[item.id] = item.name
+        });
+        res.param.hospital.forEach(item => {
+          this.options.hospital[item.id] = item.name
+        });
+        res.param.guide.forEach(item => {
+          this.options.guide[item.id] = item.name
+        });
 //            res.param.status.forEach(item => {
-//                this.options.status[item.id] = item.name
+//                this.filters.options.status[item.id] = item.name
 //            });
-            this.options.sex.forEach(item => {
-                this.sexList[item.value] = item.label
-            });
-          this.options.is_audit.forEach(item => {
-            this.is_audit[item.value] = item.label
-          });
-        },
+        this.options.sex.forEach(item => {
+          this.sexList[item.value] = item.label
+        });
+        this.options.is_audit.forEach(item => {
+          this.is_audit[item.value] = item.label
+        });
+
+        this.filters.options.expert_id = res.param.expert;
+        this.filters.options.expert_id.unshift({name: "全部", id: 0});
+        this.filters.options.guide_id = res.param.guide;
+        this.filters.options.guide_id.unshift({name: "全部", id: 0});
+        this.filters.options.status = this.formateOptions(res.param.status);
+        // 搜索选项
+        this.filters.options.status.unshift({name: "全部", id: 0});
+      },
+      formateOptions(source) {
+        let _data = [];
+        for (let key in source) {
+          _data.push({name: source[key], id: key * 1})
+        }
+        return _data.slice(0);
+      },
       //删除
       handleDel(index, row) {
         this.$confirm('确认删除该记录吗?', '提示', {
@@ -337,16 +421,16 @@
             api: `${MODEL_NAME}/status`,
             status: 2
           },
-            'pay': {
-                tip: '已付款',
-                api: `${MODEL_NAME}/status`,
-                status: 3
-            },
-            'finish': {
-                tip: '已经完成',
-                api: `${MODEL_NAME}/status`,
-                status: 4
-            },
+          'pay': {
+            tip: '已付款',
+            api: `${MODEL_NAME}/status`,
+            status: 3
+          },
+          'finish': {
+            tip: '已经完成',
+            api: `${MODEL_NAME}/status`,
+            status: 4
+          },
         };
         this.$confirm(`确认${actions[action].tip}选中记录吗？`, '提示', {
           type: 'warning'

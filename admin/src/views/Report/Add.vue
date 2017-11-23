@@ -127,50 +127,50 @@
             prop: 'openid',
             label: 'openid'
           },
-            {
-                type: 'text',
-                prop: 'name',
-                label: '用户名称'
-            },
-            {
-                type: 'upload',
-                prop: 'img',
-                label: '用户头像'
-            },
-            {
-                type: 'select',
-                prop: 'hospital_id',
-                label: '医院',
-                option: 'hospital', // 下拉列表数据别名
-                labelProp: 'name', // 下拉列表数组内元素 label 别名
-                valueProp: 'id', // 下拉列表数组内元素 value 别名
-                placeholder: '请输入内容'
-            },
+          {
+            type: 'text',
+            prop: 'name',
+            label: '用户名称'
+          },
+          {
+            type: 'upload',
+            prop: 'img',
+            label: '用户头像'
+          },
+          {
+            type: 'select',
+            prop: 'hospital_id',
+            label: '医院',
+            option: 'hospital', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
           {
             type: 'number',
             prop: 'front_score',
             label: '孕前成绩',
           },
-            {
-                type: 'number',
-                prop: 'in_score',
-                label: '孕中成绩',
-            },
-            {
-                type: 'number',
-                prop: 'after_score',
-                label: '产后成绩',
-            },
-            {
-                type: 'number',
-                prop: 'recovery_score',
-                label: '康复成绩',
-            },
-            {
-                type: 'number',
-                prop: 'score',
-                label: '总成绩',
-            },
+          {
+            type: 'number',
+            prop: 'in_score',
+            label: '孕中成绩',
+          },
+          {
+            type: 'number',
+            prop: 'after_score',
+            label: '产后成绩',
+          },
+          {
+            type: 'number',
+            prop: 'recovery_score',
+            label: '康复成绩',
+          },
+          {
+            type: 'number',
+            prop: 'score',
+            label: '总成绩',
+          },
         ],
         // 下拉列表数据
         options: {
@@ -181,42 +181,42 @@
           openid: [
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],
-            name: [
-                {required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            img: [
-                {required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            hospital_id: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            front_score: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            in_score: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            after_score: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            recovery_score: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            score: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
+          name: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          img: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          hospital_id: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          front_score: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          in_score: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          after_score: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          recovery_score: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          score: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
         },
         //新增界面数据
         formData: {
           openid: '',
           name: '',
           img: '',
-            hospital_id: '',
-            front_score: '',
-            in_score: '',
-            after_score: '',
-            recovery_score: '',
-            score: '',
+          hospital_id: '',
+          front_score: '',
+          in_score: '',
+          after_score: '',
+          recovery_score: '',
+          score: '',
 
         }
       }
@@ -233,7 +233,7 @@
       async getArrayData() {
         const res = await this.$http.post(`${MODEL_NAME}/array`);
         if (res === null) return;
-          this.options.hospital = res.param.hospital;
+        this.options.hospital = res.param.hospital;
       },
       formateOptions(source) {
         let _data = [];
@@ -266,20 +266,20 @@
       getUEContent(ele) {
         return this.$refs[ele].getUEContent();
       },
-    // 多图上传获取内容，传入 ref 的值
-          getImageList(ele) {
-              return this.$refs[ele].getImageList();
-  },
+      // 多图上传获取内容，传入 ref 的值
+      getImageList(ele) {
+        return this.$refs[ele].getImageList();
+      },
     },
     mounted() {
-        this.getArrayData();
+      this.getArrayData();
     },
     components: {
       UE,
       'i-uploader': Uploader,
       'i-baidu-map': BaiduMap,
       'i-baidu-map': BaiduMap,
-        "i-muti-uploader": MutiUploader
+      "i-muti-uploader": MutiUploader
     },
   }
 </script>

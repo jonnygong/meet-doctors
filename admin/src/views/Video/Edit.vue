@@ -102,27 +102,27 @@
 </template>
 
 <script>
-import util from "@/utils/js";
-import UE from "@/components/UEditor";
-import Uploader from "@/components/Uploader";
-import BaiduMap from "@/components/BaiduMap";
-import MutiUploader from "@/components/MutiUploader";
+  import util from "@/utils/js";
+  import UE from "@/components/UEditor";
+  import Uploader from "@/components/Uploader";
+  import BaiduMap from "@/components/BaiduMap";
+  import MutiUploader from "@/components/MutiUploader";
 
-const MODEL_NAME = "Video"; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
+  const MODEL_NAME = "Video"; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
 
-export default {
-  data() {
-    // 富文本校验
-    var validateContent = (rule, value, callback) => {
-      value = this.$refs["content"].getUEContent();
-      if (value === "") {
-        callback(new Error("请输入内容"));
-      } else {
-        callback();
-      }
-    };
-    return {
-      /**
+  export default {
+    data() {
+      // 富文本校验
+      var validateContent = (rule, value, callback) => {
+        value = this.$refs["content"].getUEContent();
+        if (value === "") {
+          callback(new Error("请输入内容"));
+        } else {
+          callback();
+        }
+      };
+      return {
+        /**
          * type 'text'(普通文本) 'number'(数值) 'textarea'(文本域)
          *      'period'(时间段)  --> start_prop / end_prop 对应 开始 / 结束 时间字段名称
          *      'time'(时间选择) 'upload'(图片上传) 'location'(经纬度)
@@ -131,115 +131,115 @@ export default {
          * label 对应表单名称
          * placeholder 对应提示信息
          */
-      formItems: [
+        formItems: [
           {
-              type: 'select',
-              prop: 'category_id',
-              label: '所属分类',
-              option: 'category', // 下拉列表数据别名
-              labelProp: 'name', // 下拉列表数组内元素 label 别名
-              valueProp: 'id', // 下拉列表数组内元素 value 别名
-              placeholder: '请输入内容'
+            type: 'select',
+            prop: 'category_id',
+            label: '所属分类',
+            option: 'category', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
           },
           {
-              type: 'upload',
-              prop: 'cover',
-              label: '封面图片'
+            type: 'upload',
+            prop: 'cover',
+            label: '封面图片'
           },
           {
-              type: 'text',
-              prop: 'title',
-              label: '视频标题'
+            type: 'text',
+            prop: 'title',
+            label: '视频标题'
           },
           {
-              type: 'text',
-              prop: 'info',
-              label: '视频简介'
+            type: 'text',
+            prop: 'info',
+            label: '视频简介'
           },
           {
-              type: 'text',
-              prop: 'video_url',
-              label: '视频链接'
+            type: 'text',
+            prop: 'video_url',
+            label: '视频链接'
           },
           {
-              type: 'number',
-              prop: 'sort',
-              label: '排序',
-              placeholder: '请输入排序' // 不加则显示缺省内容
+            type: 'number',
+            prop: 'sort',
+            label: '排序',
+            placeholder: '请输入排序' // 不加则显示缺省内容
           },
           {
-              type: 'select',
-              prop: 'hospital_id',
-              label: '归属医院',
-              option: 'hospital', // 下拉列表数据别名
-              labelProp: 'name', // 下拉列表数组内元素 label 别名
-              valueProp: 'id', // 下拉列表数组内元素 value 别名
-              placeholder: '请输入内容'
+            type: 'select',
+            prop: 'hospital_id',
+            label: '归属医院',
+            option: 'hospital', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
           },
-        {
-          type: 'select',
-          prop: 'is_receive',
-          label: '是否可领取药膳',
-          option: 'is_receive', // 下拉列表数据别名
-          labelProp: 'label', // 下拉列表数组内元素 label 别名
-          valueProp: 'value', // 下拉列表数组内元素 value 别名
-          placeholder: '请输入内容'
-        },
           {
-              type: 'text',
-              prop: 'long_time',
-              label: '视频时长',
+            type: 'select',
+            prop: 'is_receive',
+            label: '是否可领取药膳',
+            option: 'is_receive', // 下拉列表数据别名
+            labelProp: 'label', // 下拉列表数组内元素 label 别名
+            valueProp: 'value', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
           },
-      ],
-      // 下拉列表数据
-      options: {
+          {
+            type: 'text',
+            prop: 'long_time',
+            label: '视频时长',
+          },
+        ],
+        // 下拉列表数据
+        options: {
           category: [],
           hospital: [],
-        is_receive: [
-          {value: 0, label: '不可以'},
-          {value: 1, label: '可以'},
-        ],
-      },
+          is_receive: [
+            {value: 0, label: '不可以'},
+            {value: 1, label: '可以'},
+          ],
+        },
 
-      formLoading: false,
-      formRules: {
+        formLoading: false,
+        formRules: {
           category_id: [
-              {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           cover: [
-              {required: true, message: '请输入内容'}
+            {required: true, message: '请输入内容'}
           ],
           title: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           info: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           video_url: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           sort: [
-              {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           hospital_id: [
-              {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           long_time: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           img: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           content: [
-              {validator: validateContent, trigger: 'blur'}
+            {validator: validateContent, trigger: 'blur'}
           ],
-        is_receive: [
-          {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-        ],
-      },
-      //新增界面数据
-      formData: {
-        id: "",
+          is_receive: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+        },
+        //新增界面数据
+        formData: {
+          id: "",
           category_id: '',
           cover: '',
           title: '',
@@ -250,100 +250,100 @@ export default {
           content: '',
           hospital_id: '',
           long_time: '',
-        is_receive: '',
-      }
-    };
-  },
-  methods: {
-    // 百度地图定位成功后的回调
-    locationSuccess(data) {
-      this.formData.longitude = data.lng;
-      this.formData.latitude = data.lat;
-    },
-    handleCancel() {
-      this.$router.back();
-    },
-    //显示编辑界面
-    async handleEdit(index, row) {
-      let params = {
-        id: this.$route.params.id
+          is_receive: '',
+        }
       };
-      const res = await this.$http.post(`${MODEL_NAME}/info`, params);
-      if (res === null) return;
-      this.formData = Object.assign({}, res.param);
-      // 经纬度需要数值类型，需转换
-      this.formData.longitude = Number(this.formData.longitude);
-      this.formData.latitude = Number(this.formData.latitude);
     },
-    async getArrayData() {
-      const res = await this.$http.post(`${MODEL_NAME}/array`);
-      if (res === null) return;
+    methods: {
+      // 百度地图定位成功后的回调
+      locationSuccess(data) {
+        this.formData.longitude = data.lng;
+        this.formData.latitude = data.lat;
+      },
+      handleCancel() {
+        this.$router.back();
+      },
+      //显示编辑界面
+      async handleEdit(index, row) {
+        let params = {
+          id: this.$route.params.id
+        };
+        const res = await this.$http.post(`${MODEL_NAME}/info`, params);
+        if (res === null) return;
+        this.formData = Object.assign({}, res.param);
+        // 经纬度需要数值类型，需转换
+        this.formData.longitude = Number(this.formData.longitude);
+        this.formData.latitude = Number(this.formData.latitude);
+      },
+      async getArrayData() {
+        const res = await this.$http.post(`${MODEL_NAME}/array`);
+        if (res === null) return;
         this.options.category = res.param.category;
         this.options.hospital = res.param.hospital;
-      this.options.hospital.unshift({ name: "全部医院", id: 0 });
+        this.options.hospital.unshift({name: "全部医院", id: 0});
 //      // 搜索选项
 //      this.filters.options.type = this.formateOptions(res.param.type);
 //      this.filters.options.type.unshift({ label: "全部分类", value: "" });
-    },
-    formateOptions(source) {
-      let _data = [];
-      for (let key in source) {
-        _data.push({ label: source[key], value: key * 1 });
-      }
-      return _data.slice(0);
-    },
-    //编辑
-    formSubmit() {
-      this.$refs.formData.validate(valid => {
-        if (valid) {
-          this.$confirm("确认提交吗？", "提示", {}).then(async () => {
-            this.formLoading = true;
-            // 处理时间为时间戳
-            //              let _next_open_ = this.formData.next_open;
-            //              if(typeof this.formData.next_open === 'number') {
-            //                _next_open_ = this.formData.next_open / 1000
-            //              } else {
-            //                _next_open_ = new Date(this.formData.next_open).getTime() / 1000
-            //              }
-            let params = Object.assign({}, this.formData);
-            //              params.next_open = _next_open_; // 后台接收10位时间戳，需要转换
+      },
+      formateOptions(source) {
+        let _data = [];
+        for (let key in source) {
+          _data.push({label: source[key], value: key * 1});
+        }
+        return _data.slice(0);
+      },
+      //编辑
+      formSubmit() {
+        this.$refs.formData.validate(valid => {
+          if (valid) {
+            this.$confirm("确认提交吗？", "提示", {}).then(async () => {
+              this.formLoading = true;
+              // 处理时间为时间戳
+              //              let _next_open_ = this.formData.next_open;
+              //              if(typeof this.formData.next_open === 'number') {
+              //                _next_open_ = this.formData.next_open / 1000
+              //              } else {
+              //                _next_open_ = new Date(this.formData.next_open).getTime() / 1000
+              //              }
+              let params = Object.assign({}, this.formData);
+              //              params.next_open = _next_open_; // 后台接收10位时间戳，需要转换
               params.content = this.getUEContent('content'); // 富文本内容
               params.img = this.getImageList("album"); // 多图上传
-            const res = await this.$http.post(`${MODEL_NAME}/update`, params);
-            this.formLoading = false;
-            if (res === null) return;
-            this.$message({
-              message: "修改成功",
-              type: "success"
+              const res = await this.$http.post(`${MODEL_NAME}/update`, params);
+              this.formLoading = false;
+              if (res === null) return;
+              this.$message({
+                message: "修改成功",
+                type: "success"
+              });
+              this.handleCancel();
             });
-            this.handleCancel();
-          });
-        }
-      });
-    },
-    selsChange(sels) {
-      this.sels = sels;
-    },
-    // UEditor 获取内容，传入 ref 的值
-    getUEContent(ele) {
-      return this.$refs[ele].getUEContent();
-    },
+          }
+        });
+      },
+      selsChange(sels) {
+        this.sels = sels;
+      },
+      // UEditor 获取内容，传入 ref 的值
+      getUEContent(ele) {
+        return this.$refs[ele].getUEContent();
+      },
       // 多图上传获取内容，传入 ref 的值
       getImageList(ele) {
-          return this.$refs[ele].getImageList();
+        return this.$refs[ele].getImageList();
       },
-  },
-  mounted() {
-    this.handleEdit();
+    },
+    mounted() {
+      this.handleEdit();
       this.getArrayData();
-  },
-  components: {
-    UE,
-    "i-uploader": Uploader,
-    "i-baidu-map": BaiduMap,
+    },
+    components: {
+      UE,
+      "i-uploader": Uploader,
+      "i-baidu-map": BaiduMap,
       "i-muti-uploader": MutiUploader
-  }
-};
+    }
+  };
 </script>
 
 <style lang="scss" scoped>

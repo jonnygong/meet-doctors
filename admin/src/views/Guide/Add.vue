@@ -131,71 +131,71 @@
             prop: 'tel',
             label: '电话',
           },
-            {
-                type: 'select',
-                prop: 'sex',
-                label: '性别',
-                option: 'sex', // 下拉列表数据别名
-                labelProp: 'label', // 下拉列表数组内元素 label 别名
-                valueProp: 'value', // 下拉列表数组内元素 value 别名
-                placeholder: '请输入内容'
-            },
-            {
-                type: 'number',
-                prop: 'age',
-                label: '年龄',
-            },
-            {
-                type: 'select',
-                prop: 'hospital_id',
-                label: '医院',
-                option: 'hospital_id', // 下拉列表数据别名
-                labelProp: 'name', // 下拉列表数组内元素 label 别名
-                valueProp: 'id', // 下拉列表数组内元素 value 别名
-                placeholder: '请输入内容'
-            },
-            {
-                type: 'upload',
-                prop: 'img',
-                label: '头像',
-            },
-            {
-                type: 'upload',
-                prop: 'code',
-                label: '导诊微信二维码',
-            },
+          {
+            type: 'select',
+            prop: 'sex',
+            label: '性别',
+            option: 'sex', // 下拉列表数据别名
+            labelProp: 'label', // 下拉列表数组内元素 label 别名
+            valueProp: 'value', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
+          {
+            type: 'number',
+            prop: 'age',
+            label: '年龄',
+          },
+          {
+            type: 'select',
+            prop: 'hospital_id',
+            label: '医院',
+            option: 'hospital_id', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
+          {
+            type: 'upload',
+            prop: 'img',
+            label: '头像',
+          },
+          {
+            type: 'upload',
+            prop: 'code',
+            label: '导诊微信二维码',
+          },
         ],
         // 下拉列表数据
         options: {
-            hospital_id: [],
-            sex: [
-                {value: 1, label: "男"},
-                {value: 2, label: "女"},
-            ],
+          hospital_id: [],
+          sex: [
+            {value: 1, label: "男"},
+            {value: 2, label: "女"},
+          ],
         },
         formLoading: false,
         formRules: {
           name: [
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],
-            tel: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            sex: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            age: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            hospital_id: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            img: [
-                {required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            code: [
-                {required: true, message: '请输入内容', trigger: 'blur'}
-            ],
+          tel: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          sex: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          age: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          hospital_id: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          img: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          code: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
 
 
         },
@@ -206,8 +206,8 @@
           sex: '',
           age: '',
           hospital_id: '',
-            img: '',
-            code: '',
+          img: '',
+          code: '',
         }
       }
     },
@@ -223,7 +223,7 @@
       async getArrayData() {
         const res = await this.$http.post(`${MODEL_NAME}/array`);
         if (res === null) return;
-          this.options.hospital_id = res.param.hospital;
+        this.options.hospital_id = res.param.hospital;
       },
       formateOptions(source) {
         let _data = [];
@@ -258,7 +258,7 @@
       }
     },
     mounted() {
-        this.getArrayData();
+      this.getArrayData();
     },
     components: {
       UE,

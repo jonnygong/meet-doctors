@@ -122,15 +122,15 @@
          * placeholder 对应提示信息
          */
         formItems: [
-            {
-                type: 'select',
-                prop: 'place_id',
-                label: '广告位',
-                option: 'place', // 下拉列表数据别名
-                labelProp: 'name', // 下拉列表数组内元素 label 别名
-                valueProp: 'id', // 下拉列表数组内元素 value 别名
-                placeholder: '请输入内容'
-            },
+          {
+            type: 'select',
+            prop: 'place_id',
+            label: '广告位',
+            option: 'place', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
           {
             type: 'upload',
             prop: 'cover',
@@ -146,17 +146,17 @@
             prop: 'link',
             label: '广告外链',
           },
-            {
-                type: 'number',
-                prop: 'sort',
-                label: '排序',
-            },
-            {
-                type: 'period',
-                start_prop: 'start_time',
-                end_prop: 'end_time',
-                label: '时间段'
-            },
+          {
+            type: 'number',
+            prop: 'sort',
+            label: '排序',
+          },
+          {
+            type: 'period',
+            start_prop: 'start_time',
+            end_prop: 'end_time',
+            label: '时间段'
+          },
         ],
         // 下拉列表数据
         options: {
@@ -167,32 +167,32 @@
           place_id: [
             {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
-            cover: [
-                {required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            title: [
-                {required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            start_time: [
-                {type: 'date', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            end_time: [
-                {type: 'date', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            link: [
-                {required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            sort: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
+          cover: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          title: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          start_time: [
+            {type: 'date', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          end_time: [
+            {type: 'date', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          link: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          sort: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
         },
         //新增界面数据
         formData: {
           title: '',
           place_id: '',
-            start_time: '',
+          start_time: '',
           cover: '',
-            end_time: '',
+          end_time: '',
           link: '',
           sort: ''
         }
@@ -210,7 +210,7 @@
       async getArrayData() {
         const res = await this.$http.post(`${MODEL_NAME}/array`);
         if (res === null) return;
-          this.options.place = res.param.place;
+        this.options.place = res.param.place;
 
       },
       formateOptions(source) {
@@ -226,22 +226,22 @@
           if (valid) {
             this.$confirm('确认提交吗？', '提示', {}).then(async () => {
               this.formLoading = true;
-                // 处理时间为时间戳
-                              let _start_time_ = this.formData.start_time;
-                              if(typeof this.formData.start_time === 'number') {
-                                  _start_time_ = this.formData.start_time / 1000
-                              } else {
-                                  _start_time_ = new Date(this.formData.start_time).getTime() / 1000
-                              }
-                let _end_time_ = this.formData.end_time;
-                if(typeof this.formData.end_time === 'number') {
-                    _end_time_ = this.formData.end_time / 1000
-                } else {
-                    _end_time_ = new Date(this.formData.end_time).getTime() / 1000
-                }
+              // 处理时间为时间戳
+              let _start_time_ = this.formData.start_time;
+              if (typeof this.formData.start_time === 'number') {
+                _start_time_ = this.formData.start_time / 1000
+              } else {
+                _start_time_ = new Date(this.formData.start_time).getTime() / 1000
+              }
+              let _end_time_ = this.formData.end_time;
+              if (typeof this.formData.end_time === 'number') {
+                _end_time_ = this.formData.end_time / 1000
+              } else {
+                _end_time_ = new Date(this.formData.end_time).getTime() / 1000
+              }
               let params = Object.assign({}, this.formData);
-                params.start_time = _start_time_; // 后台接收10位时间戳，需要转换
-                params.end_time = _end_time_; // 后台接收10位时间戳，需要转换
+              params.start_time = _start_time_; // 后台接收10位时间戳，需要转换
+              params.end_time = _end_time_; // 后台接收10位时间戳，需要转换
               const res = await this.$http.post(`${MODEL_NAME}/add`, params);
               this.formLoading = false;
               if (res === null) return;
@@ -260,7 +260,7 @@
       }
     },
     mounted() {
-        this.getArrayData();
+      this.getArrayData();
     },
     components: {
       UE,

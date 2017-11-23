@@ -4,30 +4,32 @@
         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
             <el-form :inline="true" :model="filters">
                 <!--<el-form-item>-->
-                    <!--<el-input v-model="filters.value" placeholder="关键词"></el-input>-->
+                <!--<el-input v-model="filters.value" placeholder="关键词"></el-input>-->
                 <!--</el-form-item>-->
                 <!--<el-form-item>-->
-                    <!--<el-select v-model="filters.key" placeholder="请选择搜索字段">-->
-                        <!--<el-option-->
-                                <!--v-for="(item,index) in filters.options"-->
-                                <!--:key="index"-->
-                                <!--:label="item.label"-->
-                                <!--:value="item.value">-->
-                        <!--</el-option>-->
-                    <!--</el-select>-->
+                <!--<el-select v-model="filters.key" placeholder="请选择搜索字段">-->
+                <!--<el-option-->
+                <!--v-for="(item,index) in filters.options"-->
+                <!--:key="index"-->
+                <!--:label="item.label"-->
+                <!--:value="item.value">-->
+                <!--</el-option>-->
+                <!--</el-select>-->
                 <!--</el-form-item>-->
                 <!--<el-form-item>-->
-                    <!--<el-button type="primary"-->
-                               <!--icon="search"-->
-                               <!--@click="getListData">搜索</el-button>-->
+                <!--<el-button type="primary"-->
+                <!--icon="search"-->
+                <!--@click="getListData">搜索</el-button>-->
                 <!--</el-form-item>-->
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="handleBack">返回</el-button>
+                               @click="handleBack">返回
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -61,36 +63,36 @@
             </el-table-column>
 
             <!--<el-table-column prop="status" label="状态" width="100">-->
-                <!--<template scope="scope">-->
-                    <!--<el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : 'danger'">-->
-                        <!--{{ scope.row.status === 1 ? '可用' : scope.row.status === -1 ? '已删除' : '不可用' }}-->
-                    <!--</el-tag>-->
-                <!--</template>-->
+            <!--<template scope="scope">-->
+            <!--<el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : 'danger'">-->
+            <!--{{ scope.row.status === 1 ? '可用' : scope.row.status === -1 ? '已删除' : '不可用' }}-->
+            <!--</el-tag>-->
+            <!--</template>-->
             <!--</el-table-column>-->
             <!--<el-table-column label="操作" width="240" fixed="right">-->
-                <!--<template scope="scope">-->
-                    <!--<el-button size="small"-->
-                               <!--@click="statusSubmit(scope.$index, scope.row)"-->
-                               <!--:disabled="scope.row.status === -1">-->
-                        <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
-                    <!--</el-button>-->
-                    <!--<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
-                    <!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>-->
-                <!--</template>-->
+            <!--<template scope="scope">-->
+            <!--<el-button size="small"-->
+            <!--@click="statusSubmit(scope.$index, scope.row)"-->
+            <!--:disabled="scope.row.status === -1">-->
+            <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
+            <!--</el-button>-->
+            <!--<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
+            <!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>-->
+            <!--</template>-->
             <!--</el-table-column>-->
         </el-table>
 
         <!--工具条-->
         <el-col :span="24" class="toolbar">
             <!--<el-button type="danger"-->
-                       <!--@click="batchAction('remove')"-->
-                       <!--:disabled="this.sels.length===0">批量删除</el-button>-->
+            <!--@click="batchAction('remove')"-->
+            <!--:disabled="this.sels.length===0">批量删除</el-button>-->
             <!--<el-button type="warning"-->
-                       <!--@click="batchAction('disable')"-->
-                       <!--:disabled="this.sels.length===0">批量禁用</el-button>-->
+            <!--@click="batchAction('disable')"-->
+            <!--:disabled="this.sels.length===0">批量禁用</el-button>-->
             <!--<el-button type="primary"-->
-                       <!--@click="batchAction('active')"-->
-                       <!--:disabled="this.sels.length===0">批量启用</el-button>-->
+            <!--@click="batchAction('active')"-->
+            <!--:disabled="this.sels.length===0">批量启用</el-button>-->
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -131,7 +133,7 @@
             {value: 2, label: '收入'},
           ],
         },
-          is_pay: {},
+        is_pay: {},
 
         total: 0,
         page: 1,

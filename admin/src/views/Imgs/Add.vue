@@ -223,13 +223,13 @@
       getUEContent(ele) {
         return this.$refs[ele].getUEContent();
       },
-    // 多图上传获取内容，传入 ref 的值
-          getImageList(ele) {
-              return this.$refs[ele].getImageList();
-  },
+      // 多图上传获取内容，传入 ref 的值
+      getImageList(ele) {
+        return this.$refs[ele].getImageList();
+      },
     },
     mounted() {
-        this.getArrayData();
+      this.getArrayData();
     },
     components: {
       UE,

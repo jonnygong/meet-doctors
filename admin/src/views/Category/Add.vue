@@ -121,15 +121,15 @@
          * placeholder 对应提示信息
          */
         formItems: [
-            {
-                type: 'select',
-                prop: 'cate_type',
-                label: '分类类型',
-                option: 'cate_type', // 下拉列表数据别名
-                labelProp: 'label', // 下拉列表数组内元素 label 别名
-                valueProp: 'value', // 下拉列表数组内元素 value 别名
-                placeholder: '请输入内容'
-            },
+          {
+            type: 'select',
+            prop: 'cate_type',
+            label: '分类类型',
+            option: 'cate_type', // 下拉列表数据别名
+            labelProp: 'label', // 下拉列表数组内元素 label 别名
+            valueProp: 'value', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
           {
             type: 'text',
             prop: 'name',
@@ -160,8 +160,8 @@
         //新增界面数据
         formData: {
           name: '',
-            cate_type: '',
-            img: '',
+          cate_type: '',
+          img: '',
         }
       }
     },
@@ -177,7 +177,7 @@
       async getArrayData() {
         const res = await this.$http.post(`${MODEL_NAME}/array`);
         if (res === null) return;
-          this.options.cate_type = this.formateOptions(res.param.cate_type);
+        this.options.cate_type = this.formateOptions(res.param.cate_type);
 //        // 搜索选项
 //        this.filters.options.type = this.formateOptions(res.param.type);
 //        this.filters.options.type.unshift({label: '全部分类', value: ''});
@@ -215,7 +215,7 @@
       }
     },
     mounted() {
-        this.getArrayData();
+      this.getArrayData();
     },
     components: {
       UE,

@@ -139,18 +139,18 @@
             label: '高度',
             placeholder: '请输入内容'
           },
-            {
-                type: 'number',
-                prop: 'min_sum',
-                label: '推荐最小数量',
-                placeholder: '请输入内容' // 不加则显示缺省内容
-            },
-            {
-                type: 'number',
-                prop: 'max_sum',
-                label: '限制最大数量',
-                placeholder: '请输入内容'
-            },
+          {
+            type: 'number',
+            prop: 'min_sum',
+            label: '推荐最小数量',
+            placeholder: '请输入内容' // 不加则显示缺省内容
+          },
+          {
+            type: 'number',
+            prop: 'max_sum',
+            label: '限制最大数量',
+            placeholder: '请输入内容'
+          },
         ],
         // 下拉列表数据
         options: {
@@ -165,18 +165,18 @@
           name: [
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],
-            width: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            hieght: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            min_sum: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
-            max_sum: [
-                {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-            ],
+          width: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          hieght: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          min_sum: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          max_sum: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
 
         },
         //新增界面数据
@@ -184,8 +184,8 @@
           name: '',
           width: '',
           height: '',
-            min_sum: '',
-            max_sum: '',
+          min_sum: '',
+          max_sum: '',
         }
       }
     },

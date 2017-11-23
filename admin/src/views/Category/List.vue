@@ -4,30 +4,32 @@
         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
             <el-form :inline="true" :model="filters">
                 <!--<el-form-item>-->
-                    <!--<el-input v-model="filters.value" placeholder="关键词"></el-input>-->
+                <!--<el-input v-model="filters.value" placeholder="关键词"></el-input>-->
                 <!--</el-form-item>-->
                 <!--<el-form-item>-->
-                    <!--<el-select v-model="filters.key" placeholder="请选择搜索字段">-->
-                        <!--<el-option-->
-                                <!--v-for="(item,index) in filters.options"-->
-                                <!--:key="index"-->
-                                <!--:label="item.label"-->
-                                <!--:value="item.value">-->
-                        <!--</el-option>-->
-                    <!--</el-select>-->
+                <!--<el-select v-model="filters.key" placeholder="请选择搜索字段">-->
+                <!--<el-option-->
+                <!--v-for="(item,index) in filters.options"-->
+                <!--:key="index"-->
+                <!--:label="item.label"-->
+                <!--:value="item.value">-->
+                <!--</el-option>-->
+                <!--</el-select>-->
                 <!--</el-form-item>-->
                 <!--<el-form-item>-->
-                    <!--<el-button type="primary"-->
-                               <!--icon="search"-->
-                               <!--@click="getListData">搜索</el-button>-->
+                <!--<el-button type="primary"-->
+                <!--icon="search"-->
+                <!--@click="getListData">搜索</el-button>-->
                 <!--</el-form-item>-->
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="handleAdd">新增</el-button>
+                               @click="handleAdd">新增
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -98,13 +100,16 @@
         <el-col :span="24" class="toolbar">
             <el-button type="danger"
                        @click="batchAction('remove')"
-                       :disabled="this.sels.length===0">批量删除</el-button>
+                       :disabled="this.sels.length===0">批量删除
+            </el-button>
             <el-button type="warning"
                        @click="batchAction('disable')"
-                       :disabled="this.sels.length===0">批量禁用</el-button>
+                       :disabled="this.sels.length===0">批量禁用
+            </el-button>
             <el-button type="primary"
                        @click="batchAction('active')"
-                       :disabled="this.sels.length===0">批量启用</el-button>
+                       :disabled="this.sels.length===0">批量启用
+            </el-button>
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -123,24 +128,24 @@
       return {
         // 列表表头数据
         tableColumn: [
-            {
-                prop: 'name',
-                label: '分类名称',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'hits',
-                label: '点击量',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'pid',
-                label: '父级分类',
-                width: 120,
-                sortable: false
-            },
+          {
+            prop: 'name',
+            label: '分类名称',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'hits',
+            label: '点击量',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'pid',
+            label: '父级分类',
+            width: 120,
+            sortable: false
+          },
         ],
         // 搜索条件
         filters: {
@@ -150,9 +155,9 @@
             {value: 'name', label: '名称'},
           ]
         },
-          options: {
-            cate_type: [],
-          },
+        options: {
+          cate_type: [],
+        },
         list: [],
         total: 0,
         page: 1,
@@ -185,15 +190,15 @@
         this.pagesize = res.param.pages.pagesize;
         this.list = res.param.list;
       },
-        //获列表
-        async getListArray() {
-            this.listLoading = true;
-            let params = {};
-            const res = await this.$http.post(`${MODEL_NAME}/array`, params);
-            this.listLoading = false;
-            if (res === null) return;
-            this.options.cate_type = res.param.cate_type;
-        },
+      //获列表
+      async getListArray() {
+        this.listLoading = true;
+        let params = {};
+        const res = await this.$http.post(`${MODEL_NAME}/array`, params);
+        this.listLoading = false;
+        if (res === null) return;
+        this.options.cate_type = res.param.cate_type;
+      },
       //删除
       handleDel(index, row) {
         this.$confirm('确认删除该记录吗?', '提示', {
@@ -247,7 +252,7 @@
       //批量删除
       batchAction(action) {
         // 三种操作：remove disable active
-        let  id = this.sels.map(item => item.id).toString();
+        let id = this.sels.map(item => item.id).toString();
         const actions = {
           'remove': {
             tip: '删除',
@@ -271,7 +276,7 @@
           this.listLoading = true;
           // 非批量删除，带上 status
           let params = (Object.assign({
-             id:  id + '',
+            id: id + '',
             status: actions[action].status
           }, params));
           const res = await this.$http.post(actions[action].api, params);

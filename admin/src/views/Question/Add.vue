@@ -123,162 +123,162 @@
 </template>
 
 <script>
-    import util from '@/utils/js';
-    import UE from '@/components/UEditor';
-    import Uploader from '@/components/Uploader';
-    import BaiduMap from '@/components/BaiduMap';
-    import MutiUploader from "@/components/MutiUploader";
+  import util from '@/utils/js';
+  import UE from '@/components/UEditor';
+  import Uploader from '@/components/Uploader';
+  import BaiduMap from '@/components/BaiduMap';
+  import MutiUploader from "@/components/MutiUploader";
 
-    const MODEL_NAME = 'Question'; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
+  const MODEL_NAME = 'Question'; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
 
-    export default {
-        data() {
-            var validateContent = (rule, value, callback) => {
-                value = this.$refs['ue'].getUEContent();
-                if (value === '') {
-                    callback(new Error('请输入内容'));
-                } else {
-                    callback();
-                }
-            };
-            return {
-                /**
-                 * type 'text'(普通文本) 'number'(数值) 'textarea'(文本域)
-                 *      'period'(时间段)  --> start_prop / end_prop 对应 开始 / 结束 时间字段名称
-                 *      'time'(时间选择) 'upload'(图片上传) 'location'(经纬度)
-                 *      'select'(选择器)  --> option 字段对应 data 中 options 里字段名
-                 * prop 对应 formData 字段 和 validate 名称
-                 * label 对应表单名称
-                 * placeholder 对应提示信息
-                 */
-                formItems: [
-                    {
-                        type: 'select',
-                        prop: 'category_id',
-                        label: '专家分类',
-                        option: 'category', // 下拉列表数据别名
-                        labelProp: 'name', // 下拉列表数组内元素 label 别名
-                        valueProp: 'id', // 下拉列表数组内元素 value 别名
-                        placeholder: '请输入内容'
-                    },
-                    {
-                        type: 'text',
-                        prop: 'question',
-                        label: '题目'
-                    },
+  export default {
+    data() {
+      var validateContent = (rule, value, callback) => {
+        value = this.$refs['ue'].getUEContent();
+        if (value === '') {
+          callback(new Error('请输入内容'));
+        } else {
+          callback();
+        }
+      };
+      return {
+        /**
+         * type 'text'(普通文本) 'number'(数值) 'textarea'(文本域)
+         *      'period'(时间段)  --> start_prop / end_prop 对应 开始 / 结束 时间字段名称
+         *      'time'(时间选择) 'upload'(图片上传) 'location'(经纬度)
+         *      'select'(选择器)  --> option 字段对应 data 中 options 里字段名
+         * prop 对应 formData 字段 和 validate 名称
+         * label 对应表单名称
+         * placeholder 对应提示信息
+         */
+        formItems: [
+          {
+            type: 'select',
+            prop: 'category_id',
+            label: '专家分类',
+            option: 'category', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
+          {
+            type: 'text',
+            prop: 'question',
+            label: '题目'
+          },
 
+        ],
+        // 下拉列表数据
+        options: {
+          category: [],
+          result: [
+            {value: 1, label: 'A'},
+            {value: 2, label: 'B'},
+          ],
+        },
+        formLoading: false,
+        formRules: {
+          category: [
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          question: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          answerA: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          answerB: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          result: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+        },
+        //新增界面数据
+        formData: {
+          question: '',
+          answerA: '',
+          answerB: '',
+          result: 1,
+          category: '',
+        }
+      }
+    },
+    methods: {
+      // 百度地图定位成功后的回调
+      locationSuccess(data) {
+        this.formData.longitude = data.lng;
+        this.formData.latitude = data.lat;
+      },
+      handleCancel() {
+        this.$router.back();
+      },
+      async getArrayData() {
+        const res = await this.$http.post(`${MODEL_NAME}/array`);
+        if (res === null) return;
+        this.options.category = res.param.category;
+      },
+      formateOptions(source) {
+        let _data = [];
+        for (let key in source) {
+          _data.push({label: source[key], value: key * 1})
+        }
+        return _data.slice(0);
+      },
+      //新增
+      formSubmit() {
+        this.$refs.formData.validate((valid) => {
+          if (valid) {
+            this.$confirm('确认提交吗？', '提示', {}).then(async () => {
+              this.formLoading = true;
+
+              let params = {
+                question: this.formData.question,
+                answer: [
+                  {
+                    'id': 1,
+                    'name': this.formData.answerA
+                  },
+                  {
+                    'id': 2,
+                    'name': this.formData.answerB
+                  }
                 ],
-                // 下拉列表数据
-                options: {
-                    category: [],
-                    result: [
-                        {value: 1, label: 'A'},
-                        {value: 2, label: 'B'},
-                    ],
-                },
-                formLoading: false,
-                formRules: {
-                    category: [
-                        {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-                    ],
-                    question: [
-                        {required: true, message: '请输入内容', trigger: 'blur'}
-                    ],
-                    answerA: [
-                        {required: true, message: '请输入内容', trigger: 'blur'}
-                    ],
-                    answerB: [
-                        {required: true, message: '请输入内容', trigger: 'blur'}
-                    ],
-                    result: [
-                        {required: true, message: '请输入内容', trigger: 'blur'}
-                    ],
-                },
-                //新增界面数据
-                formData: {
-                    question: '',
-                    answerA: '',
-                    answerB: '',
-                    result: 1,
-                    category: '',
-                }
-            }
-        },
-        methods: {
-            // 百度地图定位成功后的回调
-            locationSuccess(data) {
-                this.formData.longitude = data.lng;
-                this.formData.latitude = data.lat;
-            },
-            handleCancel() {
-                this.$router.back();
-            },
-            async getArrayData() {
-                const res = await this.$http.post(`${MODEL_NAME}/array`);
-                if (res === null) return;
-                this.options.category = res.param.category;
-            },
-            formateOptions(source) {
-                let _data = [];
-                for (let key in source) {
-                    _data.push({label: source[key], value: key * 1})
-                }
-                return _data.slice(0);
-            },
-            //新增
-            formSubmit() {
-                this.$refs.formData.validate((valid) => {
-                    if (valid) {
-                        this.$confirm('确认提交吗？', '提示', {}).then(async () => {
-                            this.formLoading = true;
-
-                            let params = {
-                                question: this.formData.question,
-                                answer: [
-                                    {
-                                        'id': 1,
-                                        'name': this.formData.answerA
-                                    },
-                                    {
-                                        'id': 2,
-                                        'name': this.formData.answerB
-                                    }
-                                ],
-                                result: this.formData.result,
-                                category_id: this.formData.category_id,
-                            };
-                            const res = await this.$http.post(`${MODEL_NAME}/add`, params);
-                            this.formLoading = false;
-                            if (res === null) return;
-                            this.$message({
-                                message: '新建成功',
-                                type: 'success'
-                            });
-                            this.handleCancel();
-                        });
-                    }
-                });
-            },
-            // UEditor 获取内容，传入 ref 的值
-            getUEContent(ele) {
-                return this.$refs[ele].getUEContent();
-            },
-            // 多图上传获取内容，传入 ref 的值
-            getImageList(ele) {
-                return this.$refs[ele].getImageList();
-            },
-        },
-        mounted() {
-            this.getArrayData();
-        },
-        components: {
-            UE,
-            'i-uploader': Uploader,
-            'i-baidu-map': BaiduMap,
-            'i-baidu-map': BaiduMap,
-            "i-muti-uploader": MutiUploader
-        },
-    }
+                result: this.formData.result,
+                category_id: this.formData.category_id,
+              };
+              const res = await this.$http.post(`${MODEL_NAME}/add`, params);
+              this.formLoading = false;
+              if (res === null) return;
+              this.$message({
+                message: '新建成功',
+                type: 'success'
+              });
+              this.handleCancel();
+            });
+          }
+        });
+      },
+      // UEditor 获取内容，传入 ref 的值
+      getUEContent(ele) {
+        return this.$refs[ele].getUEContent();
+      },
+      // 多图上传获取内容，传入 ref 的值
+      getImageList(ele) {
+        return this.$refs[ele].getImageList();
+      },
+    },
+    mounted() {
+      this.getArrayData();
+    },
+    components: {
+      UE,
+      'i-uploader': Uploader,
+      'i-baidu-map': BaiduMap,
+      'i-baidu-map': BaiduMap,
+      "i-muti-uploader": MutiUploader
+    },
+  }
 </script>
 
 <style lang="scss" scoped>

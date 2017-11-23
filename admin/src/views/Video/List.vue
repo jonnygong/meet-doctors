@@ -16,15 +16,18 @@
                 <el-form-item>
                     <el-button type="primary"
                                icon="search"
-                               @click="getListData">搜索</el-button>
+                               @click="getListData">搜索
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="handleAdd">新增</el-button>
+                               @click="handleAdd">新增
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -105,13 +108,16 @@
         <el-col :span="24" class="toolbar">
             <el-button type="danger"
                        @click="batchAction('remove')"
-                       :disabled="this.sels.length===0">批量删除</el-button>
+                       :disabled="this.sels.length===0">批量删除
+            </el-button>
             <el-button type="warning"
                        @click="batchAction('disable')"
-                       :disabled="this.sels.length===0">批量禁用</el-button>
+                       :disabled="this.sels.length===0">批量禁用
+            </el-button>
             <el-button type="primary"
                        @click="batchAction('active')"
-                       :disabled="this.sels.length===0">批量启用</el-button>
+                       :disabled="this.sels.length===0">批量启用
+            </el-button>
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -136,36 +142,36 @@
             width: 120,
             sortable: false
           },
-            {
-                prop: 'info',
-                label: '视频简介',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'video_url',
-                label: '视频链接',
-                width: 220,
-                sortable: false
-            },
-            {
-                prop: 'sort',
-                label: '排序',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'click',
-                label: '点击量',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'long_time',
-                label: '视频时长',
-                width: 120,
-                sortable: false
-            },
+          {
+            prop: 'info',
+            label: '视频简介',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'video_url',
+            label: '视频链接',
+            width: 220,
+            sortable: false
+          },
+          {
+            prop: 'sort',
+            label: '排序',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'click',
+            label: '点击量',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'long_time',
+            label: '视频时长',
+            width: 120,
+            sortable: false
+          },
 
         ],
         // 搜索条件
@@ -177,14 +183,14 @@
           ],
 
         },
-          options: {
-              category: [],
-              hospital: [],
-            is_receive: [
-              {value: 0, label: '不可以'},
-              {value: 1, label: '可以'},
-            ],
-          },
+        options: {
+          category: [],
+          hospital: [],
+          is_receive: [
+            {value: 0, label: '不可以'},
+            {value: 1, label: '可以'},
+          ],
+        },
         list: [],
         is_receive: {},
         total: 0,
@@ -219,29 +225,29 @@
         this.list = res.param.list;
 
       },
-        //获列表
-        async getListArray() {
-            this.listLoading = true;
-            let params = {};
-            const res = await this.$http.post(`${MODEL_NAME}/array`, params);
-            this.listLoading = false;
-            if (res === null) return;
-          this.filters.options = res.param.category;
-          // 搜索选项
-          this.filters.options.unshift({ name: "全部类别", id: "" });
+      //获列表
+      async getListArray() {
+        this.listLoading = true;
+        let params = {};
+        const res = await this.$http.post(`${MODEL_NAME}/array`, params);
+        this.listLoading = false;
+        if (res === null) return;
+        this.filters.options = res.param.category;
+        // 搜索选项
+        this.filters.options.unshift({name: "全部类别", id: ""});
 
 //            this.options.hospital = res.param.hospital;
-            res.param.category.forEach(item => {
-                this.options.category[item.id] = item.name
-            });
-            res.param.hospital.forEach(item => {
-                this.options.hospital[item.id] = item.name
-            });
-          this.options.hospital[0] = '全部医院'
-          this.options.is_receive.forEach(item => {
-            this.is_receive[item.value] = item.label
-          });
-        },
+        res.param.category.forEach(item => {
+          this.options.category[item.id] = item.name
+        });
+        res.param.hospital.forEach(item => {
+          this.options.hospital[item.id] = item.name
+        });
+        this.options.hospital[0] = '全部医院'
+        this.options.is_receive.forEach(item => {
+          this.is_receive[item.value] = item.label
+        });
+      },
       //删除
       handleDel(index, row) {
         this.$confirm('确认删除该记录吗?', '提示', {
@@ -336,7 +342,7 @@
       },
     },
     mounted() {
-        this.getListArray();
+      this.getListArray();
       this.getListData();
 
     }

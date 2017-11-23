@@ -16,15 +16,18 @@
                 <el-form-item>
                     <el-button type="primary"
                                icon="search"
-                               @click="getListData">搜索</el-button>
+                               @click="getListData">搜索
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="handleAdd">新增</el-button>
+                               @click="handleAdd">新增
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -95,13 +98,16 @@
         <el-col :span="24" class="toolbar">
             <el-button type="danger"
                        @click="batchAction('remove')"
-                       :disabled="this.sels.length===0">批量删除</el-button>
+                       :disabled="this.sels.length===0">批量删除
+            </el-button>
             <el-button type="warning"
                        @click="batchAction('disable')"
-                       :disabled="this.sels.length===0">批量禁用</el-button>
+                       :disabled="this.sels.length===0">批量禁用
+            </el-button>
             <el-button type="primary"
                        @click="batchAction('active')"
-                       :disabled="this.sels.length===0">批量启用</el-button>
+                       :disabled="this.sels.length===0">批量启用
+            </el-button>
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -129,14 +135,14 @@
           ],
 
         },
-          options: {
-            category: [],
-              result: {
-                1: 'A',
-                2: 'B',
-              },
-              answer: {}
+        options: {
+          category: [],
+          result: {
+            1: 'A',
+            2: 'B',
           },
+          answer: {}
+        },
         list: [],
         total: 0,
         page: 1,
@@ -169,30 +175,30 @@
         this.pagesize = res.param.pages.pagesize;
         this.list = res.param.list;
       },
-        formateOptions(source) {
-            let _data = [];
-            for (let key in source) {
-                _data.push({label: source[key], value: key * 1})
-            }
-            return _data.slice(0);
-        },
-        //获列表
-        async getListArray() {
-            this.listLoading = true;
-            let params = {};
-            const res = await this.$http.post(`${MODEL_NAME}/array`, params);
-            this.listLoading = false;
-            if (res === null) return;
-          this.filters.options = res.param.category;
-          // 搜索选项
-          this.filters.options.unshift({ name: "全部类别", id: "" });
-            res.param.category.forEach(item => {
-                this.options.category[item.id] = item.name
-            });
+      formateOptions(source) {
+        let _data = [];
+        for (let key in source) {
+          _data.push({label: source[key], value: key * 1})
+        }
+        return _data.slice(0);
+      },
+      //获列表
+      async getListArray() {
+        this.listLoading = true;
+        let params = {};
+        const res = await this.$http.post(`${MODEL_NAME}/array`, params);
+        this.listLoading = false;
+        if (res === null) return;
+        this.filters.options = res.param.category;
+        // 搜索选项
+        this.filters.options.unshift({name: "全部类别", id: ""});
+        res.param.category.forEach(item => {
+          this.options.category[item.id] = item.name
+        });
 //            res.param.list.answer.forEach(item => {
 //                this.options.answer[item.id] = item.name
 //            });
-        },
+      },
       //删除
       handleDel(index, row) {
         this.$confirm('确认删除该记录吗?', '提示', {

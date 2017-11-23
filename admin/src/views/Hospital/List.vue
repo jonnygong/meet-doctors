@@ -4,30 +4,32 @@
         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
             <el-form :inline="true" :model="filters">
                 <!--<el-form-item>-->
-                    <!--<el-input v-model="filters.value" placeholder="关键词"></el-input>-->
+                <!--<el-input v-model="filters.value" placeholder="关键词"></el-input>-->
                 <!--</el-form-item>-->
                 <!--<el-form-item>-->
-                    <!--<el-select v-model="filters.key" placeholder="请选择搜索字段">-->
-                        <!--<el-option-->
-                                <!--v-for="(item,index) in filters.options"-->
-                                <!--:key="index"-->
-                                <!--:label="item.label"-->
-                                <!--:value="item.value">-->
-                        <!--</el-option>-->
-                    <!--</el-select>-->
+                <!--<el-select v-model="filters.key" placeholder="请选择搜索字段">-->
+                <!--<el-option-->
+                <!--v-for="(item,index) in filters.options"-->
+                <!--:key="index"-->
+                <!--:label="item.label"-->
+                <!--:value="item.value">-->
+                <!--</el-option>-->
+                <!--</el-select>-->
                 <!--</el-form-item>-->
                 <!--<el-form-item>-->
-                    <!--<el-button type="primary"-->
-                               <!--icon="search"-->
-                               <!--@click="getListData">搜索</el-button>-->
+                <!--<el-button type="primary"-->
+                <!--icon="search"-->
+                <!--@click="getListData">搜索</el-button>-->
                 <!--</el-form-item>-->
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="handleAdd">新增</el-button>
+                               @click="handleAdd">新增
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -93,13 +95,16 @@
         <el-col :span="24" class="toolbar">
             <el-button type="danger"
                        @click="batchAction('remove')"
-                       :disabled="this.sels.length===0">批量删除</el-button>
+                       :disabled="this.sels.length===0">批量删除
+            </el-button>
             <el-button type="warning"
                        @click="batchAction('disable')"
-                       :disabled="this.sels.length===0">批量禁用</el-button>
+                       :disabled="this.sels.length===0">批量禁用
+            </el-button>
             <el-button type="primary"
                        @click="batchAction('active')"
-                       :disabled="this.sels.length===0">批量启用</el-button>
+                       :disabled="this.sels.length===0">批量启用
+            </el-button>
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"

@@ -123,26 +123,26 @@
 </template>
 
 <script>
-import util from "@/utils/js";
-import UE from "@/components/UEditor";
-import Uploader from "@/components/Uploader";
-import BaiduMap from "@/components/BaiduMap";
+  import util from "@/utils/js";
+  import UE from "@/components/UEditor";
+  import Uploader from "@/components/Uploader";
+  import BaiduMap from "@/components/BaiduMap";
 
-const MODEL_NAME = "Question"; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
+  const MODEL_NAME = "Question"; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
 
-export default {
-  data() {
-    // 富文本校验
-    var validateContent = (rule, value, callback) => {
-      value = this.$refs["ue"].getUEContent();
-      if (value === "") {
-        callback(new Error("请输入内容"));
-      } else {
-        callback();
-      }
-    };
-    return {
-      /**
+  export default {
+    data() {
+      // 富文本校验
+      var validateContent = (rule, value, callback) => {
+        value = this.$refs["ue"].getUEContent();
+        if (value === "") {
+          callback(new Error("请输入内容"));
+        } else {
+          callback();
+        }
+      };
+      return {
+        /**
          * type 'text'(普通文本) 'number'(数值) 'textarea'(文本域)
          *      'period'(时间段)  --> start_prop / end_prop 对应 开始 / 结束 时间字段名称
          *      'time'(时间选择) 'upload'(图片上传) 'location'(经纬度)
@@ -151,157 +151,158 @@ export default {
          * label 对应表单名称
          * placeholder 对应提示信息
          */
-      formItems: [
+        formItems: [
           {
-              type: 'select',
-              prop: 'category_id',
-              label: '专家分类',
-              option: 'category', // 下拉列表数据别名
-              labelProp: 'name', // 下拉列表数组内元素 label 别名
-              valueProp: 'id', // 下拉列表数组内元素 value 别名
-              placeholder: '请输入内容'
+            type: 'select',
+            prop: 'category_id',
+            label: '专家分类',
+            option: 'category', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
           },
           {
-              type: 'text',
-              prop: 'question',
-              label: '题目'
+            type: 'text',
+            prop: 'question',
+            label: '题目'
           },
 
-      ],
-      // 下拉列表数据
+        ],
+        // 下拉列表数据
         options: {
-            category: [],
-            result: [
-                {value: 1, label: 'A'},
-                {value: 2, label: 'B'},
-            ],
+          category: [],
+          result: [
+            {value: 1, label: 'A'},
+            {value: 2, label: 'B'},
+          ],
         },
-      formLoading: false,
-      formRules: {
+        formLoading: false,
+        formRules: {
           category: [
-              {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           question: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           answerA: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           answerB: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           result: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
-      },
-      //新增界面数据
-      formData: {
+        },
+        //新增界面数据
+        formData: {
           question: '',
           answerA: '',
           answerB: '',
           result: 1,
           category: '',
-      }
-    };
-  },
-  methods: {
-    // 百度地图定位成功后的回调
-    locationSuccess(data) {
-      this.formData.longitude = data.lng;
-      this.formData.latitude = data.lat;
-    },
-    handleCancel() {
-      this.$router.back();
-    },
-    //显示编辑界面
-    async handleEdit(index, row) {
-      let params = {
-          id: this.$route.params.id,
-      };
-      const res = await this.$http.post(`${MODEL_NAME}/info`, params);
-      if (res === null) return;
-        console.log(res.param.answer[0].name)
-      this.formData = {
-          question : res.param.question,
-          answerA : res.param.answer[0].name,
-          answerB : res.param.answer[1].name,
-          result : res.param.result,
-          category_id : res.param.category_id,
-      };
-
-    },
-    async getArrayData() {
-      const res = await this.$http.post(`${MODEL_NAME}/array`);
-      if (res === null) return;
-        this.options.category = res.param.category;
-    },
-    formateOptions(source) {
-      let _data = [];
-      for (let key in source) {
-        _data.push({ label: source[key], value: key * 1 });
-      }
-      return _data.slice(0);
-    },
-    //编辑
-    formSubmit() {
-      this.$refs.formData.validate(valid => {
-        if (valid) {
-          this.$confirm("确认提交吗？", "提示", {}).then(async () => {
-            this.formLoading = true;
-            // 处理时间为时间戳
-            //              let _next_open_ = this.formData.next_open;
-            //              if(typeof this.formData.next_open === 'number') {
-            //                _next_open_ = this.formData.next_open / 1000
-            //              } else {
-            //                _next_open_ = new Date(this.formData.next_open).getTime() / 1000
-            //              }
-              let params = {
-                  question: this.formData.question,
-                  answer: [
-                      {
-                          'id': 1,
-                          'name': this.formData.answerA
-                      },
-                      {
-                          'id': 2,
-                          'name': this.formData.answerB
-                      }
-                  ],
-                  result: this.formData.result,
-                  category_id: this.formData.category_id,
-              };
-            //              params.next_open = _next_open_; // 后台接收10位时间戳，需要转换
-
-            const res = await this.$http.post(`${MODEL_NAME}/update`, params);
-            this.formLoading = false;
-            if (res === null) return;
-            this.$message({
-              message: "修改成功",
-              type: "success"
-            });
-            this.handleCancel();
-          });
         }
-      });
+      };
     },
-    selsChange(sels) {
-      this.sels = sels;
+    methods: {
+      // 百度地图定位成功后的回调
+      locationSuccess(data) {
+        this.formData.longitude = data.lng;
+        this.formData.latitude = data.lat;
+      },
+      handleCancel() {
+        this.$router.back();
+      },
+      //显示编辑界面
+      async handleEdit(index, row) {
+        let params = {
+          id: this.$route.params.id,
+        };
+        const res = await this.$http.post(`${MODEL_NAME}/info`, params);
+        if (res === null) return;
+        console.log(res.param.answer[0].name)
+        this.formData = {
+          question: res.param.question,
+          answerA: res.param.answer[0].name,
+          answerB: res.param.answer[1].name,
+          result: res.param.result,
+          category_id: res.param.category_id,
+        };
+
+      },
+      async getArrayData() {
+        const res = await this.$http.post(`${MODEL_NAME}/array`);
+        if (res === null) return;
+        this.options.category = res.param.category;
+      },
+      formateOptions(source) {
+        let _data = [];
+        for (let key in source) {
+          _data.push({label: source[key], value: key * 1});
+        }
+        return _data.slice(0);
+      },
+      //编辑
+      formSubmit() {
+        this.$refs.formData.validate(valid => {
+          if (valid) {
+            this.$confirm("确认提交吗？", "提示", {}).then(async () => {
+              this.formLoading = true;
+              // 处理时间为时间戳
+              //              let _next_open_ = this.formData.next_open;
+              //              if(typeof this.formData.next_open === 'number') {
+              //                _next_open_ = this.formData.next_open / 1000
+              //              } else {
+              //                _next_open_ = new Date(this.formData.next_open).getTime() / 1000
+              //              }
+              let params = {
+                id: this.$route.params.id,
+                question: this.formData.question,
+                answer: [
+                  {
+                    'id': 1,
+                    'name': this.formData.answerA
+                  },
+                  {
+                    'id': 2,
+                    'name': this.formData.answerB
+                  }
+                ],
+                result: this.formData.result,
+                category_id: this.formData.category_id,
+              };
+              //              params.next_open = _next_open_; // 后台接收10位时间戳，需要转换
+
+              const res = await this.$http.post(`${MODEL_NAME}/update`, params);
+              this.formLoading = false;
+              if (res === null) return;
+              this.$message({
+                message: "修改成功",
+                type: "success"
+              });
+              this.handleCancel();
+            });
+          }
+        });
+      },
+      selsChange(sels) {
+        this.sels = sels;
+      },
+      // UEditor 获取内容，传入 ref 的值
+      getUEContent(ele) {
+        return this.$refs[ele].getUEContent();
+      }
     },
-    // UEditor 获取内容，传入 ref 的值
-    getUEContent(ele) {
-      return this.$refs[ele].getUEContent();
-    }
-  },
-  mounted() {
+    mounted() {
       this.getArrayData();
-    this.handleEdit();
-  },
-  components: {
-    UE,
-    "i-uploader": Uploader,
-    "i-baidu-map": BaiduMap,
-  }
-};
+      this.handleEdit();
+    },
+    components: {
+      UE,
+      "i-uploader": Uploader,
+      "i-baidu-map": BaiduMap,
+    }
+  };
 </script>
 
 <style lang="scss" scoped>

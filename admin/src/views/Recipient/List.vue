@@ -16,15 +16,18 @@
                 <el-form-item>
                     <el-button type="primary"
                                icon="search"
-                               @click="getListData">搜索</el-button>
+                               @click="getListData">搜索
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="handleAdd">新增</el-button>
+                               @click="handleAdd">新增
+                    </el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -79,9 +82,9 @@
             <el-table-column label="操作" width="160" fixed="right">
                 <template scope="scope">
                     <!--<el-button size="small"-->
-                               <!--@click="statusSubmit(scope.$index, scope.row)"-->
-                               <!--:disabled="scope.row.status === -1">-->
-                        <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
+                    <!--@click="statusSubmit(scope.$index, scope.row)"-->
+                    <!--:disabled="scope.row.status === -1">-->
+                    <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
                     <!--</el-button>-->
                     <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">关闭</el-button>
@@ -93,13 +96,16 @@
         <el-col :span="24" class="toolbar">
             <el-button type="danger"
                        @click="batchAction('disable')"
-                       :disabled="this.sels.length===0">批量关闭</el-button>
+                       :disabled="this.sels.length===0">批量关闭
+            </el-button>
             <el-button type="warning"
                        @click="batchAction('active')"
-                       :disabled="this.sels.length===0">批量申请</el-button>
+                       :disabled="this.sels.length===0">批量申请
+            </el-button>
             <el-button type="primary"
                        @click="batchAction('send')"
-                       :disabled="this.sels.length===0">批量已邮寄</el-button>
+                       :disabled="this.sels.length===0">批量已邮寄
+            </el-button>
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -124,18 +130,18 @@
             width: 120,
             sortable: false
           },
-            {
-                prop: 'tel',
-                label: '用户电话',
-                width: 130,
-                sortable: false
-            },
-            {
-                prop: 'address',
-                label: '用户地址',
-                width: 180,
-                sortable: false
-            },
+          {
+            prop: 'tel',
+            label: '用户电话',
+            width: 130,
+            sortable: false
+          },
+          {
+            prop: 'address',
+            label: '用户地址',
+            width: 180,
+            sortable: false
+          },
 
 
         ],
@@ -191,7 +197,7 @@
         if (res === null) return;
         this.filters.options = res.param.goods;
         // 搜索选项
-        this.filters.options.unshift({ name: "全部产品", id: "" });
+        this.filters.options.unshift({name: "全部产品", id: ""});
         res.param.goods.forEach(item => {
           this.options.goods[item.id] = item.name
         });

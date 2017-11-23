@@ -101,27 +101,27 @@
 </template>
 
 <script>
-import util from "@/utils/js";
-import UE from "@/components/UEditor";
-import Uploader from "@/components/Uploader";
-import BaiduMap from "@/components/BaiduMap";
-import MutiUploader from "@/components/MutiUploader";
+  import util from "@/utils/js";
+  import UE from "@/components/UEditor";
+  import Uploader from "@/components/Uploader";
+  import BaiduMap from "@/components/BaiduMap";
+  import MutiUploader from "@/components/MutiUploader";
 
-const MODEL_NAME = "Goods"; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
+  const MODEL_NAME = "Goods"; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
 
-export default {
-  data() {
-    // 富文本校验
-    var validateContent = (rule, value, callback) => {
-      value = this.$refs["content"].getUEContent();
-      if (value === "") {
-        callback(new Error("请输入内容"));
-      } else {
-        callback();
-      }
-    };
-    return {
-      /**
+  export default {
+    data() {
+      // 富文本校验
+      var validateContent = (rule, value, callback) => {
+        value = this.$refs["content"].getUEContent();
+        if (value === "") {
+          callback(new Error("请输入内容"));
+        } else {
+          callback();
+        }
+      };
+      return {
+        /**
          * type 'text'(普通文本) 'number'(数值) 'textarea'(文本域)
          *      'period'(时间段)  --> start_prop / end_prop 对应 开始 / 结束 时间字段名称
          *      'time'(时间选择) 'upload'(图片上传) 'location'(经纬度)
@@ -130,97 +130,89 @@ export default {
          * label 对应表单名称
          * placeholder 对应提示信息
          */
-      formItems: [
-        {
-          type: 'select',
-          prop: 'category_id',
-          label: '产品分类',
-          option: 'category', // 下拉列表数据别名
-          labelProp: 'name', // 下拉列表数组内元素 label 别名
-          valueProp: 'id', // 下拉列表数组内元素 value 别名
-          placeholder: '请输入内容'
-        },
-        {
-          type: 'text',
-          prop: 'name',
-          label: '产品名称'
-        },
-        {
-          type: 'select',
-          prop: 'good_type',
-          label: '产品类别',
-          option: 'good_type', // 下拉列表数据别名
-          labelProp: 'label', // 下拉列表数组内元素 label 别名
-          valueProp: 'value', // 下拉列表数组内元素 value 别名
-          placeholder: '请输入内容'
-        },
-        {
-          type: 'number',
-          prop: 'price',
-          label: '价格',
-        },
-        {
-          type: 'number',
-          prop: 'total',
-          label: '库存量',
-        },
-        {
-          type: 'textarea',
-          prop: 'material',
-          label: '材料',
-        },
-        {
-          type: 'textarea',
-          prop: 'effect',
-          label: '功效',
-        },
-        {
-          type: 'upload',
-          prop: 'cover',
-          label: '产品封面图片',
-        },
-      ],
-      // 下拉列表数据
-      options: {
+        formItems: [
+          {
+            type: 'select',
+            prop: 'category_id',
+            label: '产品分类',
+            option: 'category', // 下拉列表数据别名
+            labelProp: 'name', // 下拉列表数组内元素 label 别名
+            valueProp: 'id', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
+          {
+            type: 'text',
+            prop: 'name',
+            label: '产品名称'
+          },
+          {
+            type: 'select',
+            prop: 'good_type',
+            label: '产品类别',
+            option: 'good_type', // 下拉列表数据别名
+            labelProp: 'label', // 下拉列表数组内元素 label 别名
+            valueProp: 'value', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
+          {
+            type: 'number',
+            prop: 'price',
+            label: '价格',
+          },
+          {
+            type: 'number',
+            prop: 'total',
+            label: '库存量',
+          },
+          {
+            type: 'textarea',
+            prop: 'material',
+            label: '材料',
+          },
+          {
+            type: 'upload',
+            prop: 'cover',
+            label: '产品封面图片',
+          },
+        ],
+        // 下拉列表数据
+        options: {
           good_type: [],
           category: []
-      },
+        },
 
-      formLoading: false,
-      formRules: {
+        formLoading: false,
+        formRules: {
           category_id: [
-              {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           img_url: [
-              {required: true, message: '请上传封面图片'}
+            {required: true, message: '请上传封面图片'}
           ],
           name: [
-              {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           content: [
-              {validator: validateContent, trigger: 'blur'}
+            {validator: validateContent, trigger: 'blur'}
           ],
           price: [
-              {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           total: [
-              {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           good_type: [
-              {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
+            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
-        material: [
-          {required: true, message: '请输入内容', trigger: 'blur'}
-        ],
-        effect: [
-          {required: true, message: '请输入内容', trigger: 'blur'}
-        ],
-        cover: [
-          {required: true, message: '请输入内容', trigger: 'blur'}
-        ],
-      },
-      //新增界面数据
-      formData: {
+          material: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+          cover: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
+        },
+        //新增界面数据
+        formData: {
           category_id: '',
           img_url: '',
           name: '',
@@ -228,96 +220,95 @@ export default {
           good_type: '',
           price: '',
           total: '',
-        cover: '',
-        material: '',
-        effect: '',
-      }
-    };
-  },
-  methods: {
-    // 百度地图定位成功后的回调
-    locationSuccess(data) {
-      this.formData.longitude = data.lng;
-      this.formData.latitude = data.lat;
-    },
-    handleCancel() {
-      this.$router.back();
-    },
-    //显示编辑界面
-    async handleEdit(index, row) {
-      let params = {
-        id: this.$route.params.id
+          cover: '',
+          material: '',
+        }
       };
-      const res = await this.$http.post(`${MODEL_NAME}/info`, params);
-      if (res === null) return;
-      this.formData = Object.assign({}, res.param);
-        this.formData.price = Number(this.formData.price);
     },
-    async getArrayData() {
-      const res = await this.$http.post(`${MODEL_NAME}/array`);
-      if (res === null) return;
+    methods: {
+      // 百度地图定位成功后的回调
+      locationSuccess(data) {
+        this.formData.longitude = data.lng;
+        this.formData.latitude = data.lat;
+      },
+      handleCancel() {
+        this.$router.back();
+      },
+      //显示编辑界面
+      async handleEdit(index, row) {
+        let params = {
+          id: this.$route.params.id
+        };
+        const res = await this.$http.post(`${MODEL_NAME}/info`, params);
+        if (res === null) return;
+        this.formData = Object.assign({}, res.param);
+        this.formData.price = Number(this.formData.price);
+      },
+      async getArrayData() {
+        const res = await this.$http.post(`${MODEL_NAME}/array`);
+        if (res === null) return;
         this.options.category = res.param.category;
         this.options.good_type = this.formateOptions(res.param.good_type);
-    },
-    formateOptions(source) {
-      let _data = [];
-      for (let key in source) {
-        _data.push({ label: source[key], value: key * 1 });
-      }
-      return _data.slice(0);
-    },
-    //编辑
-    formSubmit() {
-      this.formData.img_url = this.getImageList("album"); // 多图上传
-      this.$refs.formData.validate(valid => {
-        if (valid) {
-          this.$confirm("确认提交吗？", "提示", {}).then(async () => {
-            this.formLoading = true;
-            // 处理时间为时间戳
-            //              let _next_open_ = this.formData.next_open;
-            //              if(typeof this.formData.next_open === 'number') {
-            //                _next_open_ = this.formData.next_open / 1000
-            //              } else {
-            //                _next_open_ = new Date(this.formData.next_open).getTime() / 1000
-            //              }
-            let params = Object.assign({}, this.formData);
-            //              params.next_open = _next_open_; // 后台接收10位时间戳，需要转换
-              params.content = this.getUEContent('content'); // 富文本内容
-            const res = await this.$http.post(`${MODEL_NAME}/update`, params);
-            this.formLoading = false;
-            if (res === null) return;
-            this.$message({
-              message: "修改成功",
-              type: "success"
-            });
-            this.handleCancel();
-          });
+      },
+      formateOptions(source) {
+        let _data = [];
+        for (let key in source) {
+          _data.push({label: source[key], value: key * 1});
         }
-      });
+        return _data.slice(0);
+      },
+      //编辑
+      formSubmit() {
+        this.formData.img_url = this.getImageList("album"); // 多图上传
+        this.$refs.formData.validate(valid => {
+          if (valid) {
+            this.$confirm("确认提交吗？", "提示", {}).then(async () => {
+              this.formLoading = true;
+              // 处理时间为时间戳
+              //              let _next_open_ = this.formData.next_open;
+              //              if(typeof this.formData.next_open === 'number') {
+              //                _next_open_ = this.formData.next_open / 1000
+              //              } else {
+              //                _next_open_ = new Date(this.formData.next_open).getTime() / 1000
+              //              }
+              let params = Object.assign({}, this.formData);
+              //              params.next_open = _next_open_; // 后台接收10位时间戳，需要转换
+              params.content = this.getUEContent('content'); // 富文本内容
+              const res = await this.$http.post(`${MODEL_NAME}/update`, params);
+              this.formLoading = false;
+              if (res === null) return;
+              this.$message({
+                message: "修改成功",
+                type: "success"
+              });
+              this.handleCancel();
+            });
+          }
+        });
+      },
+      selsChange(sels) {
+        this.sels = sels;
+      },
+      // UEditor 获取内容，传入 ref 的值
+      getUEContent(ele) {
+        return this.$refs[ele].getUEContent();
+      },
+      // 多图上传获取内容，传入 ref 的值
+      getImageList(ele) {
+        return this.$refs[ele].getImageList();
+      },
     },
-    selsChange(sels) {
-      this.sels = sels;
-    },
-    // UEditor 获取内容，传入 ref 的值
-    getUEContent(ele) {
-      return this.$refs[ele].getUEContent();
-    },
-    // 多图上传获取内容，传入 ref 的值
-    getImageList(ele) {
-      return this.$refs[ele].getImageList();
-    },
-  },
-  mounted() {
+    mounted() {
       this.getArrayData();
-    this.handleEdit();
-  },
-  components: {
-    UE,
-    "i-uploader": Uploader,
-    "i-baidu-map": BaiduMap,
-    "i-muti-uploader": MutiUploader
-  }
-};
+      this.handleEdit();
+    },
+    components: {
+      UE,
+      "i-uploader": Uploader,
+      "i-baidu-map": BaiduMap,
+      "i-muti-uploader": MutiUploader
+    }
+  };
 </script>
 
 <style lang="scss" scoped>

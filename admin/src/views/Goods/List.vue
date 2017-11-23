@@ -4,30 +4,31 @@
         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
             <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.value" placeholder="关键词"></el-input>
+                    <el-input v-model="filters.key" placeholder="请输入药膳名称关键字"></el-input>
                 </el-form-item>
-                <el-form-item>
-                    <el-select v-model="filters.key" placeholder="请选择搜索字段">
-                        <el-option
-                                v-for="(item,index) in filters.options"
-                                :key="index"
-                                :label="item.label"
-                                :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
+                <el-select v-model="filters.value" placeholder="请选择搜索字段">
+                    <el-option
+                            v-for="(item,index) in filters.options"
+                            :key="index"
+                            :label="item.name"
+                            :value="item.id">
+                    </el-option>
+                </el-select>
                 <el-form-item>
                     <el-button type="primary"
                                icon="search"
-                               @click="getListData">搜索</el-button>
+                               @click="getListData">搜索
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="getListData">刷新</el-button>
+                               @click="getListData">刷新
+                    </el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
-                               @click="handleAdd">新增</el-button>
+                               @click="handleAdd">新增
+                    </el-button>
                 </el-form-item>
 
             </el-form>
@@ -105,9 +106,10 @@
             <el-table-column label="操作" width="280" fixed="right">
                 <template scope="scope">
 
-                        <el-button size="small"
-                                    type="primary"
-                                   @click="handleImgs(scope.$index, scope.row)">药膳图库</el-button>
+                    <el-button size="small"
+                               type="primary"
+                               @click="handleImgs(scope.$index, scope.row)">药膳图库
+                    </el-button>
 
                     <el-button size="small"
                                @click="statusSubmit(scope.$index, scope.row)"
@@ -124,13 +126,16 @@
         <el-col :span="24" class="toolbar">
             <el-button type="danger"
                        @click="batchAction('remove')"
-                       :disabled="this.sels.length===0">批量删除</el-button>
+                       :disabled="this.sels.length===0">批量删除
+            </el-button>
             <el-button type="warning"
                        @click="batchAction('disable')"
-                       :disabled="this.sels.length===0">批量禁用</el-button>
+                       :disabled="this.sels.length===0">批量禁用
+            </el-button>
             <el-button type="primary"
                        @click="batchAction('active')"
-                       :disabled="this.sels.length===0">批量启用</el-button>
+                       :disabled="this.sels.length===0">批量启用
+            </el-button>
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -155,37 +160,31 @@
             width: 120,
             sortable: false
           },
-            {
-                prop: 'sales',
-                label: '销售量',
-                width: 120,
-                sortable: false
-            },{
-                prop: 'price',
-                label: '价格',
-                width: 120,
-                sortable: false
-            },{
-                prop: 'total',
-                label: '库存量',
-                width: 120,
-                sortable: false
-            },
-            {
-                prop: 'clicks',
-                label: '点击量',
-                width: 120,
-                sortable: false
-            },
           {
-            prop: 'material',
-            label: '材料',
+            prop: 'sales',
+            label: '销售量',
+            width: 120,
+            sortable: false
+          }, {
+            prop: 'price',
+            label: '价格',
+            width: 120,
+            sortable: false
+          }, {
+            prop: 'total',
+            label: '库存量',
             width: 120,
             sortable: false
           },
           {
-            prop: 'effect',
-            label: '功效',
+            prop: 'clicks',
+            label: '点击量',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'material',
+            label: '材料',
             width: 120,
             sortable: false
           },
@@ -194,15 +193,15 @@
         // 搜索条件
         filters: {
           value: '',
-          key: 'name',
+          key: '',
           options: [
-            {value: 'name', label: '名称'},
+            {value: 'category_id', label: '分类名称'},
           ]
         },
-          options: {
-            category: [],
-              good_type: [],
-          },
+        options: {
+          category: [],
+          good_type: [],
+        },
         list: [],
         total: 0,
         page: 1,
@@ -225,8 +224,8 @@
         this.listLoading = true;
         let params = {
           page: this.page,
-          key: this.filters.key, // 可选参数查询
-          value: this.filters.value // 可选参数查询
+          name: this.filters.key, // 可选参数查询
+          category_id: this.filters.value // 可选参数查询
         };
         const res = await this.$http.post(`${MODEL_NAME}/list`, params);
         this.listLoading = false;
@@ -235,20 +234,23 @@
         this.pagesize = res.param.pages.pagesize;
         this.list = res.param.list;
       },
-        //获列表
-        async getListArray() {
-            this.listLoading = true;
-            let params = {};
-            const res = await this.$http.post(`${MODEL_NAME}/array`, params);
-            this.listLoading = false;
-            if (res === null) return;
-            this.options.category = res.param.category;
-            this.options.good_type = res.param.good_type;
-            res.param.category.forEach(item => {
-                this.options.category[item.id] = item.name
-            });
+      //获列表
+      async getListArray() {
+        this.listLoading = true;
+        let params = {};
+        const res = await this.$http.post(`${MODEL_NAME}/array`, params);
+        this.listLoading = false;
+        if (res === null) return;
+        this.filters.options = res.param.category;
+        // 搜索选项
+        this.filters.options.unshift({name: "全部分类", id: 0});
+//        this.options.category = res.param.category;
+        this.options.good_type = res.param.good_type;
+        res.param.category.forEach(item => {
+          this.options.category[item.id] = item.name
+        });
 
-        },
+      },
       //删除
       handleDel(index, row) {
         this.$confirm('确认删除该记录吗?', '提示', {
@@ -281,9 +283,9 @@
         console.log(this.$route.path);
         this.$router.push(`${this.$route.path}/add`);
       },
-        handleImgs(index, row) {
-            this.$router.push(`/imgs/list/${row.id}`);
-        },
+      handleImgs(index, row) {
+        this.$router.push(`/imgs/list/${row.id}`);
+      },
       // 修改状态
       async statusSubmit(index, row) {
         let params = {
