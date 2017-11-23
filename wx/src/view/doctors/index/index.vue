@@ -79,9 +79,9 @@ export default {
         hospital_id: 1
       });
       this.experts = res.param;
-      this.experts.forEach(i => {
-        i.visit_time = formatDateTime(i.visit_time);
-      })
+      // this.experts.forEach(i => {
+      //   i.visit_time = formatDateTime(i.visit_time);
+      // })
     },
     toDetail(id) {
       this.$router.push('/doctor/detail/' + id)
@@ -96,6 +96,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import 'index.scss';
 </style>
