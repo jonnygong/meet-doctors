@@ -123,7 +123,7 @@
 | --------- | -------- | ------- |
 | cate_type | int(11) | 1专家2产品3视频 |
 | name | varchar(50) | 分类名称 |
-| img | varchar(255) | 分类图片 |
+| *img | varchar(255) | 分类图片 |
 
 
 + __响应参数__
@@ -145,7 +145,7 @@
 | id | int(11) | 分类id |
 | cate_type | int(11) | 1专家2产品3视频 |
 | name | varchar(50) | 分类名称 |
-| img | varchar(255) | 分类图片 |
+| *img | varchar(255) | 分类图片 |
 
 
 + __响应参数__
