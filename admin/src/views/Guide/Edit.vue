@@ -134,20 +134,6 @@
           },
           {
             type: 'select',
-            prop: 'sex',
-            label: '性别',
-            option: 'sex', // 下拉列表数据别名
-            labelProp: 'label', // 下拉列表数组内元素 label 别名
-            valueProp: 'value', // 下拉列表数组内元素 value 别名
-            placeholder: '请输入内容'
-          },
-          {
-            type: 'number',
-            prop: 'age',
-            label: '年龄',
-          },
-          {
-            type: 'select',
             prop: 'hospital_id',
             label: '医院',
             option: 'hospital_id', // 下拉列表数据别名
@@ -164,6 +150,20 @@
             type: 'upload',
             prop: 'code',
             label: '导诊微信二维码',
+          },
+          {
+            type: 'select',
+            prop: 'sex',
+            label: '性别',
+            option: 'sex', // 下拉列表数据别名
+            labelProp: 'label', // 下拉列表数组内元素 label 别名
+            valueProp: 'value', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
+          {
+            type: 'number',
+            prop: 'age',
+            label: '年龄',
           },
         ],
         // 下拉列表数据

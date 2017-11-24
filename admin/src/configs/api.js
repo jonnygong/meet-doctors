@@ -1,5 +1,5 @@
 import systems from '@/configs';
-const baseUrl = systems.debug ? '/api/' : 'http://api.zhongjiao.kfw001.com/webadmin/';
+const baseUrl = systems.debug ? '/api/' : ' http://api.mtd.kfw001.com/admin/';
 export default {
   // 接口请求baseUrl
   baseUrl: baseUrl,

@@ -151,11 +151,6 @@
             placeholder: "请输入内容"
           },
           {
-            type: "text",
-            prop: "address",
-            label: "患者地址",
-          },
-          {
             type: "number",
             prop: "weight",
             label: "体重(kg)",
@@ -235,9 +230,6 @@
           sex: [
             {type: "number", required: true, message: "请输入内容", trigger: "blur"}
           ],
-          address: [
-            {required: true, message: "请输入内容", trigger: "blur"}
-          ],
           weight: [
             {type: "number", required: true, message: "请输入内容", trigger: "blur"}
           ],
@@ -271,7 +263,6 @@
           name: "",
           tel: "",
           sex: "",
-          address: "",
           weight: "",
           height: "",
           age: "",

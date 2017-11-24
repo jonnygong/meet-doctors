@@ -151,7 +151,7 @@
           {
             type: 'upload',
             prop: 'img',
-            label: '上传待产证明',
+            label: '上传医院床头卡',
           },
         ],
         // 下拉列表数据

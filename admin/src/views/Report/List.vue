@@ -72,10 +72,10 @@
                     :sortable="item.sortable">
             </el-table-column>
             <!-- 时间戳转日期 -->
-            <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
-            </el-table-column>
-            <el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">
-            </el-table-column>
+            <!--<el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
             <el-table-column prop="status" label="状态" width="100">
                 <template scope="scope">
                     <el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : 'danger'">

@@ -98,6 +98,14 @@
                     :min-width="item.width"
                     :sortable="item.sortable">
             </el-table-column>
+            <el-table-column prop="status" label="状态" width="100">
+                <template scope="scope">
+                    <el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : scope.row.status === 2 ? 'warning' : scope.row.status === 3 ? 'success' : 'primary' ">
+                        {{ scope.row.status === 1 ? '交易关闭' : scope.row.status === -1 ? '已删除' : scope.row.status === 2 ? '未付款' : scope.row.status === 3 ? '已付款' : '已完成'
+                        }}
+                    </el-tag>
+                </template>
+            </el-table-column>
             <el-table-column prop="is_audit" label="用户申请审核" min-width="120">
                 <template scope="scope">
                     {{ is_audit[scope.row.is_audit] }}
@@ -141,18 +149,11 @@
                     </el-popover>
                 </template>
             </el-table-column>
-            <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
-            </el-table-column>
-            <el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">
-            </el-table-column>
-            <el-table-column prop="status" label="状态" width="100">
-                <template scope="scope">
-                    <el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : scope.row.status === 2 ? 'warning' : scope.row.status === 3 ? 'success' : 'primary' ">
-                        {{ scope.row.status === 1 ? '交易关闭' : scope.row.status === -1 ? '已删除' : scope.row.status === 2 ? '未付款' : scope.row.status === 3 ? '已付款' : '已完成'
-                        }}
-                    </el-tag>
-                </template>
-            </el-table-column>
+            <!--<el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+
             <el-table-column label="操作" width="150" fixed="right">
                 <template scope="scope">
                     <!--<el-button size="small"-->
@@ -210,12 +211,6 @@
             prop: 'tel',
             label: '患者手机号',
             width: 130,
-            sortable: false
-          },
-          {
-            prop: 'address',
-            label: '患者地址',
-            width: 120,
             sortable: false
           },
           {

@@ -57,10 +57,10 @@
                     :sortable="item.sortable">
             </el-table-column>
             <!-- 时间戳转日期 -->
-            <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
-            </el-table-column>
-            <el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">
-            </el-table-column>
+            <!--<el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
             <!-- 图片显示 -->
             <el-table-column prop="img" label="封面图片" width="130">
                 <template scope="scope">
@@ -140,12 +140,12 @@
             width: 120,
             sortable: false
           },
-          {
-            prop: 'pid',
-            label: '父级分类',
-            width: 120,
-            sortable: false
-          },
+//          {
+//            prop: 'pid',
+//            label: '父级分类',
+//            width: 120,
+//            sortable: false
+//          },
         ],
         // 搜索条件
         filters: {

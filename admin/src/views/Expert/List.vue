@@ -47,13 +47,13 @@
             </el-table-column>
             <el-table-column prop="name" label="专家姓名" width="120">
             </el-table-column>
-            <el-table-column prop="sex" label="专家性别" min-width="100">
-                <template scope="scope">
-                    {{ sexList[scope.row.sex] }}
-                </template>
-            </el-table-column>
-            <el-table-column prop="age" label="专家年龄" width="100">
-            </el-table-column>
+            <!--<el-table-column prop="sex" label="专家性别" min-width="100">-->
+                <!--<template scope="scope">-->
+                    <!--{{ sexList[scope.row.sex] }}-->
+                <!--</template>-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="age" label="专家年龄" width="100">-->
+            <!--</el-table-column>-->
             <!--&lt;!&ndash; 图片显示 &ndash;&gt;-->
             <!--<el-table-column prop="img" label="头像" width="130">-->
             <!--<template scope="scope">-->
@@ -74,6 +74,13 @@
                     {{ options.hospital[scope.row.hospital_id] }}
                 </template>
             </el-table-column>
+            <el-table-column prop="status" label="状态" width="100">
+                <template scope="scope">
+                    <el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : 'danger'">
+                        {{ scope.row.status === 1 ? '可用' : scope.row.status === -1 ? '已删除' : '不可用' }}
+                    </el-tag>
+                </template>
+            </el-table-column>
             <!-- 普通列表显示 -->
             <el-table-column
                     v-for="(item,index) in tableColumn"
@@ -89,17 +96,11 @@
                 </template>
             </el-table-column>
             <!-- 时间戳转日期 -->
-            <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
-            </el-table-column>
-            <el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">
-            </el-table-column>
-            <el-table-column prop="status" label="状态" width="100">
-                <template scope="scope">
-                    <el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : 'danger'">
-                        {{ scope.row.status === 1 ? '可用' : scope.row.status === -1 ? '已删除' : '不可用' }}
-                    </el-tag>
-                </template>
-            </el-table-column>
+            <!--<el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+
             <el-table-column label="操作" width="320" fixed="right">
                 <template scope="scope">
                     <el-button size="small" @click="handleIncome(scope.$index, scope.row)">专家收入明细</el-button>
@@ -146,30 +147,30 @@
       return {
         // 列表表头数据
         tableColumn: [
-          {
-            prop: 'info',
-            label: '专家简介',
-            width: 220,
-            sortable: false
-          },
+//          {
+//            prop: 'info',
+//            label: '专家简介',
+//            width: 220,
+//            sortable: false
+//          },
           {
             prop: 'tel',
             label: '手机号码',
             width: 130,
             sortable: false
           },
-          {
-            prop: 'scale',
-            label: '收入比例',
-            width: 120,
-            sortable: false
-          },
-          {
-            prop: 'price',
-            label: '价格',
-            width: 120,
-            sortable: false
-          },
+//          {
+//            prop: 'scale',
+//            label: '收入比例',
+//            width: 120,
+//            sortable: false
+//          },
+//          {
+//            prop: 'price',
+//            label: '价格',
+//            width: 120,
+//            sortable: false
+//          },
           {
             prop: 'income',
             label: '收入',
@@ -188,12 +189,12 @@
             width: 80,
             sortable: false
           },
-          {
-            prop: 'position',
-            label: '职位',
-            width: 120,
-            sortable: false
-          },
+//          {
+//            prop: 'position',
+//            label: '职位',
+//            width: 120,
+//            sortable: false
+//          },
           {
             prop: 'pos_name',
             label: '职称',

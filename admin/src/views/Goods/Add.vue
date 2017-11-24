@@ -87,7 +87,7 @@
                 <i-muti-uploader :value="formData.img_url" ref="album"></i-muti-uploader>
             </el-form-item>
             <!-- 富文本 -->
-            <el-form-item label="产品简介" prop="content">
+            <el-form-item label="食材说明" prop="content">
                 <UE :defaultMsg="formData.content" ref="content"></UE>
             </el-form-item>
 

@@ -55,7 +55,7 @@
                     :sortable="item.sortable">
             </el-table-column>
             <!-- 图片显示 -->
-            <el-table-column prop="img" label="待产证明" width="130">
+            <el-table-column prop="img" label="医院床头卡" width="130">
                 <template scope="scope">
                     <el-popover trigger="hover" placement="top">
                         <div class="ad-img">
@@ -68,9 +68,6 @@
                         </div>
                     </el-popover>
                 </template>
-            </el-table-column>
-            <!-- 时间戳转日期 -->
-            <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
             </el-table-column>
             <el-table-column prop="status" label="状态" width="100">
                 <template scope="scope">

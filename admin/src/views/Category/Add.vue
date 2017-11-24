@@ -150,9 +150,9 @@
           cate_type: [
             {type: 'number', required: true, message: '请选择分类名称', trigger: 'blur'}
           ],
-          img: [
-            {required: true, message: '请上传封面图片'}
-          ],
+//          img: [
+//            {required: true, message: '请上传封面图片'}
+//          ],
           name: [
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],

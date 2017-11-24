@@ -52,35 +52,23 @@
                     {{ options.good_type[scope.row.good_type] }}
                 </template>
             </el-table-column>
+            <el-table-column prop="name" label="产品名称" width="120">
+            </el-table-column>
             <!-- 图片显示 -->
-            <el-table-column prop="img_url" label="产品头图" width="130">
-                <template scope="scope">
-                    <el-popover trigger="hover" placement="top">
-                        <div class="ad-img">
-                            <img :src="scope.row.img_url" :alt="scope.row.name" width="200" height="auto"
-                                 v-if="scope.row.img_url !== ''">
-                            <p v-else>暂无图片</p>
-                        </div>
-                        <div slot="reference" class="name-wrapper">
-                            <el-tag>查看图片</el-tag>
-                        </div>
-                    </el-popover>
-                </template>
-            </el-table-column>
-            <!-- 普通列表显示 -->
-            <el-table-column
-                    v-for="(item,index) in tableColumn"
-                    :key="index"
-                    :prop="item.prop"
-                    :label="item.label"
-                    :min-width="item.width"
-                    :sortable="item.sortable">
-            </el-table-column>
-            <!-- 时间戳转日期 -->
-            <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
-            </el-table-column>
-            <el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">
-            </el-table-column>
+            <!--<el-table-column prop="img_url" label="产品头图" width="130">-->
+                <!--<template scope="scope">-->
+                    <!--<el-popover trigger="hover" placement="top">-->
+                        <!--<div class="ad-img">-->
+                            <!--<img :src="scope.row.img_url" :alt="scope.row.name" width="200" height="auto"-->
+                                 <!--v-if="scope.row.img_url !== ''">-->
+                            <!--<p v-else>暂无图片</p>-->
+                        <!--</div>-->
+                        <!--<div slot="reference" class="name-wrapper">-->
+                            <!--<el-tag>查看图片</el-tag>-->
+                        <!--</div>-->
+                    <!--</el-popover>-->
+                <!--</template>-->
+            <!--</el-table-column>-->
             <!-- 图片显示 -->
             <el-table-column prop="cover" label="产品封面图片" width="130">
                 <template scope="scope">
@@ -103,6 +91,21 @@
                     </el-tag>
                 </template>
             </el-table-column>
+            <!-- 普通列表显示 -->
+            <el-table-column
+                    v-for="(item,index) in tableColumn"
+                    :key="index"
+                    :prop="item.prop"
+                    :label="item.label"
+                    :min-width="item.width"
+                    :sortable="item.sortable">
+            </el-table-column>
+            <!-- 时间戳转日期 -->
+            <!--<el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+
             <el-table-column label="操作" width="280" fixed="right">
                 <template scope="scope">
 
@@ -154,12 +157,6 @@
       return {
         // 列表表头数据
         tableColumn: [
-          {
-            prop: 'name',
-            label: '产品名称',
-            width: 120,
-            sortable: false
-          },
           {
             prop: 'sales',
             label: '销售量',

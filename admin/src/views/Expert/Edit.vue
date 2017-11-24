@@ -141,28 +141,9 @@
             label: '专家名称'
           },
           {
-            type: 'select',
-            prop: 'sex',
-            label: '性别',
-            option: 'sex', // 下拉列表数据别名
-            labelProp: 'label', // 下拉列表数组内元素 label 别名
-            valueProp: 'value', // 下拉列表数组内元素 value 别名
-            placeholder: '请输入内容'
-          },
-          {
-            type: 'number',
-            prop: 'age',
-            label: '年龄'
-          },
-          {
             type: 'upload',
             prop: 'img',
             label: '头像'
-          },
-          {
-            type: 'textarea',
-            prop: 'info',
-            label: '专家简介'
           },
           {
             type: 'select',
@@ -180,16 +161,6 @@
           },
           {
             type: 'number',
-            prop: 'scale',
-            label: '收入比例'
-          },
-          {
-            type: 'number',
-            prop: 'price',
-            label: '价格'
-          },
-          {
-            type: 'number',
             prop: 'sort',
             label: '排序'
           },
@@ -201,11 +172,6 @@
             labelProp: 'name', // 下拉列表数组内元素 label 别名
             valueProp: 'id', // 下拉列表数组内元素 value 别名
             placeholder: '请输入内容'
-          },
-          {
-            type: 'text',
-            prop: 'position',
-            label: '职位'
           },
           {
             type: 'text',
@@ -221,6 +187,40 @@
             type: 'text',
             prop: 'specialty',
             label: '特长'
+          },
+          {
+            type: 'select',
+            prop: 'sex',
+            label: '性别',
+            option: 'sex', // 下拉列表数据别名
+            labelProp: 'label', // 下拉列表数组内元素 label 别名
+            valueProp: 'value', // 下拉列表数组内元素 value 别名
+            placeholder: '请输入内容'
+          },
+          {
+            type: 'number',
+            prop: 'age',
+            label: '年龄'
+          },
+          {
+            type: 'number',
+            prop: 'scale',
+            label: '收入比例'
+          },
+          {
+            type: 'number',
+            prop: 'price',
+            label: '价格'
+          },
+          {
+            type: 'text',
+            prop: 'position',
+            label: '职位'
+          },
+          {
+            type: 'textarea',
+            prop: 'info',
+            label: '专家简介'
           },
         ],
         // 下拉列表数据
@@ -245,28 +245,10 @@
           name: [
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],
-          sex: [
-            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-          ],
-          age: [
-            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-          ],
-          info: [
-            {required: true, message: '请输入内容', trigger: 'blur'}
-          ],
-          content: [
-            {validator: validateContent, trigger: 'blur'}
-          ],
           is_show: [
             {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           tel: [
-            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-          ],
-          scale: [
-            {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-          ],
-          price: [
             {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
           ],
           sort: [
@@ -274,9 +256,6 @@
           ],
           hospital_id: [
             {type: 'number', required: true, message: '请输入内容', trigger: 'blur'}
-          ],
-          position: [
-            {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           pos_name: [
             {required: true, message: '请输入内容', trigger: 'blur'}

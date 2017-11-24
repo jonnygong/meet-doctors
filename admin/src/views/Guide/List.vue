@@ -49,11 +49,11 @@
                     :min-width="item.width"
                     :sortable="item.sortable">
             </el-table-column>
-            <el-table-column prop="sex" label="性别" min-width="80">
-                <template scope="scope">
-                    {{ sexList[scope.row.sex] }}
-                </template>
-            </el-table-column>
+            <!--<el-table-column prop="sex" label="性别" min-width="80">-->
+                <!--<template scope="scope">-->
+                    <!--{{ sexList[scope.row.sex] }}-->
+                <!--</template>-->
+            <!--</el-table-column>-->
             <el-table-column prop="hospital_id" label="医院" min-width="120">
                 <template scope="scope">
                     {{ options.hospital_id[scope.row.hospital_id] }}
@@ -156,12 +156,6 @@
             prop: 'tel',
             label: '电话',
             width: 130,
-            sortable: false
-          },
-          {
-            prop: 'age',
-            label: '年龄',
-            width: 80,
             sortable: false
           },
         ],
