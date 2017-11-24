@@ -64,7 +64,7 @@
 | --------- | -------- | ------- |
 | id | int | 预约信息id |
 | name | varchar | 患者名称 |
-| status | tinyint | 订单状态，2未付款3已付款 |
+| status | tinyint | 订单状态，1,已关闭2未付款3已付款 |
 | is_audit | tinyint | 是否申请支付审核0未申请，1已申请 |
 | hospital_name | varchar | 医院名字 |
 | tel | varchar | 导诊电话 |

@@ -74,7 +74,6 @@
 
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
-| *hospital_id | int | 医院id |
 
 + __响应参数__
 
@@ -83,7 +82,6 @@
 | id | int | 专家id |
 | specialty | varchar | 特长 |
 | visit_time | varchar | 就诊时间 |
-| position | varchar | 职位 |
 | pos_name | varchar | 职称 |
 | name | varchar | 医生名称 |
 | hospital_name | varchar | 医院名称 |
