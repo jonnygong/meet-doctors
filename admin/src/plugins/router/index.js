@@ -21,32 +21,32 @@ router.beforeEach((to, from, next) => {
     store.dispatch('getUserAuth');
   }
   // 如果未登录，跳转
-  // if (window.localStorage.getItem('IS_LOGIN') === null && to.path !== '/login') {
-  //   next({
-  //     path: '/login',
-  //     query: {redirect: to.fullPath}
-  //     // 将跳转的路由path作为参数，登录成功后跳转到该路由
-  //   })
-  // } else {
+  if (window.localStorage.getItem('IS_LOGIN') === null && to.path !== '/login') {
+    next({
+      path: '/login',
+      query: {redirect: to.fullPath}
+      // 将跳转的路由path作为参数，登录成功后跳转到该路由
+    })
+  } else {
     // 需要鉴权的路由地址
-    // if (to.meta.requiresAuth) {
-    //   // 有权限进入
-    //   if (auth.indexOf(to.meta.alias) > -1) {
-    //     next();
-    //   } else {
-    //     if(auth.length > 0) {
-    //       Message.error({
-    //         message: '当前用户权限不足，无法访问',
-    //         showClose: true,
-    //       });
-    //     } else {
-    //       next();
-    //     }
-    //   }
-    // } else {
+    if (to.meta.requiresAuth) {
+      // 有权限进入
+      if (auth.indexOf(to.meta.alias) > -1) {
+        next();
+      } else {
+        if (auth.length > 0) {
+          Message.error({
+            message: '当前用户权限不足，无法访问',
+            showClose: true,
+          });
+        } else {
+          next();
+        }
+      }
+    } else {
       next();
-    // }
-  // }
+    }
+  }
 });
 
 export default router;
