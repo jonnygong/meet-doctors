@@ -198,6 +198,7 @@
         this.listLoading = false;
         if (res === null) return;
         this.options.cate_type = res.param.cate_type;
+        this.getListData();
       },
       //删除
       handleDel(index, row) {
@@ -293,7 +294,7 @@
       },
     },
     mounted() {
-      this.getListData();
+
       this.getListArray();
     }
   }

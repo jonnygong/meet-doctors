@@ -42,6 +42,15 @@
                   style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
+            <el-table-column prop="reg_sn" label="预约单唯一ID" width="160">
+            </el-table-column>
+            <el-table-column prop="name" label="患者姓名" width="120">
+            </el-table-column>
+            <el-table-column prop="sex" label="性别" min-width="80">
+                <template scope="scope">
+                    {{ sexList[scope.row.sex] }}
+                </template>
+            </el-table-column>
             <!-- 普通列表显示 -->
             <el-table-column
                     v-for="(item,index) in tableColumn"
@@ -51,35 +60,62 @@
                     :min-width="item.width"
                     :sortable="item.sortable">
             </el-table-column>
-            <el-table-column prop="is_pay" label="类型" min-width="120">
+            <el-table-column prop="status" label="状态" width="100">
                 <template scope="scope">
-                    {{ is_pay[scope.row.is_pay] }}
+                    <el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : scope.row.status === 2 ? 'warning' : scope.row.status === 3 ? 'success' : 'primary' ">
+                        {{ scope.row.status === 1 ? '交易关闭' : scope.row.status === -1 ? '已删除' : scope.row.status === 2 ? '未付款' : scope.row.status === 3 ? '已付款' : '已完成'
+                        }}
+                    </el-tag>
                 </template>
             </el-table-column>
-            <!-- 时间戳转日期 -->
-            <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
+            <el-table-column prop="is_audit" label="用户申请审核" min-width="120">
+                <template scope="scope">
+                    {{ is_audit[scope.row.is_audit] }}
+                </template>
             </el-table-column>
-            <el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">
+            <el-table-column prop="bespeak_time" label="预约时间" width="180" :formatter="formateTime">
             </el-table-column>
+            <!--<el-table-column prop="bespeak_address" label="预约地址" width="120">-->
+            <!--</el-table-column>-->
+            <el-table-column prop="visit_time" label="就诊时间" width="180" :formatter="formateTime">
+            </el-table-column>
+            <el-table-column prop="visit_address" label="就诊地址" width="120">
+            </el-table-column>
+            <el-table-column prop="expert_id" label="专家" min-width="120">
+                <template scope="scope">
+                    {{ options.expert[scope.row.expert_id] }}
+                </template>
+            </el-table-column>
+            <el-table-column prop="hospital_id" label="医院" min-width="120">
+                <template scope="scope">
+                    {{ options.hospital[scope.row.hospital_id] }}
+                </template>
+            </el-table-column>
+            <el-table-column prop="guide_id" label="导诊" min-width="120">
+                <template scope="scope">
+                    {{ options.guide[scope.row.guide_id] }}
+                </template>
+            </el-table-column>
+            <!-- 图片显示 -->
+            <el-table-column prop="visit_report" label="就诊报告" width="130">
+                <template scope="scope">
+                    <el-popover trigger="hover" placement="top">
+                        <div class="ad-img">
+                            <img :src="scope.row.visit_report" :alt="scope.row.name" width="200" height="auto"
+                                 v-if="scope.row.visit_report !== ''">
+                            <p v-else>暂无图片</p>
+                        </div>
+                        <div slot="reference" class="name-wrapper">
+                            <el-tag>查看图片</el-tag>
+                        </div>
+                    </el-popover>
+                </template>
+            </el-table-column>
+            <!--<el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
+            <!--<el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">-->
+            <!--</el-table-column>-->
 
-            <!--<el-table-column prop="status" label="状态" width="100">-->
-            <!--<template scope="scope">-->
-            <!--<el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : 'danger'">-->
-            <!--{{ scope.row.status === 1 ? '可用' : scope.row.status === -1 ? '已删除' : '不可用' }}-->
-            <!--</el-tag>-->
-            <!--</template>-->
-            <!--</el-table-column>-->
-            <!--<el-table-column label="操作" width="240" fixed="right">-->
-            <!--<template scope="scope">-->
-            <!--<el-button size="small"-->
-            <!--@click="statusSubmit(scope.$index, scope.row)"-->
-            <!--:disabled="scope.row.status === -1">-->
-            <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
-            <!--</el-button>-->
-            <!--<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
-            <!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>-->
-            <!--</template>-->
-            <!--</el-table-column>-->
         </el-table>
 
         <!--工具条-->
@@ -112,8 +148,32 @@
         // 列表表头数据
         tableColumn: [
           {
-            prop: 'money',
-            label: '金额',
+            prop: 'tel',
+            label: '患者手机号',
+            width: 130,
+            sortable: false
+          },
+          {
+            prop: 'weight',
+            label: '体重',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'height',
+            label: '身高',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'age',
+            label: '年龄',
+            width: 120,
+            sortable: false
+          },
+          {
+            prop: 'content',
+            label: '患者自述',
             width: 120,
             sortable: false
           },
@@ -128,12 +188,21 @@
         },
         list: [],
         options: {
-          is_pay: [
-            {value: 1, label: '提现'},
-            {value: 2, label: '收入'},
+          expert: [],
+          status: [],
+          guide: [],
+          hospital: [],
+          sex: [
+            {value: 1, label: '男'},
+            {value: 2, label: '女'},
+          ],
+          is_audit: [
+            {value: 0, label: '未申请'},
+            {value: 1, label: '申请'},
           ],
         },
-        is_pay: {},
+        sexList: {},
+        is_audit: {},
 
         total: 0,
         page: 1,
@@ -166,9 +235,38 @@
         this.total = res.param.pages.total;
         this.pagesize = res.param.pages.pagesize;
         this.list = res.param.list;
-        this.options.is_pay.forEach(item => {
-          this.is_pay[item.value] = item.label
+//        this.options.is_pay.forEach(item => {
+//          this.is_pay[item.value] = item.label
+//        });
+      },
+      //获列表
+      async getListArray() {
+        this.listLoading = true;
+        let params = {};
+        const res = await this.$http.post(`/register/array`, params);
+        this.listLoading = false;
+        if (res === null) return;
+
+        this.options.status = res.param.status;
+        res.param.expert.forEach(item => {
+          this.options.expert[item.id] = item.name
         });
+        res.param.hospital.forEach(item => {
+          this.options.hospital[item.id] = item.name
+        });
+        res.param.guide.forEach(item => {
+          this.options.guide[item.id] = item.name
+        });
+//            res.param.status.forEach(item => {
+//                this.filters.options.status[item.id] = item.name
+//            });
+        this.options.sex.forEach(item => {
+          this.sexList[item.value] = item.label
+        });
+        this.options.is_audit.forEach(item => {
+          this.is_audit[item.value] = item.label
+        });
+        this.getListData();
       },
       //删除
       handleDel(index, row) {
@@ -263,7 +361,7 @@
       },
     },
     mounted() {
-      this.getListData();
+      this.getListArray();
     }
   }
 </script>

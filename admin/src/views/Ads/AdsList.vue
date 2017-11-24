@@ -191,7 +191,7 @@
         res.param.place.forEach(item => {
           this.options.place[item.id] = item.name
         });
-
+        this.getListData();
       },
       //删除
       handleDel(index, row) {
@@ -288,7 +288,7 @@
     },
     mounted() {
       this.getListArray();
-      this.getListData();
+
     }
   }
 </script>

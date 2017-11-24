@@ -202,6 +202,7 @@
         this.formateOptions(res.param.img_type).forEach(item => {
           this.options.img_type[item.id] = item.name;
         });
+        this.getListData();
       },
       formateOptions(source) {
         let _data = [];
@@ -309,7 +310,7 @@
     },
     mounted() {
       this.getListArray();
-      this.getListData();
+
     }
   }
 </script>

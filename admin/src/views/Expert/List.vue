@@ -103,7 +103,7 @@
 
             <el-table-column label="操作" width="320" fixed="right">
                 <template scope="scope">
-                    <el-button size="small" @click="handleIncome(scope.$index, scope.row)">专家收入明细</el-button>
+                    <el-button size="small" @click="handleIncome(scope.$index, scope.row)">已完成订单</el-button>
                     <el-button size="small"
                                @click="statusSubmit(scope.$index, scope.row)"
                                :disabled="scope.row.status === -1">
@@ -293,6 +293,7 @@
         this.options.is_show.forEach(item => {
           this.is_show[item.value] = item.label
         });
+        this.getListData();
       },
       //删除
       handleDel(index, row) {
@@ -392,7 +393,7 @@
     },
     mounted() {
       this.getListArray();
-      this.getListData();
+
 
     }
   }

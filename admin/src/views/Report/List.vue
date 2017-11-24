@@ -196,15 +196,7 @@
         this.pagesize = res.param.pages.pagesize;
         this.list = res.param.list;
       },
-      //获列表
-      async getListArray() {
-        this.listLoading = true;
-        let params = {};
-        const res = await this.$http.post(`${MODEL_NAME}/array`, params);
-        this.listLoading = false;
-        if (res === null) return;
 
-      },
       //获列表
       async getListArray() {
         this.listLoading = true;
@@ -219,7 +211,7 @@
         res.param.hospital.forEach(item => {
           this.options.hospital[item.id] = item.name
         });
-
+        this.getListData();
       },
       //删除
       handleDel(index, row) {
@@ -316,7 +308,6 @@
     },
     mounted() {
       this.getListArray();
-      this.getListData();
     }
   }
 </script>

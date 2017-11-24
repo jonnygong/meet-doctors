@@ -229,6 +229,7 @@
         this.options.is_audit.forEach(item => {
           this.is_audit[item.value] = item.label
         });
+        this.getListData();
       },
       //删除
       handleDel(index, row) {
@@ -335,7 +336,7 @@
     },
     mounted() {
       this.getListArray();
-      this.getListData();
+
     }
   }
 </script>

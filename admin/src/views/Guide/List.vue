@@ -220,6 +220,7 @@
         this.options.sex.forEach(item => {
           this.sexList[item.value] = item.label
         });
+        this.getListData();
       },
       //删除
       handleDel(index, row) {
@@ -317,7 +318,6 @@
     },
     mounted() {
       this.getListArray();
-      this.getListData();
 
     }
   }

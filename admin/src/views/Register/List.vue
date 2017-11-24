@@ -354,6 +354,7 @@
         this.filters.options.status = this.formateOptions(res.param.status);
         // 搜索选项
         this.filters.options.status.unshift({name: "全部", id: 0});
+        this.getListData();
       },
       formateOptions(source) {
         let _data = [];
@@ -467,7 +468,6 @@
     },
     mounted() {
       this.getListArray();
-      this.getListData();
     }
   }
 </script>
