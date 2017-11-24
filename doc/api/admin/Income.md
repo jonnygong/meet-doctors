@@ -1,4 +1,4 @@
-# 专家列表 接口文档
+# 专家看诊列表 接口文档
 
 + 作者：qqs
 
@@ -13,12 +13,12 @@
 
 |  表名称  |  参数说明 |
 | --------- |  ------- |
-| mtd_income_details | 专家列表 |
+| mtd_register | 专家列表 |
 
 
 ### 列表接口
 
-+ __接口说明__： __用于显示专家收入明细数据，从专家列表选择专家，进入该专家收入明细__
++ __接口说明__： __用于显示专家看过病人的订单__
 
 + __接口地址__： __/Admin/Income/list__
 
@@ -48,9 +48,26 @@
 
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
-| expert_id | int(11) | 专家id |
+| reg_sn | varchar(15) | 预约单唯一ID |
+| name | varchar(50) | 患者名称 |
+| tel | varchar(50) | 患者手机号 |
+| sex | tinyint(1) | 患者性别1男2女 |
+| address | varchar(255) | 患者地址 |
+| weight | decimal(5,2) | 体重 |
+| height | decimal(5,2) | 身高 |
+| age | int(11) | 年龄 |
+| content | varchar(255) | 患者自述 |
+| status | tinyint(1) | 1交易关闭2未付款3已付款4已经完成 |
 | create_time | int(11) |  |
 | update_time | int(11) |  |
-| money | int(11) | 金额 |
-| status | tinyint(1) |  |
-| is_pay | tinyint(1) | 1提现2收入 |
+| expert_id | int(11) | 专家id |
+| hospital_id | int(11) | 医院ID |
+| openid | varchar(50) | 会员openid |
+| img | varchar(1000) | 就诊图片,多张 |
+| visit_time | int(11) | 就诊时间 |
+| visit_address | varchar(255) | 就诊地址 |
+| bespeak_time | int(11) | 预约时间 |
+| bespeak_address | varchar(255) | 预约地址 |
+| is_audit | tinyint(1) | 用户申请审核0没申请1申请 |
+| guide_id | int(11) | 导诊id |
+| visit_report | varchar(255) | 就诊报告 |
