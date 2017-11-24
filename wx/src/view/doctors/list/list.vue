@@ -71,9 +71,9 @@ export default {
         category_id: id
       });
       this.experts = res.param;
-      // this.experts.forEach(i => {
-      //   i.visit_time = formatDateTime(i.visit_time);
-      // })
+      this.experts.forEach(i => {
+        i.visit_time = formatDateTime(i.visit_time);
+      })
     },
   },
   mounted() {
@@ -85,6 +85,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/style/reset.scss';
+@import './../../../style/reset.scss';
 @import './list.scss';
 </style>
