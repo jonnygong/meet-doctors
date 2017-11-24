@@ -32,7 +32,7 @@
             </div>
             <div class="item-right">
               <router-link :to="`/expert/order/${list.id}`" v-if="item.id === 1">查 看</router-link>
-              <button v-else disabled>查 看</button>
+              <slot v-else></slot>
             </div>
           </div>
         </mt-tab-container-item>

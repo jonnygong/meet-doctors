@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style>
-@import './style/reset.scss';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,12 +31,5 @@ li{
 }
 a{
   text-decoration: none;
-}
-/* 时间选择器字号 */
-.picker-slot{
-  font-size: 1.5rem;
-}
-.mint-cell:last-child{
-  background-image: none;
 }
 </style>

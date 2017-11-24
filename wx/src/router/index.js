@@ -29,6 +29,7 @@ import Expert_Order from '@/view/expert/order/order.vue'
 import Guide from '@/view/guide/index/index.vue'
 import Guide_Order from '@/view/guide/order/order.vue'
 import Guide_Time from '@/view/guide/time/time.vue'
+import Guide_List from '@/view/guide/list/list.vue'
 
 import Login from '@/view/login/login.vue'
 
@@ -43,7 +44,7 @@ const router = new Router({
       children: [
         // 遇见名医
         { 
-          path: '/doctor', 
+          path: '/doctor/:id', 
           component: Doctor, 
           meta: { title: '遇见名医' }
         },
@@ -153,6 +154,11 @@ const router = new Router({
       path: '/guide/time/:id',
       component: Guide_Time,
       meta: { title: '填写就诊时间' }
+    },
+    {
+      path: '/guide/list/:id',
+      component: Guide_List,
+      meta: { title: '领取药膳名单' }
     },
     {
       path: '*',

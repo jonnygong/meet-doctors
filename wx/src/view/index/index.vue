@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       menus: [
-        { name: '遇见名医', icon: 'yisheng', path: '/doctor' },
+        { name: '遇见名医', icon: 'yisheng', path: `/doctor/${localStorage.getItem('hospital_id')}` },
         { name: '孕妇课堂', icon: 'yunfu', path: '/gravida' },
         { name: '个人中心', icon: 'gerenzhongxinxia', path: '/personal' }
       ]
@@ -26,6 +26,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../style/iconfont/iconfont.css';
+@import '~@/style/iconfont/iconfont.css';
 @import 'index.scss';
 </style>

@@ -3,6 +3,7 @@
     <header>
       <img src="./../../../assets/headurl.png">
       <div class="nickname">夏日驿站</div>
+      <router-link :to="`/guide/list/${guide_id}`">查看药膳领取名单</router-link>
     </header>
 
     <div class="exp-index-nav">
@@ -139,7 +140,8 @@ export default {
       img: [],
       mask: false,
       // 上传就诊报告id,
-      id: ''
+      id: '',
+      guide_id: this.$route.params.id
     }
   },
   methods: {
@@ -233,7 +235,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
-@import './../../../style/iconfont/iconfont.css';
-@import 'index.scss';
+@import '~@/style/reset.scss';
+@import '~@/style/iconfont/iconfont.css';
+@import './index.scss';
 </style>

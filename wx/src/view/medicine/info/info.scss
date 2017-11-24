@@ -1,4 +1,4 @@
-.doc-info{
+.goods-info{
   h1{
     width: 100%;
     padding: 1.5rem 0;
@@ -46,7 +46,7 @@
         }
       }
     }
-    &-five{
+    &-two{
       margin-top: 1.5rem;
       background: $white;
       text-align: center;
@@ -55,7 +55,6 @@
         overflow: hidden;
         li{
           width: 8.8rem;
-          
           float: left;
           margin-right: 1rem;
           margin-bottom: 1rem;
@@ -80,13 +79,28 @@
           }
         }
       }
-      button{
-        @include btn;
-        width: 11.7rem;
-        height: 3.2rem;
-        border-radius: 1.6rem;
-        margin-top: 2.5rem;
+      span{
+        display: block;
+        text-align: left;
+        color: red;
+        font-size: 1.2rem;
       }
+    }
+    &-three{
+      margin-top: 1.5rem;
+      .mint-radiolist{
+        padding: 0;
+      }
+    }
+  }
+  .btn{
+    text-align: center;
+    button{
+      @include btn;
+      width: 11.7rem;
+      height: 3.2rem;
+      border-radius: 1.6rem;
+      margin-top: 2.5rem;
     }
   }
 }

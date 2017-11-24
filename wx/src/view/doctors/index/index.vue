@@ -70,18 +70,16 @@ export default {
       this.category = res.param;
     },
     // 查看更多 ？？？？
-    toList() {
-      this.$router.push('/doctor/list');
-    },
+    // toList() {
+    //   this.$router.push('/doctor/list');
+    // },
     // 推荐专家
     async apiForExpert() {
-      const res = await this.$http.post('patientDocHomeExpert', {
-        hospital_id: 1
-      });
+      const res = await this.$http.post('patientDocHomeExpert', {});
       this.experts = res.param;
-      this.experts.forEach(i => {
-        i.visit_time = formatDateTime(i.visit_time);
-      })
+      // this.experts.forEach(i => {
+      //   i.visit_time = formatDateTime(i.visit_time);
+      // })
     },
     toDetail(id) {
       this.$router.push('/doctor/detail/' + id)
@@ -91,6 +89,7 @@ export default {
     this.apiForAds();
     this.apiForCategory();
     this.apiForExpert();
+    localStorage.setItem('hospital_id', this.$route.params.id);
   }
 }
 </script>

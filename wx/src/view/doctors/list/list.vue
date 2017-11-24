@@ -19,7 +19,7 @@
         <router-link v-for="(expert, i) in experts" :key="i" :to="`/doctor/detail/${expert.id}`">
           <div class="card">
             <div class="card-info">
-              <img src="./../../../assets/thumb.jpg">
+              <img :src="expert.img">
               <div class="info">
                 <h1>{{ expert.name }}</h1>
                 <p>{{ expert.pos_name }}</p>
@@ -58,6 +58,8 @@ export default {
     async apiForCategory() {
       const res = await this.$http.post('patientDocElistCategory', {});
       this.category = res.param;
+      this.selected = Number(this.$route.params.id);
+      this.apiForExpert(this.selected);
     },
     // 专家列表
     async apiForExpert(id) {
@@ -65,20 +67,18 @@ export default {
         category_id: id
       });
       this.experts = res.param;
-      this.experts.forEach(i => {
-        i.visit_time = formatDateTime(i.visit_time);
-      })
+      // this.experts.forEach(i => {
+      //   i.visit_time = formatDateTime(i.visit_time);
+      // })
     },
   },
   mounted() {
     this.apiForCategory();
-    this.apiForExpert(this.$route.params.id);
-    this.selected = this.$route.params.id;
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import './list.scss';
 </style>
