@@ -64,7 +64,7 @@ export default {
       });
       // console.log(res.param);
       this.info = res.param;
-      this.info.visit_time = formatDateTime(res.param.visit_time);
+      // this.info.visit_time = formatDateTime(res.param.visit_time);
     }
   },
   mounted() {
@@ -74,6 +74,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import 'detail.scss';
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="doc-info">
+  <div class="goods-info">
     <h1>个人信息填写</h1>
     <div class="part-one">
       <mt-field label="姓名" placeholder="请输入姓名" :attr="{ maxlength: 15 }" v-model="params.name"></mt-field>
@@ -19,7 +19,7 @@
       </div>
       <mt-field label="地址" placeholder="请输入地址" v-model="params.address"></mt-field>
     </div>
-    <div class="part-five">
+    <div class="part-two">
       <ul class="upload-img_up">
         <upload-img @input="handleUplaodImage( $event )"></upload-img>
         <li v-for="(img, index) in params.img" :key="index">
@@ -27,9 +27,19 @@
           <i class="iconfont icon-guanbi" @click="DelImg(index)"></i>
         </li>
       </ul>
+      <span>提示：请上传医院床头卡</span>
+    </div>
+    <div class="part-three">
+      <mt-radio 
+        align="right" 
+        title=""
+        v-model="value"
+        :options="options">
+      </mt-radio>
+    </div>
+    <div class="btn">
       <button @click="apiForSubmit">提 交</button>
     </div>
-
   </div>
 </template>
 
@@ -42,14 +52,16 @@ export default {
   },
   data() {
     return {
-      params: { 
+      params: {
         goods_id: this.$route.params.id,
         name: '',
         tel: '',
         address: '',
         img: []
       },
-      hide: false
+      hide: false,
+      value: '1',
+      options: []
     }
   },
   methods: {
@@ -89,7 +101,23 @@ export default {
       if(res.status === "200") {
         this.handleMsgBox();
       }
+    },
+    // 获取医导
+    async apiForGetGuide() {
+      const res = await this.$http.post('patientGooGetGuide', {
+        hospital_id: localStorage.getItem('hospital_id')
+      });
+      this.options = [];
+      res.param.forEach( (item, index) => {
+        this.options.push({
+          label: item.name,
+          value: item.id.toString()
+        });
+      });
     }
+  },
+  mounted() {
+    this.apiForGetGuide()
   },
   watch: {
     params: {
@@ -105,6 +133,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import './info.scss';
 </style>

@@ -124,6 +124,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import './info.scss';
 </style>
