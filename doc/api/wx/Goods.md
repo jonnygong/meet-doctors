@@ -115,4 +115,5 @@
 | id | int | id |
 | name | int | 导诊名称 |
 | img | varchar | 导诊图片 |
+| info | varchar | 导诊简介 |
 

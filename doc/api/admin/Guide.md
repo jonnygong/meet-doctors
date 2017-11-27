@@ -59,6 +59,7 @@
 | hospital_id | int(11) | 医院id |
 | img | varchar(255) | 头像 |
 | code | varchar(255) | 导诊微信二维码 |
+| info | varchar(255) | 简介 |
 
 
 
@@ -114,6 +115,7 @@
 | hospital_id | int(11) | 医院id |
 | img | varchar(255) | 头像 |
 | code | varchar(255) | 导诊微信二维码 |
+| info | varchar(255) | 简介 |
 
 
 
@@ -134,6 +136,7 @@
 | hospital_id | int(11) | 医院id |
 | img | varchar(255) | 头像 |
 | code | varchar(255) | 导诊微信二维码 |
+| info | varchar(255) | 简介 |
 
 
 + __响应参数__
@@ -160,6 +163,7 @@
 | hospital_id | int(11) | 医院id |
 | img | varchar(255) | 头像 |
 | code | varchar(255) | 导诊微信二维码 |
+| info | varchar(255) | 简介 |
 
 
 + __响应参数__
