@@ -60,7 +60,6 @@
 | id | int | 专家id |
 | specialty | varchar | 特长 |
 | visit_time | varchar | 就诊时间 |
-| position | varchar | 职位 |
 | pos_name | varchar | 职称 |
 | name | varchar | 医生名称 |
 | hospital_name | varchar | 医院名称 |
@@ -88,7 +87,6 @@
 | id | int | 专家id |
 | specialty | varchar | 特长 |
 | visit_time | varchar | 就诊时间 |
-| position | varchar | 职位 |
 | pos_name | varchar | 职称 |
 | name | varchar | 医生名称 |
 | hospital_name | varchar | 医院名称 |
@@ -145,3 +143,32 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | code | varchar | 微信二维码 |
+
+
+
+### 微信端专家列表搜索
+
++ __接口说明__： __用于专家搜索__
+
++ __接口地址__： __/Wx/Elist/search__
+
++ __请求参数__
+
+|  参数名称  | 参数类型 | 参数说明 |
+| --------- | -------- | ------- |
+| *search | varchar | 搜索条件，名字or医院名称 |
+| *category_id | int | 分类id |
+
++ __响应参数__
+
+|  参数名称  | 参数类型 | 参数说明 |
+| --------- | -------- | ------- |
+| id | int | 专家id |
+| specialty | varchar | 特长 |
+| visit_time | varchar | 就诊时间 |
+| pos_name | varchar | 职称 |
+| name | varchar | 医生名称 |
+| hospital_name | varchar | 医院名称 |
+| img | varchar | 专家头像 |
+| category_name | varchar | 所属分类 |
+
