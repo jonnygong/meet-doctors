@@ -27,13 +27,13 @@
           <i class="iconfont icon-guanbi" @click="DelImg(index)"></i>
         </li>
       </ul>
-      <span>提示：请上传医院床头卡</span>
+      <span>提示：请上传医院床头卡，便于审核通过。</span>
     </div>
     <div class="part-three">
       <mt-radio 
         align="right" 
         title=""
-        v-model="value"
+        v-model="params.guide_id"
         :options="options">
       </mt-radio>
     </div>
@@ -57,10 +57,10 @@ export default {
         name: '',
         tel: '',
         address: '',
-        img: []
+        img: [],
+        guide_id: '1'
       },
       hide: false,
-      value: '1',
       options: []
     }
   },
@@ -83,7 +83,8 @@ export default {
     DelImg(index) {
       this.params.img.splice(index, 1);
     },
-    handleUplaodImage ( $event ){
+    // 获取图片路径
+    handleUplaodImage($event){
       this.params.img.push( $event );
     },
     // 表单提交成功后执行

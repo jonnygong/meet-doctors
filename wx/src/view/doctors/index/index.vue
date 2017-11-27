@@ -24,25 +24,27 @@
       </ul>
     </div>
     <!-- 医生列表 -->
-    <div class="card" v-for="(expert, i) in experts" :key="i" @click="toDetail(expert.id)">
-      <div class="card-info">
-        <img :src="expert.img">
-        <div class="info">
-          <h1>{{ expert.name }}</h1>
-          <p>{{ expert.pos_name }}</p>
-          <p>{{ expert.hospital_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ expert.category_name }}</p>
+    <div class="card" v-for="(expert, i) in experts" :key="i">
+      <router-link :to="`/doctor/detail/${expert.id}`">
+        <div class="card-info">
+          <img :src="expert.img">
+          <div class="info">
+            <h1>{{ expert.name }}</h1>
+            <p>{{ expert.pos_name }}</p>
+            <p>{{ expert.hospital_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ expert.category_name }}</p>
+          </div>
         </div>
-      </div>
-      <!-- 擅长领域 -->
-      <div class="advantage">
-        <div class="tips">擅长领域 <i class="iconfont icon-shanchanglingyu"></i></div>
-        <p>{{ expert.specialty }}</p>
-      </div>
-      <!-- 出诊时间 -->
-      <div class="advantage">
-        <div class="tips">出诊时间 <i class="iconfont icon-shanchanglingyu"></i></div>
-        <p>{{ expert.visit_time }}</p>
-      </div>
+        <!-- 擅长领域 -->
+        <div class="advantage">
+          <div class="tips">擅长领域 <i class="iconfont icon-shanchanglingyu"></i></div>
+          <p>{{ expert.specialty }}</p>
+        </div>
+        <!-- 出诊时间 -->
+        <div class="advantage">
+          <div class="tips">出诊时间 <i class="iconfont icon-shanchanglingyu"></i></div>
+          <p>{{ expert.visit_time }}</p>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -59,42 +61,31 @@ export default {
     }
   },
   methods: {
-    // 广告接口
-    async apiForAds() {
-      const res = await this.$http.post('patientDocHomeAds', {});
-      this.banners = res.param;
-    },
-    // 科室分类
-    async apiForCategory() {
-      const res = await this.$http.post('patientDocHomeCategory', {});
-      this.category = res.param;
-    },
-    // 查看更多 ？？？？
-    // toList() {
-    //   this.$router.push('/doctor/list');
-    // },
-    // 推荐专家
-    async apiForExpert() {
-      const res = await this.$http.post('patientDocHomeExpert', {});
-      this.experts = res.param;
-      // this.experts.forEach(i => {
-      //   i.visit_time = formatDateTime(i.visit_time);
-      // })
-    },
-    toDetail(id) {
-      this.$router.push('/doctor/detail/' + id)
+    // 接口
+    async apiForApi(api) {
+      const res = await this.$http.post(api, {});
+      if(api === 'patientDocHomeAds') {
+        this.banners = res.param;
+      }else if(api === 'patientDocHomeCategory') {
+        this.category = res.param;
+      }else if(api === 'patientDocHomeExpert') {
+        this.experts = res.param;
+      }
     }
   },
   mounted() {
-    this.apiForAds();
-    this.apiForCategory();
-    this.apiForExpert();
+    // 广告接口
+    this.apiForApi('patientDocHomeAds');
+    // 科室分类
+    this.apiForApi('patientDocHomeCategory');
+    // 推荐专家
+    this.apiForApi('patientDocHomeExpert');
     localStorage.setItem('hospital_id', this.$route.params.id);
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import 'index.scss';
 </style>
