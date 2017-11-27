@@ -14,9 +14,11 @@ const patient = {
   patientDocHomeCategory: '/Wx/Home/category',
   // 患者：名医-首页-推荐专家
   patientDocHomeExpert: '/Wx/Home/expert',
+  // 患者：名医-列表-搜索专家
+  patientElistSearch: '/Wx/Elist/search',
   // 患者：名医-列表-专家分类
   patientDocElistCategory: '/Wx/Elist/category',
-  // 患者：名医-列表-推荐专家
+  // 患者：名医-专家列表
   patientDocElistExpert: '/Wx/Elist/expert',
   // 患者：名医-专家详情
   patientDocElistDetails: '/Wx/Elist/details',

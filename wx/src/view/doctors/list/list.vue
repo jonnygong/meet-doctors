@@ -3,8 +3,8 @@
     <!-- 搜索框 -->
     <header>
       <div class="search">
-        <i class="iconfont icon-sousuo"></i>
-        <input type="text" placeholder="搜索医院或医生">
+        <i class="iconfont icon-sousuo" @click="apiForSearch"></i>
+        <input type="text" placeholder="搜索医院或医生" v-model="search" @keyup.enter="apiForSearch">
       </div>
     </header>
     
@@ -49,15 +49,30 @@
 
 <script>
 import { formatDateTime } from '@/plugins/formatDateTime.js'
+import { Toast } from 'mint-ui'
 export default {
   data() {
     return {
+      search: '',
       selected: 0,
       category: [],
       experts: []
     }
   },
   methods: {
+    // 搜索框
+    async apiForSearch() {
+      const res = await this.$http.post('patientElistSearch', {
+        search: this.search,
+        // category_id: this.selected
+      });
+      this.experts = res.param;
+      if(res.param == []) {
+        Toast({
+          message: '该科室下没有您要找的专家'
+        })
+      }
+    },
     // 科室分类
     async apiForCategory() {
       const res = await this.$http.post('patientDocElistCategory', {});
