@@ -2,6 +2,7 @@
   <div class="doc-list">
     <!-- 搜索框 -->
     <header>
+      <img src="./../../../assets/logo.png">
       <div class="search">
         <i class="iconfont icon-sousuo" @click="apiForSearch"></i>
         <input type="text" placeholder="搜索医院或医生" v-model="search" @keyup.enter="apiForSearch">

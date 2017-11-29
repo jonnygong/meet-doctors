@@ -4,27 +4,33 @@
     padding: 1.2rem 2rem;
     box-sizing: border-box;
     background: $themeBgColor;
-  }
-  .search{
-    width: 20.5rem;
-    position: relative;
-    display: flex;
-    background: $white;
-    border-radius: .4rem;
-    i{
-      position: absolute;
-      color: #bfbfbf;
-      font-size: 1.8rem;
-      top: .2rem;
-      left: .3rem;
+    img{
+      width: 12rem;
+      vertical-align: top;
+      float: left;
+      margin-right: 1rem;
     }
-    input{
-      height: 2.5rem;
-      border: 0;
-      padding-left: 2.5rem;
-      box-sizing: border-box;
+    .search{
+      width: 20.5rem;
+      position: relative;
+      display: flex;
+      background: $white;
       border-radius: .4rem;
-      outline: none;
+      i{
+        position: absolute;
+        color: #bfbfbf;
+        font-size: 1.8rem;
+        top: .2rem;
+        left: .3rem;
+      }
+      input{
+        height: 2.5rem;
+        border: 0;
+        padding-left: 2.5rem;
+        box-sizing: border-box;
+        border-radius: .4rem;
+        outline: none;
+      }
     }
   }
   .mint-navbar{
