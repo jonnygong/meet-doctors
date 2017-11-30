@@ -31,7 +31,7 @@ export default {
       const res = await this.$http.post('getHospitalName', {
         hospital_id: localStorage.getItem('hospital_id')
       });
-      this.hospital  = res.param.hospital_name
+      this.hospital = res.param.hospital_name
     }
   },
   mounted() {
