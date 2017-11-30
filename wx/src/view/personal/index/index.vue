@@ -1,8 +1,8 @@
 <template>
   <div class="per-index">
     <header>
-      <img src="./../../../assets/headurl.png">
-      <div class="nickname">夏日驿站</div>
+      <img :src="headUrl">
+      <div class="nickname">{{ nickName }}</div>
     </header>
     <div class="main">
       <div class="main-menu" v-for="(item, index) in menus" :key="index">
@@ -78,6 +78,8 @@ import { MessageBox, Toast } from 'mint-ui'
 export default {
   data() {
     return {
+      headUrl: localStorage.getItem('headUrl'),
+      nickName: localStorage.getItem('nickName'),
       menus: [
         { icon: 'yuyue', menu: '预约信息', lists: [] },
         { icon: 'jilu', menu: '就诊记录', lists: [] },

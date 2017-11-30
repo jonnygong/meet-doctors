@@ -27,7 +27,7 @@
             <span>年龄：{{ params.age }}</span>
             <!-- 就诊时间为0，显示预约时间。就诊时间不为0，显示就诊时间 -->
             <span v-if="params.visit_time == 0">预约时间：{{ params.bespeak_time }}</span>
-            <span v-else>就诊时间：{{ params.visit_time }}</span>
+            <span v-else style="color: red;">就诊时间：{{ params.visit_time }}</span>
           </div>
           <div class="option" v-if="index == 1">
             <p v-html="params.content"></p>
