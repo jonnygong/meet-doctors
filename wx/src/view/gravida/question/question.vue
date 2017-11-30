@@ -50,6 +50,7 @@ export default {
     // 保存成绩
     async apiForSave() {
       const res = await this.$http.post('patientGraVideoSave', {
+        hospital_id: localStorage.getItem('hospital_id'),
         category_id: this.$route.params.id,
         sum: this.sum
       });
