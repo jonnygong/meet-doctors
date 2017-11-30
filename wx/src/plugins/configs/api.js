@@ -1,6 +1,8 @@
 const login = {
-  // 患者：获取用户头像昵称
+  // 获取用户头像昵称
   patientGetInfo: '/Wx/Personal/info',
+  // 获取医院名称
+  getHospitalName: '/Wx/Home/setuser',
   // 获取验证码
   loginCode: '/Wx/Login/code',
   // 验证码登录
