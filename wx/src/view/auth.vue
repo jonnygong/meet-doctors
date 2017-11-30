@@ -2,7 +2,7 @@
   <div class="auth">
     <img :src="headUrl">
     <p>{{ nickName }}</p>
-    <p>正在进入，请稍后...</p>
+    <p>{{ hospital }}欢迎您！请稍后...</p>
   </div>
 </template>
 
@@ -12,7 +12,8 @@ export default {
     return {
       auth: this.$route.params.auth,
       headUrl: '',
-      nickName: ''
+      nickName: '',
+      hospital: ''
     }
   },
   methods: {
@@ -25,11 +26,18 @@ export default {
       setTimeout( () => {
         this.$router.replace( localStorage.getItem('backUrl') != null ? localStorage.getItem('backUrl') : `/doctor/1`)
       }, 2000)
+    },
+    async apiForSendHid() {
+      const res = await this.$http.post('getHospitalName', {
+        hospital_id: localStorage.getItem('hospital_id')
+      });
+      this.hospital  = res.param.hospital_name
     }
   },
   mounted() {
     localStorage.setItem('auth', this.auth);
     this.apiForGetInfo();
+    this.apiForSendHid();
   }
 }
 </script>

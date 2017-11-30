@@ -18,7 +18,7 @@ export default {
       // 存储auth到本地
       if (localStorage.getItem('auth') == undefined || localStorage.getItem('auth') === '') {
         localStorage.setItem('backUrl', this.$route.path);
-        window.location.href = `http://api.mtd.kfw001.com/Wx/Auth/home?from=${encodeURIComponent(this.url)}&hospital_id=${localStorage.getItem('hospital_id')}`
+        window.location.href = `http://api.mtd.kfw001.com/Wx/Auth/home?from=${encodeURIComponent(this.url)}`
       }
     }
   },
