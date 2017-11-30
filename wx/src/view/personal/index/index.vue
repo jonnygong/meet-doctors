@@ -90,8 +90,6 @@ export default {
     }
   },
   methods: {
-    // 获取微信头像及微信昵称
-    
     // 下拉功能
     openOptions(index) {
       if(this.show == index) {
@@ -150,7 +148,9 @@ export default {
     },
     // 获取成绩单
     async apiForReport() {
-      const res = await this.$http.post('patientPerReport', {});
+      const res = await this.$http.post('patientPerReport', {
+        hospital_id: localStorage.getItem('hospital_id')
+      });
       this.menus[3].lists = [
         { name: '分类', score: '分数' },
         { name: '孕前', score: res.param.front_score },
