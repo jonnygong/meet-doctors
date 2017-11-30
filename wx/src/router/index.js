@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Index from '@/view/index/index.vue'
+import Auth from '@/view/auth.vue'
 
 import Doctor from '@/view/doctors/index/index.vue'
 import Doc_List from '@/view/doctors/list/list.vue'
@@ -97,6 +98,10 @@ const router = new Router({
           meta: { title: '个人中心' }
         }
       ]
+    },
+    {
+      path: '/auth/:auth',
+      component: Auth,
     },
     {
       path: '/login',

@@ -40,8 +40,7 @@ axios.defaults.transformRequest = function _transformRequest( params = {} ){
     });
 
     // 返回完整数据，请求ajax
-    // formData.append('auth', localStorage.auth);
-    // formData.append('imgUrl', localStorage.headimgurl);
+    formData.append('auth', localStorage.auth);
     return formData;
 };
 
