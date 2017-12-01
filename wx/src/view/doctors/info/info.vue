@@ -95,7 +95,7 @@ export default {
       // console.log(value.getTime()/1000);  //转时间戳
       let hour = value.getHours() < 10 ? '0' + value.getHours() : value.getHours();
       let minute = value.getMinutes() < 10 ? '0' + value.getMinutes() : value.getMinutes();
-      this.yuyue_time = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
+      this.yuyue_time = `${value.getFullYear()}-${value.getMonth()+1}-${value.getDate()} ${hour}:${minute}`;
       this.params.bespeak_time = value.getTime()/1000;
     },
     // 删除图片
