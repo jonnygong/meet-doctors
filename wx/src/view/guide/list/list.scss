@@ -1,3 +1,28 @@
 .guide-list{
-  
+  .info{
+    display: flex;
+    align-items: center;
+    background: $white;
+    padding: 1rem;
+    margin-top: .5rem;
+    img{
+      width: 10rem;
+      vertical-align: top;
+      margin-right: 1rem;
+    }
+    &-content{
+      h3{
+        font-size: 1.4rem;
+        margin-bottom: .5rem;
+      }
+      a{
+        font-size: 1.4rem;
+        color: black;
+      }
+      b{
+        display: block;
+        margin-top: .5rem;
+      }
+    }
+  }
 }

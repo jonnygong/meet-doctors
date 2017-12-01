@@ -54,7 +54,8 @@ export default {
         category_id: this.$route.params.id,
         sum: this.sum
       });
-      localStorage.setItem('score', JSON.stringify(res.param))
+      localStorage.setItem('score', JSON.stringify(res.param));
+      this.$router.push('/gravida/report');
     },
     // 选择答案
     chooseAns(que, id) {
@@ -70,7 +71,6 @@ export default {
             Number(item.correct) === Number(item.result) ? this.sum ++ : this.sum;
           })
           this.apiForSave();
-          this.$router.push('/gravida/report');
         }else{
           // 获取答对题数
           this.questions.forEach(item => {

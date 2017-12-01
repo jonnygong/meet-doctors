@@ -21,7 +21,7 @@ export default {
       const res = await this.$http.post('patientDocElistCode', {
         guide_id: this.$route.params.id
       });
-      this.code = res.param[0].code;
+      this.code = res.param.code;
     }
   },
   mounted() {

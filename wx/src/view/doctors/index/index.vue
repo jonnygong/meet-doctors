@@ -71,6 +71,12 @@ export default {
       }else if(api === 'patientDocHomeExpert') {
         this.experts = res.param;
       }
+    },
+    // 传医院id
+    async apiForSendHid() {
+      const res = await this.$http.post('getHospitalName', {
+        hospital_id: this.$route.params.id
+      });
     }
   },
   mounted() {
@@ -80,6 +86,7 @@ export default {
     this.apiForApi('patientDocHomeCategory');
     // 推荐专家
     this.apiForApi('patientDocHomeExpert');
+    this.apiForSendHid()
     localStorage.setItem('hospital_id', this.$route.params.id);
   }
 }
