@@ -24,7 +24,7 @@
           </div>
           <div class="login-content-filed yzm">
             <i class="iconfont icon-verification-code"></i>
-            <input type="text" placeholder="请输入验证码" v-model="item.info.yzm">
+            <input type="text" placeholder="请输入验证码" v-model="item.info.yzm" @keyup.enter="apiForLogin('loginForCode', index)">
             <button class="yzm-btn" @click="apiForGetCode">发送验证码</button>
           </div>
           <button @click="apiForLogin('loginForCode', index)">登 录</button>
@@ -36,7 +36,7 @@
           </div>
           <div class="login-content-filed">
             <i class="iconfont icon-mima"></i>
-            <input type="password" placeholder="请输入密码" v-model="item.info.pwd">
+            <input type="password" placeholder="请输入密码" v-model="item.info.pwd" @keyup.enter="apiForLogin('loginForPwd', index)">
           </div>
           <div class="login-content-remember">
             <div class="correct" @click="rememberPwd()">
