@@ -1,8 +1,11 @@
 <template>
   <div class="exp-index">
     <header>
-      <img src="./../../../assets/headurl.png">
-      <div class="nickname">夏日驿站</div>
+      <img src="./../../../assets/card.png" alt="" class="bg-img">
+      <div class="card-info">
+        <img :src="headUrl" class="headimg">
+        <div class="nickname">{{ nickName }}</div>
+      </div>
     </header>
 
     <div class="exp-index-nav">
@@ -46,6 +49,8 @@ import { formatFullDate } from '@/plugins/formatDateTime.js'
 export default {
   data() {
     return {
+      headUrl: localStorage.getItem('headUrl'),
+      nickName: localStorage.getItem('nickName'),
       orders: [
         { title: '今日预约总量', num: '' },
         { title: '本周完成', num: '' },
