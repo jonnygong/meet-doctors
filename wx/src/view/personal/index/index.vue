@@ -1,8 +1,11 @@
 <template>
   <div class="per-index">
     <header>
-      <img :src="headUrl">
-      <div class="nickname">{{ nickName }}</div>
+      <img src="./../../../assets/card.png" class="bg-img">
+      <div class="card-info">
+        <img :src="headUrl" class="headimg">
+        <div class="nickname">{{ nickName }}</div>
+      </div>
     </header>
     <div class="main">
       <div class="main-menu" v-for="(item, index) in menus" :key="index">

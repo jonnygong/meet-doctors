@@ -1,19 +1,41 @@
 .exp-index{
   header{
-    // height: 12.5rem;
-    background: linear-gradient(top, $deepBlue, $themeBgColor 80%);
-    text-align: center;
-    padding: 2rem 0;
+    width: 100%;
     box-sizing: border-box;
-    img{
-      width: 6rem;
-      height: 6rem;
-      border-radius: 50%;
+    position: relative;
+    img.bg-img{
+      width: 100%;
+      height: 100%;
+      vertical-align: top;
     }
-    .nickname{
-      font-size: 1.4rem;
-      color: $white;
-      margin-top: 1rem;
+    .card-info{
+      position: absolute;
+      bottom: .5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      img.headimg{
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        border: 2px solid $white;
+      }
+      .nickname{
+        font-size: 1.4rem;
+        color: $white;
+        // margin-top: .5rem;
+        text-align: center;
+      }
+      a{
+        border: 1px solid $white;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        color: $white;
+        padding: .3rem 1rem;
+        background: rgba($color: $white, $alpha: .2);
+        margin-top: .5rem;
+        display: inline-block;
+      }
     }
     a{
       border: 1px solid $white;

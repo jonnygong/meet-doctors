@@ -1,9 +1,12 @@
 <template>
   <div class="exp-index">
     <header>
-      <img src="./../../../assets/headurl.png">
-      <div class="nickname">夏日驿站</div>
-      <router-link :to="`/guide/list/${guide_id}`">查看药膳领取名单</router-link>
+      <img src="./../../../assets/card.png" class="bg-img">
+      <div class="card-info">
+        <img :src="headUrl" class="headimg">
+        <div class="nickname">{{ nickName }}</div>
+        <router-link :to="`/guide/list/${guide_id}`">查看药膳领取名单</router-link>
+      </div>
     </header>
 
     <div class="exp-index-nav">
@@ -124,6 +127,8 @@ export default {
   },
   data() {
     return {
+      headUrl: localStorage.getItem('headUrl'),
+      nickName: localStorage.getItem('nickName'),
       orders: [
         { title: '今日预约总量', num: '' },
         { title: '本周完成', num: '' },

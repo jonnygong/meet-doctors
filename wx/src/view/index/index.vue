@@ -2,8 +2,11 @@
   <div class="container">
     <router-view/>
     <footer>
-      <router-link v-for="(item, index) in menus"  :to="{ path: item.path }"
-        :key="index">
+      <router-link 
+        v-for="(item, index) in menus" 
+        :to="{ path: item.path }"
+        :key="index"
+        replace>
         <i :class="`iconfont icon-${item.icon}`"></i>
         {{ item.name }}
       </router-link>
