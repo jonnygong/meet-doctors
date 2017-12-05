@@ -60,23 +60,26 @@ axios.defaults.transformResponse = function _transformResponse( res ){
         
     };
     // 处理错误码
-    const { status, info, param } = res;
-    // if( status === '306' || status === '304' ) {
-    //     Toast({
-    //         message: info
-    //     })
-    //     window.localStorage.removeItem('auth');
-    //     setTimeout(() => {
-    //         location.reload();
-    //     }, 1500)
-    //     return null
-    // };
     // 返回object对象到response[data]
+    const { status, info, param } = res;
     if(status === '200') {
         return res;
     }else{
         Toast({
             message: info
-        })
+        });
+        // 556未登录状态下重定向路由，10000授权过期后重新发起授权
+        if(status === '556') {
+            const { host, pathname } = window.location
+            setTimeout(() => {
+                window.location.href = `http://${host}${pathname}#/login`
+            }, 1000);
+        }else if(status === '10000') {
+            localStorage.removeItem('auth');
+            setTimeout(() => {
+                location.reload()
+            }, 1000);
+        }
+        return null;
     }
 };

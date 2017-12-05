@@ -5,6 +5,9 @@
     background: $white;
     padding: 1rem;
     margin-top: .5rem;
+    &:last-child{
+      margin-bottom: .5rem;
+    }
     img{
       width: 10rem;
       vertical-align: top;

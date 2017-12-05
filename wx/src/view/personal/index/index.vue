@@ -1,7 +1,7 @@
 <template>
   <div class="per-index">
     <header>
-      <img src="./../../../assets/card.png" class="bg-img">
+      <img src="~@/assets/card.png" class="bg-img">
       <div class="card-info">
         <img :src="headUrl" class="headimg">
         <div class="nickname">{{ nickName }}</div>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { formatDate } from './../../../plugins/formatDateTime.js'
+import { formatDate } from '@/plugins/formatDateTime.js'
 import { MessageBox, Toast } from 'mint-ui'
 export default {
   data() {
