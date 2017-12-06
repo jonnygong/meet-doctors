@@ -88,6 +88,9 @@
               color: $color4c;
               display: flex;
               line-height: 2;
+              &.red{
+                color: red;
+              }
             }
           }
           img{
