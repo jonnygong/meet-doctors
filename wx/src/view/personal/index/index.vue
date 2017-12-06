@@ -21,15 +21,21 @@
               <span>医院：{{ li.hospital_name }} / {{ li.expert_name }}医生</span>
               <span>预约人：{{ li.name }}</span>
               <span>医导联系方式：{{ li.tel }}</span>
+              <span v-if="li.status == 1" class="red">提示：预约单已关闭，请联系医导恢复。</span>
             </div>
-            <img v-if="li.status == 2" src="./../../../assets/nopay.png">
-            <img v-else src="./../../../assets/pay.png">
+            <img v-if="li.status == 1" src="~@/assets/close.png">
+            <img v-if="li.status == 2" src="~@/assets/nopay.png">
+            <img v-if="li.status == 3" src="~@/assets/pay.png">        
+            <div class="item-right" v-if="li.status == 1">
+              <span>{{ li.bespeak_time}}</span>
+              <button @click="handleToInfo(li.id)">查看预约信息</button>
+            </div>
             <div class="item-right" v-if="li.status == 2">
               <span>{{ li.bespeak_time}}</span>
               <button @click="handleToInfo(li.id)">查看预约信息</button>
               <button @click="applyPay(li.is_audit, li.id)">申请支付审核</button>
             </div>
-            <div class="item-right" v-else>
+            <div class="item-right" v-if="li.status == 3">
               <span>{{ li.bespeak_time}}</span>
               <button @click="handleToInfo(li.id)">查看预约信息</button>
             </div>

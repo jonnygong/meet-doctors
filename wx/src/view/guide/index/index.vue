@@ -169,9 +169,6 @@ export default {
       }else if(id === 5) {
         MessageBox.confirm('是否确认恢复预约单？', '提示').then(() => {
           this.apiForBtn('guideRecovery', orderid);
-          Toast({
-            message: '请刷新页面...'
-          })
         });
       }
     },
@@ -198,12 +195,13 @@ export default {
     async apiForBtn(api, id) {
       const res = await this.$http.post(api, {
         id: id
-      })
+      });
+      window.location.reload();
     },
     // 关闭预约单
     closeOrder(id) {
       MessageBox.confirm('是否确认关闭预约单', '提示').then(() => {
-        this.apiForBtn('guideIsClose', id)
+        this.apiForBtn('guideIsClose', id);
       });
     },
     // 专家待看-就医确认
