@@ -196,7 +196,12 @@ export default {
       const res = await this.$http.post(api, {
         id: id
       });
-      window.location.reload();
+      Toast({
+        message: '正在刷新页面，请稍后...'
+      })
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000)
     },
     // 关闭预约单
     closeOrder(id) {
