@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" :style="{ height: height + 'px' }">
     <div class="login-position">
       <div class="login-title">
         <span 
@@ -56,6 +56,7 @@ import { Toast } from 'mint-ui'
 export default {
   data() {
     return {
+      height: document.documentElement.clientHeight,
       menus: [
         { title: '快捷登录', info: { tel: localStorage.getItem('tel'), yzm: '' } },
         { title: '账户登录', info: { tel: localStorage.getItem('tel'), pwd: '' } }
