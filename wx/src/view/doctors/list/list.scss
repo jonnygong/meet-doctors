@@ -33,17 +33,34 @@
       }
     }
   }
-  .mint-navbar{
-    .mint-tab-item{
-      &.is-selected{
-        margin-bottom: 0;
-        padding-bottom: 14px;
-        border-color: $deepBlue;
-        color: $deepBlue;
+  nav{
+    display: flex;
+    align-items: center;
+    background: $white;
+    flex-flow: wrap;
+    margin-top: .6rem;
+    a{
+      width: 25%;
+      color: #000;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 1rem 0;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      box-sizing: border-box;
+      &:nth-child(4n){
+        border-right: 0;
+      }
+      &.router-link-active{
+        color: $white;
+        background: $themeBgColor;
       }
     }
   }
   .mint-tab-container{
+    .mint-tab-container-item{
+      padding-bottom: 4.4rem;
+    }
     .card{
       width: 100%;
       box-sizing: border-box;

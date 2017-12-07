@@ -2,22 +2,26 @@
   <div class="doc-list">
     <!-- 搜索框 -->
     <header>
-      <img src="./../../../assets/logo.png">
+      <img src="~@/assets/logo.png">
       <div class="search">
         <i class="iconfont icon-sousuo" @click="apiForSearch"></i>
         <input type="text" placeholder="搜索医院或医生" v-model="search" @keyup.enter="apiForSearch">
       </div>
     </header>
     
-    <mt-navbar v-model="selected">
-      <mt-tab-item 
+    <!-- nav -->
+    <nav>
+      <router-link 
         v-for="(item, index) in category" 
         :key="index" 
         :id="item.id"
-        @click.native="apiForExpert(item.id)">
+        :to="`/doctor/list/${item.id}`"
+        @click.native="apiForExpert(item.id)"
+        replace>
         {{ item.name }}
-      </mt-tab-item>
-    </mt-navbar>
+      </router-link>
+    </nav>
+
     <!-- 医生列表 -->
     <mt-tab-container v-model="selected">
       <mt-tab-container-item v-for="(item, index) in category"  :key="index" :id="item.id" @click="apiForExpert(item.id)">
@@ -70,7 +74,7 @@ export default {
       this.experts = res.param;
       if(res.param == []) {
         Toast({
-          message: '该科室下没有您要找的专家'
+          message: '没有您要找的专家哦!'
         })
       }
     },
