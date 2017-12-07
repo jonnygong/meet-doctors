@@ -54,8 +54,10 @@ export default {
         category_id: this.$route.params.id,
         sum: this.sum
       });
-      localStorage.setItem('score', JSON.stringify(res.param));
-      this.$router.push('/gravida/report');
+      if(localStorage.getItem('is_receive') === '1') {
+        localStorage.setItem('score', JSON.stringify(res.param));
+        this.$router.push('/gravida/report');
+      }
     },
     // 选择答案
     chooseAns(que, id) {

@@ -25,8 +25,10 @@
             <h3>{{ score.score }}</h3>
           </dd>
         </dl>
-        <img src="./../../../assets/rabbit.gif" class="rabbit">
-        <img src="./../../../assets/great.png" class="great">
+        <img src="~@/assets/rabbit.gif" class="rabbit">
+        <img v-if="score.after_score == 100" src="~@/assets/great.png" class="great">
+        <img v-if="score.after_score == 0" src="~@/assets/poor.png" class="great">
+        <img v-else src="~@/assets/good.png" class="great">
         <div class="info">
           <h4>{{ score.name }}</h4>
           <h4>{{ score.create_time }}</h4>
