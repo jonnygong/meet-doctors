@@ -23,7 +23,7 @@ export default {
       localStorage.setItem('headUrl', this.headUrl);
       localStorage.setItem('nickName', this.nickName);
       setTimeout( () => {
-        this.$router.replace( localStorage.getItem('backUrl') != null ? localStorage.getItem('backUrl') : `/doctor/1`)
+        this.$router.replace( localStorage.getItem('backUrl') != null ? localStorage.getItem('backUrl') : `/doctor/${localStorage.hospital_id}`)
       }, 2000)
     }
   },
