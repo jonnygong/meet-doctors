@@ -26,7 +26,7 @@ import Per_Info from '@/view/personal/info/info.vue'
 import Expert from '@/view/expert/index/index.vue'
 import Expert_Order from '@/view/expert/order/order.vue'
 
-// 医导模块
+// 专家助理模块
 import Guide from '@/view/guide/index/index.vue'
 import Guide_Order from '@/view/guide/order/order.vue'
 import Guide_Time from '@/view/guide/time/time.vue'
@@ -115,11 +115,11 @@ const router = new Router({
       component: Doc_Info,
       meta: { title: '预约信息填写' }
     },
-    // 遇见名医 --- 联系医导
+    // 遇见名医 --- 联系专家助理
     {
       path: '/doctor/guide/:id',
       component: Doc_Guide,
-      meta: { title: '联系医导' }
+      meta: { title: '联系专家助理' }
     },
     // 药膳 --- 填写个人信息
     {
@@ -144,11 +144,11 @@ const router = new Router({
       component: Expert_Order,
       meta: { title: '预约单' }
     },
-    // 医导模块
+    // 专家助理模块
     {
       path: '/guide/:id',
       component: Guide,
-      meta: { title: '医导' }
+      meta: { title: '专家助理' }
     },
     {
       path: '/guide/order/:id',
