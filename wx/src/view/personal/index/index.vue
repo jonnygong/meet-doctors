@@ -62,7 +62,12 @@
             <div class="item-left">
               <span>药膳名称：{{ li.goods_name }}</span>
               <span>送货地址：{{ li.address }}</span>
+              <span v-if="li.status == 0" class="red">提示：请联系专家助理完善信息。</span>
             </div>
+            <!-- status: 0(已驳回), 1(审核中), 2(已审核) -->
+            <img v-if="li.status === 0" src="~@/assets/back.png" style="left: 15rem; top: 1rem;">
+            <img v-if="li.status === 1" src="~@/assets/auditing.png" style="left: 15rem; top: .5rem;">
+            <img v-if="li.status === 2" src="~@/assets/audit.png" style="left: 15rem; top: .5rem;">
             <div class="item-right">
               <span>{{ li.create_time }}</span>
             </div>
