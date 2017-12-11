@@ -114,7 +114,7 @@ export default {
     handleMsgBox(id) {
       MessageBox({
         message: '提交成功!', 
-        confirmButtonText: '点击前往联系医导'
+        confirmButtonText: '点击前往联系专家助理'
       }).then(action => {
         this.$router.push(`/doctor/guide/${id}`);
       })

@@ -1,4 +1,5 @@
 .doc-list{
+  padding-bottom: 4.4rem;
   header{
     width: 100%;
     padding: 1.2rem 2rem;
@@ -59,7 +60,7 @@
   }
   .mint-tab-container{
     .mint-tab-container-item{
-      padding-bottom: 4.4rem;
+      // padding-bottom: 4.4rem;
     }
     .card{
       width: 100%;
@@ -91,6 +92,13 @@
             &:nth-child(2){
               margin-top: .6rem;
             }
+            &:last-child{
+              display: flex;
+              flex-flow: wrap;
+              b{
+                margin-right: 1rem;
+              }
+            }
           }
         }
       }
@@ -115,6 +123,15 @@
           margin-top: 1rem;
         }
       }
+    }
+  }
+  .page-infinite-loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: .5rem;
+    span{
+      margin-right: .5rem;
     }
   }
 }

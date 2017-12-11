@@ -24,7 +24,14 @@
 
     <!-- 医生列表 -->
     <mt-tab-container v-model="selected">
-      <mt-tab-container-item v-for="(item, index) in category"  :key="index" :id="item.id" @click="apiForExpert(item.id)">
+      <mt-tab-container-item 
+        v-for="(item, index) in category" 
+        :key="index" 
+        :id="item.id" 
+        @click="apiForExpert(item.id)" 
+        v-infinite-scroll="loadMore" 
+        infinite-scroll-disabled="loading" 
+        infinite-scroll-distance="50">
         <router-link v-for="(expert, i) in experts" :key="i" :to="`/doctor/detail/${expert.id}`">
           <div class="card">
             <div class="card-info">
@@ -32,7 +39,7 @@
               <div class="info">
                 <h1>{{ expert.name }}</h1>
                 <p>{{ expert.pos_name }}</p>
-                <p>{{ expert.hospital_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ expert.category_name }}</p>
+                <p><b>{{ expert.hospital_name}}</b>{{ expert.category_name }}</p>
               </div>
             </div>
             <!-- 擅长领域 -->
@@ -49,6 +56,10 @@
         </router-link>
       </mt-tab-container-item>
     </mt-tab-container>
+    <p v-show="loading" class="page-infinite-loading">
+      <mt-spinner type="fading-circle"></mt-spinner>
+      加载中...
+    </p>
   </div>
 </template>
 
@@ -61,15 +72,18 @@ export default {
       search: '',
       selected: 0,
       category: [],
-      experts: []
+      experts: [],
+      // 上拉加载数据
+      loading: false,
+      allLoaded: false,
+      page: 1
     }
   },
   methods: {
     // 搜索框
     async apiForSearch() {
       const res = await this.$http.post('patientElistSearch', {
-        search: this.search,
-        // category_id: this.selected
+        search: this.search
       });
       this.experts = res.param;
       if(res.param == []) {
@@ -88,10 +102,35 @@ export default {
     // 专家列表
     async apiForExpert(id) {
       const res = await this.$http.post('patientDocElistExpert', {
-        category_id: id
+        category_id: id,
+        page: 1
       });
       this.experts = res.param;
+      this.loading = false;
+      this.allLoaded = false;
+      this.page = 1;
     },
+    // 上拉加载数据
+    loadMore() {
+      if(this.allLoaded) {
+        this.loading = false;
+      }else {
+        this.loading = true;
+        setTimeout(async () => {
+          this.page++;
+          const res = await this.$http.post('patientDocElistExpert', {
+            category_id: this.$route.params.id,
+            page: this.page
+          });
+          if(res.param.length === 0) {
+            this.allLoaded = true
+          }else {
+            this.experts = this.experts.concat(res.param);
+          }
+          this.loading = false;
+        }, 1500)
+      }
+    }
   },
   mounted() {
     this.apiForCategory();

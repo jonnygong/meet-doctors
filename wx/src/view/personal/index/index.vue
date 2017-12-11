@@ -12,7 +12,8 @@
         <div class="main-menu-title" @click="openOptions(index)">
           <i :class="`iconfont icon-${item.icon}`"></i>
           <span>{{ item.menu }}</span>
-          <i class="iconfont icon-xiala"></i>
+          <i class="iconfont icon-xiala" v-if="show !== index"></i>
+          <i class="iconfont icon-shangla" v-if="show == index"></i>
         </div>
 
         <div class="main-menu-content" v-if="item.menu === '预约信息'" v-show="show == index">
@@ -20,8 +21,8 @@
             <div class="item-left">
               <span>医院：{{ li.hospital_name }} / {{ li.expert_name }}医生</span>
               <span>预约人：{{ li.name }}</span>
-              <span>医导联系方式：{{ li.tel }}</span>
-              <span v-if="li.status == 1" class="red">提示：预约单已关闭，请联系医导恢复。</span>
+              <span>专家助理联系方式：{{ li.tel }}</span>
+              <span v-if="li.status == 1" class="red">提示：预约单已关闭，请联系专家助理恢复。</span>
             </div>
             <img v-if="li.status == 1" src="~@/assets/close.png">
             <img v-if="li.status == 2" src="~@/assets/nopay.png">
@@ -47,7 +48,7 @@
             <div class="item-left">
               <span>医院：{{ li.hospital_name }} / {{ li.expert_name }}医生</span>
               <span>预约人：{{ li.name }}</span>
-              <span>医导联系方式：{{ li.tel }}</span>
+              <span>专家助理联系方式：{{ li.tel }}</span>
               <span>已就诊</span>
             </div>
             <div class="item-right">
@@ -56,7 +57,7 @@
           </div>
         </div>
         
-        <div class="main-menu-content" v-if="item.menu === '药领取膳'" v-show="show == index">
+        <div class="main-menu-content" v-if="item.menu === '药膳申请'" v-show="show == index">
           <div class="item" v-for="(li, i) in item.lists" :key="i">
             <div class="item-left">
               <span>药膳名称：{{ li.goods_name }}</span>
@@ -92,7 +93,7 @@ export default {
       menus: [
         { icon: 'yuyue', menu: '预约信息', lists: [] },
         { icon: 'jilu', menu: '就诊记录', lists: [] },
-        { icon: 'lingqu', menu: '药领取膳', lists: [] },
+        { icon: 'lingqu', menu: '药膳申请', lists: [] },
         { icon: 'chengjidan', menu: '成绩单', lists: [] },
       ],
       show: -1
@@ -130,7 +131,7 @@ export default {
       if(audit == 0) {
         MessageBox.confirm('是否申请支付审核？', '提示').then(() => {
           Toast({
-            message: '等待医导通过审核...'
+            message: '等待专家助理通过审核...'
           });
           this.apiForAudit(id);
           this.$set('', audit, 1);
@@ -180,6 +181,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import 'index.scss';
 </style>

@@ -103,7 +103,7 @@ export default {
         this.handleMsgBox();
       }
     },
-    // 获取医导
+    // 获取专家助理
     async apiForGetGuide() {
       const res = await this.$http.post('patientGooGetGuide', {
         hospital_id: localStorage.getItem('hospital_id')

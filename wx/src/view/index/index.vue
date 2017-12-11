@@ -9,6 +9,7 @@
         replace>
         <i :class="`iconfont icon-${item.icon}`"></i>
         {{ item.name }}
+        <span v-if="item.name === '个人中心'"></span>
       </router-link>
     </footer>
   </div>

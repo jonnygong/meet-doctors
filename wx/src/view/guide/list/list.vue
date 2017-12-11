@@ -19,7 +19,7 @@ export default {
     }
   },
   methods: {
-    // 获取选择该医导的用户信息
+    // 获取选择该专家助理的用户信息
     async apiForGetUser() {
       const res = await this.$http.post('guideGetUser', {
         guide_id: this.$route.params.id
