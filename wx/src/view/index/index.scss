@@ -10,12 +10,14 @@
     a{
       width: 12.5rem;
       font-size: 1.2rem;
-      text-align: center;
       border-right: 1px solid #ccc;
       padding: 1rem 0;
       position: relative;
       box-sizing: border-box;
       color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       &:last-child{
         border-right: 0;
       }
@@ -31,6 +33,13 @@
           top: -1px;
           left: 0;
         }
+      }
+      span{
+        width: .8rem;
+        height: .8rem;
+        border-radius: 50%;
+        background: red;
+        margin-left: .3rem;
       }
     }
   }
