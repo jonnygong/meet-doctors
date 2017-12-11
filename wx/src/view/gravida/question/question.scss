@@ -53,7 +53,7 @@
     }
     .btn{
       text-align: center;
-      margin-top: 3rem;
+      margin: 3rem 0 7.6rem;
       button{
         @include btn;
         width: 17.4rem;
@@ -61,6 +61,9 @@
         border-radius: 2rem;
         margin-top: 2.7rem;
         letter-spacing: .8rem;
+        &:first-child{
+          margin-top: 0;
+        }
       }
     }
     img{
