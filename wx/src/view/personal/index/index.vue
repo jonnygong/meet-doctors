@@ -12,7 +12,8 @@
         <div class="main-menu-title" @click="openOptions(index)">
           <i :class="`iconfont icon-${item.icon}`"></i>
           <span>{{ item.menu }}</span>
-          <i class="iconfont icon-xiala"></i>
+          <i class="iconfont icon-xiala" v-if="show !== index"></i>
+          <i class="iconfont icon-shangla" v-if="show == index"></i>
         </div>
 
         <div class="main-menu-content" v-if="item.menu === '预约信息'" v-show="show == index">
