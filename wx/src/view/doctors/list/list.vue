@@ -83,8 +83,7 @@ export default {
     // 搜索框
     async apiForSearch() {
       const res = await this.$http.post('patientElistSearch', {
-        search: this.search,
-        // category_id: this.selected
+        search: this.search
       });
       this.experts = res.param;
       if(res.param == []) {
