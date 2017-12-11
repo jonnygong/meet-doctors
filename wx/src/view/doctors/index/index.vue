@@ -31,7 +31,7 @@
           <div class="info">
             <h1>{{ expert.name }}</h1>
             <p>{{ expert.pos_name }}</p>
-            <p>{{ expert.hospital_name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ expert.category_name }}</p>
+            <p><b>{{ expert.hospital_name}}</b>{{ expert.category_name }}</p>
           </div>
         </div>
         <!-- 擅长领域 -->
