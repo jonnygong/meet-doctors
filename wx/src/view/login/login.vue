@@ -25,7 +25,7 @@
           <div class="login-content-filed yzm">
             <i class="iconfont icon-verification-code"></i>
             <input type="text" placeholder="请输入验证码" v-model="item.info.yzm" @keyup.enter="apiForLogin('loginForCode', index)">
-            <button class="yzm-btn" @click="apiForGetCode">发送验证码</button>
+            <button class="yzm-btn" @click="apiForGetCode" :disabled="dis">{{ sendCode }}</button>
           </div>
           <button @click="apiForLogin('loginForCode', index)">登 录</button>
         </slot>
@@ -63,7 +63,10 @@ export default {
       ],
       isActive: 0,
       show: 0,
-      tel: ''
+      tel: '',
+      sendCode: '发送验证码',
+      dis: false,
+      seconds: 60
     }
   },
   methods: {
@@ -90,6 +93,16 @@ export default {
       const res = await this.$http.post('loginCode', {
         mobile: this.menus[0].info.tel
       });
+      if(res.status === '200') {
+        this.dis = true;
+        this.clean = setInterval(() => {
+          this.sendCode = `已发送(${this.seconds}s)`;
+          this.seconds--;
+          if(this.seconds <= 0) {
+            clearInterval(this.clean);
+          }
+        }, 1000);
+      }
     },
     // 登录
     async apiForLogin(api, index) {
