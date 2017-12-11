@@ -57,7 +57,7 @@
           </div>
         </div>
         
-        <div class="main-menu-content" v-if="item.menu === '药领取膳'" v-show="show == index">
+        <div class="main-menu-content" v-if="item.menu === '药膳申请'" v-show="show == index">
           <div class="item" v-for="(li, i) in item.lists" :key="i">
             <div class="item-left">
               <span>药膳名称：{{ li.goods_name }}</span>
@@ -93,7 +93,7 @@ export default {
       menus: [
         { icon: 'yuyue', menu: '预约信息', lists: [] },
         { icon: 'jilu', menu: '就诊记录', lists: [] },
-        { icon: 'lingqu', menu: '药领取膳', lists: [] },
+        { icon: 'lingqu', menu: '药膳申请', lists: [] },
         { icon: 'chengjidan', menu: '成绩单', lists: [] },
       ],
       show: -1
