@@ -11,7 +11,10 @@
       <div class="main-menu" v-for="(item, index) in menus" :key="index">
         <div class="main-menu-title" @click="openOptions(index)">
           <i :class="`iconfont icon-${item.icon}`"></i>
-          <span>{{ item.menu }}</span>
+          <span>
+            {{ item.menu }}
+            <b v-if="item.menu !== '成绩单'"></b>
+          </span>
           <i class="iconfont icon-xiala" v-if="show !== index"></i>
           <i class="iconfont icon-shangla" v-if="show == index"></i>
         </div>
