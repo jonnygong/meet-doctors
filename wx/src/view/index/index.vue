@@ -9,13 +9,14 @@
         replace>
         <i :class="`iconfont icon-${item.icon}`"></i>
         {{ item.name }}
-        <span v-if="item.name === '个人中心'"></span>
+        <span v-if="item.name === '个人中心'" v-show="$redtips"></span>
       </router-link>
     </footer>
   </div>
 </template>
 
 <script>
+import redtips from '@/plugins/tips.js'
 export default {
   data() {
     return {
@@ -23,8 +24,30 @@ export default {
         { name: '遇见名医', icon: 'yisheng', path: `/doctor/${localStorage.getItem('hospital_id')}` },
         { name: '孕妇课堂', icon: 'yunfu', path: '/gravida' },
         { name: '个人中心', icon: 'gerenzhongxinxia', path: '/personal' }
-      ]
+      ],
+      redtip: false
     }
+  },
+  computed: {
+    $redtips() {
+      return redtips.redtips && this.redtip;
+    }
+  },
+  methods: {
+    // 获取修改状态
+    async apiForGetStatus() {
+      const res = await this.$http.post('Getgethc', {});
+      if(res.status == 200) {
+        this.redtip = true;
+        redtips.redtips = true;
+        localStorage.setItem('gethc', JSON.stringify(res.param));
+      }else {
+        this.redtip = false;
+      }
+    }
+  },
+  mounted() {
+    this.apiForGetStatus()
   }
 }
 </script>

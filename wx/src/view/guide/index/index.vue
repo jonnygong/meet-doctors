@@ -200,12 +200,12 @@ export default {
         openid: openid
       });
       if(res.status === '200') {
-        Toast({
-          message: '正在刷新页面，请稍后...'
-        })
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000)
+        // Toast({
+        //   message: '正在刷新页面，请稍后...'
+        // })
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 1000)
       }
     },
     // 关闭预约单
@@ -222,14 +222,14 @@ export default {
         openid: this.openid
       });
       this.mask = false;
-      if(res.status === '200') {
-        Toast({
-          message: '正在刷新页面，请稍后...'
-        })
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000)
-      }
+      // if(res.status === '200') {
+      //   Toast({
+      //     message: '正在刷新页面，请稍后...'
+      //   })
+      //   setTimeout(() => {
+      //     window.location.reload();
+      //   }, 1000)
+      // }
     },
     // 删除图片
     DelImg(index) {

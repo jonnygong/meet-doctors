@@ -13,7 +13,7 @@
           <i :class="`iconfont icon-${item.icon}`"></i>
           <span>
             {{ item.menu }}
-            <b v-if="item.menu !== '成绩单'"></b>
+            <b v-if="item.menu !== '成绩单'" v-show="item.redtip"></b>
           </span>
           <i class="iconfont icon-xiala" v-if="show !== index"></i>
           <i class="iconfont icon-shangla" v-if="show == index"></i>
@@ -94,16 +94,17 @@
 <script>
 import { formatDate } from '@/plugins/formatDateTime.js'
 import { MessageBox, Toast } from 'mint-ui'
+import redtips from '@/plugins/tips.js'
 export default {
   data() {
     return {
       headUrl: localStorage.getItem('headUrl'),
       nickName: localStorage.getItem('nickName'),
       menus: [
-        { icon: 'yuyue', menu: '预约信息', lists: [] },
-        { icon: 'jilu', menu: '就诊记录', lists: [] },
-        { icon: 'lingqu', menu: '药膳申请', lists: [] },
-        { icon: 'chengjidan', menu: '成绩单', lists: [] },
+        { icon: 'yuyue', menu: '预约信息', redtip: false, lists: [] },
+        { icon: 'jilu', menu: '就诊记录', redtip: false, lists: [] },
+        { icon: 'lingqu', menu: '药膳申请', redtip: false, lists: [] },
+        { icon: 'chengjidan', menu: '成绩单', redtip: false, lists: [] },
       ],
       show: -1
     }
@@ -111,6 +112,13 @@ export default {
   methods: {
     // 下拉功能
     openOptions(index) {
+      this.menus[index].redtip = false;
+      const tips = this.menus.every(item => {
+        return item.redtip === false;
+      })
+      if(tips) {
+        redtips.redtips = false;
+      }
       if(this.show == index) {
         this.show = -1
       }else {
@@ -180,8 +188,16 @@ export default {
       ];
     },
     // 获取修改状态
-    async apiForGetStatus() {
-      const res = await this.$http.post('Getgethc', {});
+    GetStatus() {
+      JSON.parse(localStorage.getItem('gethc')).forEach(item => {
+        if(item === 'A') {
+          this.menus[0].redtip = true;
+        }else if(item === 'B') {
+          this.menus[1].redtip = true;
+        }else if(item === 'C') {
+          this.menus[2].redtip = true;
+        }
+      })
     }
   },
   mounted() {
@@ -190,7 +206,7 @@ export default {
     this.apiForGoods();
     this.apiForReport();
 
-    this.apiForGetStatus();
+    this.GetStatus();
   }
 }
 </script>

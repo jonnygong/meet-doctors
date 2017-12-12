@@ -9,8 +9,8 @@ export default {
   name: "app",
   data() {
     return {
-      url: 'http://mtd.api.kfw001.com:8080/#/auth'
-      // url: 'http://mtd.kfw001.com/wx/#/auth'
+      // url: 'http://mtd.api.kfw001.com:8080/#/auth'
+      url: 'http://mtd.kfw001.com/wx/#/auth'
     };
   },
   methods: {
