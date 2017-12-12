@@ -11,7 +11,10 @@
       <div class="main-menu" v-for="(item, index) in menus" :key="index">
         <div class="main-menu-title" @click="openOptions(index)">
           <i :class="`iconfont icon-${item.icon}`"></i>
-          <span>{{ item.menu }}</span>
+          <span>
+            {{ item.menu }}
+            <b v-if="item.menu !== '成绩单'" v-show="item.redtip"></b>
+          </span>
           <i class="iconfont icon-xiala" v-if="show !== index"></i>
           <i class="iconfont icon-shangla" v-if="show == index"></i>
         </div>
@@ -19,7 +22,8 @@
         <div class="main-menu-content" v-if="item.menu === '预约信息'" v-show="show == index">
           <div class="item" v-for="(li, i) in item.lists" :key="i">
             <div class="item-left">
-              <span>医院：{{ li.hospital_name }} / {{ li.expert_name }}医生</span>
+              <span>医院：{{ li.hospital_name }}</span>
+              <span>医生：{{ li.expert_name }}</span>
               <span>预约人：{{ li.name }}</span>
               <span>专家助理联系方式：{{ li.tel }}</span>
               <span v-if="li.status == 1" class="red">提示：预约单已关闭，请联系专家助理恢复。</span>
@@ -62,7 +66,7 @@
             <div class="item-left">
               <span>药膳名称：{{ li.goods_name }}</span>
               <span>送货地址：{{ li.address }}</span>
-              <span v-if="li.status == 0" class="red">提示：请联系专家助理完善信息。</span>
+              <span v-if="li.status == 0" class="red">提交信息有误，请联系专家助理修改。</span>
             </div>
             <!-- status: 0(已驳回), 1(审核中), 2(已审核) -->
             <img v-if="li.status === 0" src="~@/assets/back.png" style="left: 15rem; top: 1rem;">
@@ -90,16 +94,17 @@
 <script>
 import { formatDate } from '@/plugins/formatDateTime.js'
 import { MessageBox, Toast } from 'mint-ui'
+import redtips from '@/plugins/tips.js'
 export default {
   data() {
     return {
       headUrl: localStorage.getItem('headUrl'),
       nickName: localStorage.getItem('nickName'),
       menus: [
-        { icon: 'yuyue', menu: '预约信息', lists: [] },
-        { icon: 'jilu', menu: '就诊记录', lists: [] },
-        { icon: 'lingqu', menu: '药膳申请', lists: [] },
-        { icon: 'chengjidan', menu: '成绩单', lists: [] },
+        { icon: 'yuyue', menu: '预约信息', redtip: false, lists: [] },
+        { icon: 'jilu', menu: '就诊记录', redtip: false, lists: [] },
+        { icon: 'lingqu', menu: '药膳申请', redtip: false, lists: [] },
+        { icon: 'chengjidan', menu: '成绩单', redtip: false, lists: [] },
       ],
       show: -1
     }
@@ -107,6 +112,13 @@ export default {
   methods: {
     // 下拉功能
     openOptions(index) {
+      this.menus[index].redtip = false;
+      const tips = this.menus.every(item => {
+        return item.redtip === false;
+      })
+      if(tips) {
+        redtips.redtips = false;
+      }
       if(this.show == index) {
         this.show = -1
       }else {
@@ -174,6 +186,18 @@ export default {
         { name: '康复', score: res.param.recovery_score },
         { name: '总成绩', score: res.param.score }
       ];
+    },
+    // 获取修改状态
+    GetStatus() {
+      JSON.parse(localStorage.getItem('gethc')).forEach(item => {
+        if(item === 'A') {
+          this.menus[0].redtip = true;
+        }else if(item === 'B') {
+          this.menus[1].redtip = true;
+        }else if(item === 'C') {
+          this.menus[2].redtip = true;
+        }
+      })
     }
   },
   mounted() {
@@ -181,6 +205,8 @@ export default {
     this.apiForRecord();
     this.apiForGoods();
     this.apiForReport();
+
+    this.GetStatus();
   }
 }
 </script>

@@ -65,7 +65,9 @@ const patient = {
   // 患者：保存领取药膳的用户信息
   patientGooSave: '/Wx/Goods/save',
   // 患者：获取该医院的医导（进行用药培训）
-  patientGooGetGuide: '/Wx/Goods/getguide'
+  patientGooGetGuide: '/Wx/Goods/getguide',
+  // 获取修改动态
+  Getgethc: '/Wx/Personal/gethc'
 };
 
 const guide = {
