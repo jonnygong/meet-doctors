@@ -1,7 +1,7 @@
 <template>
   <div class="exp-index">
     <header>
-      <img src="./../../../assets/card.png" class="bg-img">
+      <img src="~@/assets/card.png" class="bg-img">
       <div class="card-info">
         <img :src="headUrl" class="headimg">
         <div class="nickname">{{ nickName }}</div>
@@ -35,8 +35,8 @@
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
-              <button @click="apply(item.id, list.id)" class="green">支 付</button>
-              <button @click="closeOrder(list.id)" class="red">关 闭</button>
+              <button @click="apply(item.id, list.id, list.openid)" class="green">支 付</button>
+              <button @click="closeOrder(list.id, list.openid)" class="red">关 闭</button>
             </div>
           </div>
 
@@ -49,7 +49,7 @@
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
-              <button @click="apply(item.id, list.id)" class="blue">支付审核</button>
+              <button @click="apply(item.id, list.id, list.openid)" class="blue">支付审核</button>
             </div>
           </div>
 
@@ -62,7 +62,7 @@
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
-              <button @click="apply(item.id, list.id)" class="blue">就医确认</button>
+              <button @click="apply(item.id, list.id, list.openid)" class="blue">就医确认</button>
             </div>
           </div>
 
@@ -88,7 +88,7 @@
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
-              <button @click="apply(item.id, list.id)" class="green">恢复</button>
+              <button @click="apply(item.id, list.id, list.openid)" class="green">恢复</button>
             </div>
           </div>
         </mt-tab-container-item>
@@ -146,6 +146,7 @@ export default {
       mask: false,
       // 上传就诊报告id,
       id: '',
+      openid: '',
       guide_id: this.$route.params.id
     }
   },
@@ -154,21 +155,22 @@ export default {
       this.$router.push(`/guide/order/${id}`)
     },
     // id === 1确认客户支付,未支付 || id === 2协助客户做支付确认,支付审核
-    apply(id, orderid) {
+    apply(id, orderid, openid) {
       if(id === 1) {
         MessageBox.confirm('是否协助客户做支付确认？', '提示').then(() => {
-          this.apiForBtn('guideAudit', orderid)
+          this.apiForBtn('guideAudit', orderid, openid)
         });
       }else if(id === 2) {
         MessageBox.confirm('是否确认客户已经支付？', '提示').then(() => {
-          this.apiForBtn('guideAudit', orderid)
+          this.apiForBtn('guideAudit', orderid, openid)
         });
       }else if(id === 3) {
         this.mask = true;
         this.id = orderid;
+        this.openid = openid;
       }else if(id === 5) {
         MessageBox.confirm('是否确认恢复预约单？', '提示').then(() => {
-          this.apiForBtn('guideRecovery', orderid);
+          this.apiForBtn('guideRecovery', orderid, openid);
         });
       }
     },
@@ -192,30 +194,42 @@ export default {
       })
     },
     // 按钮功能接口
-    async apiForBtn(api, id) {
+    async apiForBtn(api, id, openid) {
       const res = await this.$http.post(api, {
-        id: id
+        id: id,
+        openid: openid
       });
-      Toast({
-        message: '正在刷新页面，请稍后...'
-      })
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000)
+      if(res.status === '200') {
+        Toast({
+          message: '正在刷新页面，请稍后...'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000)
+      }
     },
     // 关闭预约单
-    closeOrder(id) {
+    closeOrder(id, openid) {
       MessageBox.confirm('是否确认关闭预约单', '提示').then(() => {
-        this.apiForBtn('guideIsClose', id);
+        this.apiForBtn('guideIsClose', id, openid);
       });
     },
     // 专家待看-就医确认
     async apiForConfirm() {
       const res = await this.$http.post('guideConfirm', {
         id: this.id,
-        visit_report: this.img
+        visit_report: this.img,
+        openid: this.openid
       });
       this.mask = false;
+      if(res.status === '200') {
+        Toast({
+          message: '正在刷新页面，请稍后...'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000)
+      }
     },
     // 删除图片
     DelImg(index) {

@@ -19,7 +19,8 @@
         <div class="main-menu-content" v-if="item.menu === '预约信息'" v-show="show == index">
           <div class="item" v-for="(li, i) in item.lists" :key="i">
             <div class="item-left">
-              <span>医院：{{ li.hospital_name }} / {{ li.expert_name }}医生</span>
+              <span>医院：{{ li.hospital_name }}</span>
+              <span>医生：{{ li.expert_name }}</span>
               <span>预约人：{{ li.name }}</span>
               <span>专家助理联系方式：{{ li.tel }}</span>
               <span v-if="li.status == 1" class="red">提示：预约单已关闭，请联系专家助理恢复。</span>
@@ -62,7 +63,7 @@
             <div class="item-left">
               <span>药膳名称：{{ li.goods_name }}</span>
               <span>送货地址：{{ li.address }}</span>
-              <span v-if="li.status == 0" class="red">提示：请联系专家助理完善信息。</span>
+              <span v-if="li.status == 0" class="red">提交信息有误，请联系专家助理修改。</span>
             </div>
             <!-- status: 0(已驳回), 1(审核中), 2(已审核) -->
             <img v-if="li.status === 0" src="~@/assets/back.png" style="left: 15rem; top: 1rem;">
@@ -174,6 +175,10 @@ export default {
         { name: '康复', score: res.param.recovery_score },
         { name: '总成绩', score: res.param.score }
       ];
+    },
+    // 获取修改状态
+    async apiForGetStatus() {
+      const res = await this.$http.post('Getgethc', {});
     }
   },
   mounted() {
@@ -181,6 +186,8 @@ export default {
     this.apiForRecord();
     this.apiForGoods();
     this.apiForReport();
+
+    this.apiForGetStatus();
   }
 }
 </script>
