@@ -113,12 +113,17 @@ export default {
     // 下拉功能
     openOptions(index) {
       this.menus[index].redtip = false;
+      // 根据用户行为，传已读模块至后台
+      let val = index === 0 ? 'A' : index === 1 ? 'B' : 'C';
+      this.SetStatus(val);
+      // 如果所有红点都为false(隐藏), 个人中心红点隐藏
       const tips = this.menus.every(item => {
         return item.redtip === false;
       })
       if(tips) {
         redtips.redtips = false;
       }
+      // 下拉
       if(this.show == index) {
         this.show = -1
       }else {
@@ -137,7 +142,10 @@ export default {
     async apiForAudit(id) {
       const res = await this.$http.post('patientPerAudit', {
         id: id
-      })
+      });
+      if( res.status === '200') {
+        window.location.reload()
+      }
     },
     // 预约信息-跳转至预约详情
     handleToInfo(id) {
@@ -151,7 +159,6 @@ export default {
             message: '等待专家助理通过审核...'
           });
           this.apiForAudit(id);
-          this.$set('', audit, 1);
         });
       }else {
         MessageBox.alert('您已提交申请，请勿重复提交', '提示')
@@ -189,14 +196,21 @@ export default {
     },
     // 获取修改状态
     GetStatus() {
-      JSON.parse(localStorage.getItem('gethc')).forEach(item => {
-        if(item === 'A') {
-          this.menus[0].redtip = true;
-        }else if(item === 'B') {
-          this.menus[1].redtip = true;
-        }else if(item === 'C') {
-          this.menus[2].redtip = true;
-        }
+      if(localStorage.getItem('gethc')) {
+        JSON.parse(localStorage.getItem('gethc')).forEach(item => {
+          if(item === 'A') {
+            this.menus[0].redtip = true;
+          }else if(item === 'B') {
+            this.menus[1].redtip = true;
+          }else if(item === 'C') {
+            this.menus[2].redtip = true;
+          }
+        })
+      }
+    },
+    async SetStatus(val) {
+      const res = await this.$http.post('Sethc', {
+        value: val
       })
     }
   },
@@ -205,7 +219,7 @@ export default {
     this.apiForRecord();
     this.apiForGoods();
     this.apiForReport();
-
+    // 获取修改状态
     this.GetStatus();
   }
 }

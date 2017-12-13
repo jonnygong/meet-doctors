@@ -1,8 +1,7 @@
 .login{
   width: 100%;
-  // height: 100%;
-  // position: absolute;
-  background: url('./../../assets/loginbg.jpg') no-repeat;
+  min-height: 100vh;
+  background: url('~@/assets/loginbg.jpg') no-repeat;
   background-size: 100% 100%;
   &-position{
     width: 100%;
@@ -70,7 +69,7 @@
     .yzm{
       padding-right: 0;
       input{
-        width: 13rem;
+        width: 11rem;
         text-align: left;
       }
       &-btn{

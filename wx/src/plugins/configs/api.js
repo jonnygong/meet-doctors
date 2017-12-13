@@ -67,7 +67,9 @@ const patient = {
   // 患者：获取该医院的医导（进行用药培训）
   patientGooGetGuide: '/Wx/Goods/getguide',
   // 获取修改动态
-  Getgethc: '/Wx/Personal/gethc'
+  Getgethc: '/Wx/Personal/gethc',
+  // 用户已读状态上传
+  Sethc: '/Wx/Personal/sethc'
 };
 
 const guide = {

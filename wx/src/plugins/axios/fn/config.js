@@ -65,21 +65,33 @@ axios.defaults.transformResponse = function _transformResponse( res ){
     if(status === '200') {
         return res;
     }else{
-        Toast({
-            message: info
-        });
         // 556未登录状态下重定向路由，10000授权过期后重新发起授权
         if(status === '556') {
+            Toast({
+                message: info,
+                duration: 1000
+            });
             const { host, pathname } = window.location
             setTimeout(() => {
                 window.location.href = `http://${host}${pathname}#/login`
             }, 1000);
         }else if(status === '10000') {
+            Toast({
+                message: info,
+                duration: 1000
+            });
             localStorage.removeItem('auth');
             setTimeout(() => {
                 location.reload()
             }, 1000);
+        }else if(status === '110') {
+            
+        }else {
+            Toast({
+                message: info,
+                duration: 1000
+            });
         }
-        return null;
+        return res;
     }
 };

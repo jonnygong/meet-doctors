@@ -17,6 +17,7 @@
 
 <script>
 import redtips from '@/plugins/tips.js'
+import { Toast } from 'mint-ui'
 export default {
   data() {
     return {
@@ -37,12 +38,14 @@ export default {
     // 获取修改状态
     async apiForGetStatus() {
       const res = await this.$http.post('Getgethc', {});
-      if(res.status == 200) {
+      if(res.status === '200') {
         this.redtip = true;
         redtips.redtips = true;
         localStorage.setItem('gethc', JSON.stringify(res.param));
       }else {
         this.redtip = false;
+        redtips.redtips = false;
+        localStorage.setItem('gethc', '');
       }
     }
   },
