@@ -21,7 +21,7 @@
         <div class="info-three-title">三证信息</div>
         <ul>
           <li v-for="(item, i) in info.imgs" :key="i">
-            <img :src="item.img_url">
+            <img :src="item.img_url" @click="showImg(item.img_url)">
           </li>
         </ul>
       </div>
@@ -31,6 +31,10 @@
       <button @click="handleTo(info.status, info.id)">领 取</button>
     </div>
 
+    <!-- 图片放大器 -->
+    <div class="mask" v-show="mask" @click="mask = false">
+      <img :src="bigImg">
+    </div>
   </div>
 </template>
 
@@ -39,7 +43,10 @@ import { MessageBox } from 'mint-ui'
 export default {
   data() {
     return {
-      info: {}
+      info: {},
+      // 图片放大遮罩
+      mask: false,
+      bigImg: ''
     }
   },
   methods: {
@@ -66,6 +73,10 @@ export default {
       }else{
         this.$router.push(`/medicine/info/${id}`)
       }
+    },
+    showImg(img) {
+      this.mask = true;
+      this.bigImg = img;
     }
   },
   mounted() {
