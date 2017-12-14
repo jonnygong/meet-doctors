@@ -8,7 +8,7 @@
     <mt-field 
       label="就诊时间" 
       placeholder="请选择就诊时间" 
-      v-model="params.visit_time" 
+      v-model="visit_time" 
       readonly  
       @click.native="open('picker')">
     </mt-field>
@@ -35,10 +35,12 @@ export default {
   data() {
     return {
       value: new Date(),
+      visit_time: '',
       params: {
         id: this.$route.params.id,
         visit_time: '',
-        visit_address: ''
+        visit_address: '',
+        openid: this.$route.query.open
       }
     }
   },
@@ -52,7 +54,8 @@ export default {
       // console.log(value.getTime());  转时间戳
       let hour = value.getHours() < 10 ? '0' + value.getHours() : value.getHours();
       let minute = value.getMinutes() < 10 ? '0' + value.getMinutes() : value.getMinutes();
-      this.params.visit_time = `${value.getFullYear()}-${value.getMonth()}-${value.getDate()} ${hour}:${minute}`;
+      this.visit_time = `${value.getFullYear()}-${value.getMonth()+1}-${value.getDate()} ${hour}:${minute}`;
+      this.params.visit_time = value.getTime() / 1000
     },
     openMsgBox() {
       MessageBox.alert('提交成功！', '提示').then(() => {

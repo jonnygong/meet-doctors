@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="btn">
-      <router-link :to="`/guide/time/${params.id}`" v-if="params.status === 3">填写就诊时间</router-link>      
+      <router-link :to="{ path: `/guide/time/${params.id}`, query: { open: params.openid }}" v-if="params.status === 3">填写就诊时间</router-link>      
     </div>
   </div>
 </template>
