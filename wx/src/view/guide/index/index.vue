@@ -59,8 +59,8 @@
               <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
               <span>预约人：{{ list.name }}</span>
               <span>联系电话：{{ list.tel }}</span>
-              <span v-if="list.visit_time == 0">预约时间：{{ list.bespeak_time }}</span>
-              <span v-else style="color: red;">就诊时间：{{ list.visit_time }}</span>
+              <span v-if="list.visit_time === 0">预约时间：{{ list.bespeak_time }}</span>
+              <span v-if="list.visit_time != 0" style="color: red;">就诊时间：{{ visit_time }}</span>
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
@@ -144,6 +144,7 @@ export default {
         { id: 5, name: '已关闭', lists: [] },
       ],
       img: [],
+      visit_time: '',
       mask: false,
       // 上传就诊报告id,
       id: '',
@@ -192,7 +193,9 @@ export default {
       this.types[index].lists = res.param;
       this.types[index].lists.forEach(item => {
         item.bespeak_time = formatFullDate(item.bespeak_time);
-        item.visit_time = formatFullDate(item.visit_time)
+        if(api === 'guideToSee') {
+          this.visit_time = formatFullDate(item.visit_time);
+        }
       })
     },
     // 按钮功能接口
