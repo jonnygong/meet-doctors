@@ -86,7 +86,6 @@
               <span>预约人：{{ list.name }}</span>
               <span>联系电话：{{ list.tel }}</span>
               <span>预约时间：{{ list.bespeak_time }}</span>
-              <span>预约关闭</span>
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
@@ -203,12 +202,12 @@ export default {
         openid: openid
       });
       if(res.status === '200') {
-        // Toast({
-        //   message: '正在刷新页面，请稍后...'
-        // })
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 1000)
+        Toast({
+          message: '正在刷新页面，请稍后...'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000)
       }
     },
     // 关闭预约单
@@ -225,14 +224,14 @@ export default {
         openid: this.openid
       });
       this.mask = false;
-      // if(res.status === '200') {
-      //   Toast({
-      //     message: '正在刷新页面，请稍后...'
-      //   })
-      //   setTimeout(() => {
-      //     window.location.reload();
-      //   }, 1000)
-      // }
+      if(res.status === '200') {
+        Toast({
+          message: '正在刷新页面，请稍后...'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000)
+      }
     },
     // 删除图片
     DelImg(index) {
