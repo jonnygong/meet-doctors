@@ -20,6 +20,16 @@
     }
     &-two{
       margin-top: 1.5rem;
+      .mint-cell{
+        margin-bottom: .5rem;
+        .red{
+          width: .8rem; 
+          height: .8rem; 
+          background: red; 
+          border-radius: 50%; 
+          display: block;
+        }
+      }
     }
     &-three{
       margin-top: 1.5rem;
