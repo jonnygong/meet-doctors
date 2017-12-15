@@ -27,6 +27,7 @@
 
       <mt-tab-container v-model="selected">
         <mt-tab-container-item v-for="(item, index) in types" :key="index" :id="item.id">
+          <!-- 未支付 -->
           <div class="item" v-if="item.id === 1" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
               <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
@@ -39,7 +40,7 @@
               <button @click="closeOrder(list.id, list.openid)" class="red">关 闭</button>
             </div>
           </div>
-
+          <!-- 支付审核 -->
           <div class="item" v-if="item.id === 2" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
               <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
@@ -52,20 +53,21 @@
               <button @click="apply(item.id, list.id, list.openid)" class="blue">支付审核</button>
             </div>
           </div>
-
+          <!-- 专家待看 -->
           <div class="item" v-if="item.id === 3" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
               <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
               <span>预约人：{{ list.name }}</span>
               <span>联系电话：{{ list.tel }}</span>
-              <span>预约时间：{{ list.bespeak_time }}</span>
+              <span v-if="list.visit_time == 0">预约时间：{{ list.bespeak_time }}</span>
+              <span v-else style="color: red;">就诊时间：{{ list.visit_time }}</span>
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
               <button @click="apply(item.id, list.id, list.openid)" class="blue">就医确认</button>
             </div>
           </div>
-
+          <!-- 已完成 -->
           <div class="item" v-if="item.id === 4" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
               <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
@@ -77,14 +79,13 @@
               <button @click="toOrder(list.id)">查 看</button>
             </div>
           </div>
-
+          <!-- 已关闭 -->
           <div class="item" v-if="item.id === 5" v-for="(list, i) in item.lists" :key="i">
             <div class="item-left">
               <span>就医地点/专家：{{ list.hospital_name }}/{{ list.expert_name }}医生</span>
               <span>预约人：{{ list.name }}</span>
               <span>联系电话：{{ list.tel }}</span>
               <span>预约时间：{{ list.bespeak_time }}</span>
-              <span>预约关闭</span>
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
@@ -190,7 +191,8 @@ export default {
       });
       this.types[index].lists = res.param;
       this.types[index].lists.forEach(item => {
-        item.bespeak_time = formatFullDate(item.bespeak_time)
+        item.bespeak_time = formatFullDate(item.bespeak_time);
+        item.visit_time = formatFullDate(item.visit_time)
       })
     },
     // 按钮功能接口
@@ -200,12 +202,12 @@ export default {
         openid: openid
       });
       if(res.status === '200') {
-        // Toast({
-        //   message: '正在刷新页面，请稍后...'
-        // })
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 1000)
+        Toast({
+          message: '正在刷新页面，请稍后...'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000)
       }
     },
     // 关闭预约单
@@ -222,14 +224,14 @@ export default {
         openid: this.openid
       });
       this.mask = false;
-      // if(res.status === '200') {
-      //   Toast({
-      //     message: '正在刷新页面，请稍后...'
-      //   })
-      //   setTimeout(() => {
-      //     window.location.reload();
-      //   }, 1000)
-      // }
+      if(res.status === '200') {
+        Toast({
+          message: '正在刷新页面，请稍后...'
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000)
+      }
     },
     // 删除图片
     DelImg(index) {

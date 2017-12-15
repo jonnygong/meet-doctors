@@ -18,6 +18,9 @@
         readonly  
         @click.native="open('picker')">
       </mt-field>
+      <mt-field v-if="params.visit_time != 0" label="就诊时间" type="text" v-model="visit_time">
+        <span class="red"></span>
+      </mt-field>
     </div>
     <div class="part-three">
       <mt-field label="体重" placeholder="请输入体重(kg)" type="number" v-model="params.weight">
@@ -72,7 +75,8 @@ export default {
         { label: '女', value: '2' }
       ],
       yuyue_time: '',
-      imgs: []
+      imgs: [],
+      visit_time: ''
     }
   },
   methods: {
@@ -83,7 +87,8 @@ export default {
       });
       this.params = res.param;
       this.params.sex = this.params.sex.toString();
-      this.yuyue_time = formatDateTime(res.param.bespeak_time)
+      this.yuyue_time = formatDateTime(res.param.bespeak_time);
+      this.visit_time = formatDateTime(res.param.visit_time);
       // 处理多张图片
       this.imgs = this.params.img.split(',');
     },
