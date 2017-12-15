@@ -7,7 +7,7 @@
         <mt-field label="状态" readonly v-if="params.status === 1" value="交易关闭"></mt-field>
         <mt-field label="状态" readonly v-if="params.status === 2" value="未付款"></mt-field>
         <mt-field label="状态" readonly v-if="params.status === 3" value="已付款"></mt-field>
-        <mt-field label="状态" readonly v-if="params.status === 4" value="已经完成"></mt-field>
+        <mt-field label="状态" readonly v-if="params.status === 4" value="已完成"></mt-field>
       </div>
       
       <div class="exp-order-content-two" v-for="(i, index) in 4" :key="index">
