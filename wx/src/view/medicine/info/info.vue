@@ -30,22 +30,24 @@
       <span>提示：请上传医院床头卡，便于审核通过。</span>
     </div>
     <div class="part-three">
-      <mt-radio 
-        align="right" 
-        title=""
+      <mt-radio
+        align="right"
         v-model="params.guide_id"
         :options="options">
       </mt-radio>
     </div>
+    <div class="part-four">
+      <mt-cell title="您选中的专家助理">{{ checkedValue }}</mt-cell>
+    </div>
     <div class="btn">
-      <button @click="apiForSubmit">提 交</button>
+      <button @click="apiForSubmit">提交申请</button>
     </div>
   </div>
 </template>
 
 <script>
-import { MessageBox, Toast } from 'mint-ui'
-import uploadImg from '@/components/upload/upload'
+import { MessageBox, Toast } from "mint-ui";
+import uploadImg from "@/components/upload/upload";
 export default {
   components: {
     uploadImg
@@ -54,62 +56,74 @@ export default {
     return {
       params: {
         goods_id: this.$route.params.id,
-        name: '',
-        tel: '',
-        address: '',
+        name: "",
+        tel: "",
+        address: "",
         img: [],
-        guide_id: '1'
+        guide_id: "1"
       },
       hide: false,
       options: []
+    };
+  },
+  computed: {
+    checkedValue() {
+      for (let i = 0; i < this.options.length; i++) {
+        if (this.options[i].value == this.params.guide_id) {
+          return this.options[i].label;
+        }
+      }
     }
   },
   methods: {
     // 校验手机格式
     validatemobile() {
       let tel = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-      if(!tel.test(this.params.tel)) {
+      if (!tel.test(this.params.tel)) {
         Toast({
-          message: this.params.tel.length == 0 ? '请输入联系电话！' : '请输入正确的联系电话！'
+          message:
+            this.params.tel.length == 0
+              ? "请输入联系电话！"
+              : "请输入正确的联系电话！"
         });
       }
     },
     // icon点击事件，清除tel表单
     clear() {
-      this.params.tel = '';
-      this.hide =false;
+      this.params.tel = "";
+      this.hide = false;
     },
     // 删除图片
     DelImg(index) {
       this.params.img.splice(index, 1);
     },
     // 获取图片路径
-    handleUplaodImage($event){
-      this.params.img.push( $event );
+    handleUplaodImage($event) {
+      this.params.img.push($event);
     },
     // 表单提交成功后执行
     handleMsgBox() {
       MessageBox({
-        message: '提交成功!', 
-        confirmButtonText: '确定'
+        message: "提交成功!",
+        confirmButtonText: "确定"
       }).then(action => {
-        this.$router.replace('/personal');
-      })
+        this.$router.replace("/personal");
+      });
     },
     // 提交表单
     async apiForSubmit() {
-      const res = await this.$http.post('patientGooSave', this.params);
-      if(res.status === "200") {
+      const res = await this.$http.post("patientGooSave", this.params);
+      if (res.status === "200") {
         this.handleMsgBox();
       }
     },
     // 获取专家助理
     async apiForGetGuide() {
-      const res = await this.$http.post('patientGooGetGuide', {
-        hospital_id: localStorage.getItem('hospital_id')
+      const res = await this.$http.post("patientGooGetGuide", {
+        hospital_id: localStorage.getItem("hospital_id")
       });
       this.options = [];
-      res.param.forEach( (item, index) => {
+      res.param.forEach((item, index) => {
         this.options.push({
           label: item.name,
           value: item.id.toString()
@@ -118,22 +132,22 @@ export default {
     }
   },
   mounted() {
-    this.apiForGetGuide()
+    this.apiForGetGuide();
   },
   watch: {
     params: {
       handler(item) {
-        if(item.tel.length !== 0) {
+        if (item.tel.length !== 0) {
           this.hide = true;
         }
       },
       deep: true
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~@/style/reset.scss';
-@import './info.scss';
+@import "~@/style/reset.scss";
+@import "./info.scss";
 </style>
