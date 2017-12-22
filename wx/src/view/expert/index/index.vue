@@ -30,7 +30,8 @@
             <div class="item-left">
               <span>预约人：{{ list.name }}</span>
               <span>联系方式：{{ list.tel }}</span>
-              <span>预约时间：{{ list.bespeak_time }}</span>
+              <span v-if="list.visit_time === '1970年1月1日'">预约时间：{{ list.bespeak_time }}</span>
+              <span v-else style="color: red;">就诊时间：{{ list.visit_time }}</span>
               <span>就医地点：{{ list.hospital_name }}</span>
             </div>
             <div class="item-right">
@@ -81,6 +82,9 @@ export default {
       this.types[index].lists = res.param;
       this.types[index].lists.forEach(item => {
         item.bespeak_time = formatFullDate(item.bespeak_time);
+        if(api === 'expertToSee') {
+          item.visit_time = formatFullDate(item.visit_time);
+        }
       })
     }
   },
