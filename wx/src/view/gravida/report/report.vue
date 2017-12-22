@@ -36,6 +36,7 @@
       </div>
       <div class="btn">
         <router-link :to="`/medicine/detail/${score.goods_id}`">查看可领药膳</router-link>
+        <router-link v-if="score.after_score == 0" to="##" v-show="false"></router-link>
       </div>
     </div>
   </div>
