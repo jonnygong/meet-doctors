@@ -1,7 +1,7 @@
 <template>
   <div class="exp-index">
     <header>
-      <img src="./../../../assets/card.png" alt="" class="bg-img">
+      <img src="~@/assets/card.png" alt="" class="bg-img">
       <div class="card-info">
         <img :src="headUrl" class="headimg">
         <div class="nickname">{{ nickName }}</div>
@@ -64,7 +64,7 @@ export default {
     }
   },
   methods: {
-    // 预约单列表
+    // 今日预约量，本周完成量，本月完成量
     async apiForCount() {
       const res = await this.$http.post('expertCount', {
         expert_id: this.$route.params.id
@@ -96,6 +96,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import 'index.scss';
 </style>
