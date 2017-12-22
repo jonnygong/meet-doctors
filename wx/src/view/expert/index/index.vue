@@ -19,7 +19,7 @@
 
     <div class="exp-index-content">
       <mt-navbar v-model="selected">
-        <mt-tab-item v-for="(item, index) in types" :key="index" :id="item.id">
+        <mt-tab-item v-for="(item, index) in types" :key="index" :id="item.id" @click.native="apiForOrders(item.api, index)">
           {{ item.name }}
         </mt-tab-item>
       </mt-navbar>
@@ -59,8 +59,8 @@ export default {
       ],
       selected: 1,
       types: [
-        { id: 1, name: '专家待看', lists: [] },
-        { id: 2, name: '已完成', lists: [] }
+        { id: 1, name: '专家待看', api: 'expertToSee', lists: [] },
+        { id: 2, name: '已完成', api: 'expertFinish', lists: [] }
       ]
     }
   },
@@ -93,8 +93,6 @@ export default {
     this.apiForCount();
     // 专家待看
     this.apiForOrders('expertToSee', 0);
-    // 已完成
-    this.apiForOrders('expertFinish', 1);
   }
 }
 </script>
