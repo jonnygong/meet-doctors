@@ -108,6 +108,7 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | *id | int | 预约单id |
+| *openid | varchar | 订单用户的openid |
 
 
 + __响应参数__
@@ -154,6 +155,7 @@
 | --------- | -------- | ------- |
 | *id | int | 预约单id |
 | *visit_report | varchar | 就诊报告 |
+| *openid | varchar | 订单用户的openid |
 
 
 + __响应参数__
@@ -225,6 +227,7 @@
 |  参数名称  | 参数类型 | 参数说明 |
 | --------- | -------- | ------- |
 | *id | int | 预约单id |
+| *openid | varchar | 订单用户的openid |
 
 
 + __响应参数__
@@ -279,6 +282,7 @@
 | *id | int | 预约单id |
 | *visit_time | int | 就诊时间 |
 | *visit_address | varchar | 就诊地址 |
+| *openid | varchar | 订单用户的openid |
 
 
 + __响应参数__
@@ -307,4 +311,5 @@
 | name | varchar | 领取用户名称 |
 | tel | varchar | 联系方式 |
 | address | varchar | 地址 |
+| hospital_name | varchar | 医院名称 |
 

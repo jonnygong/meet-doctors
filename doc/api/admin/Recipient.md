@@ -28,6 +28,7 @@
 | --------- | -------- | ------- |
 | page | int | 当前页 默认1 |
 | *goods_id | int | 产品id 搜索条件 |
+| *create_time | int | 搜索时间 搜索条件 |
 
 
 + __响应参数__
@@ -59,6 +60,7 @@
 | openid | varchar(50) |  |
 | user_img | varchar(255) | 用户头像 |
 | img | varchar(255) | 用户上传待产证明 |
+| hospital_id | int(11) | 医院id |
 
 
 
@@ -114,6 +116,7 @@
 | openid | varchar(50) |  |
 | user_img | varchar(255) | 用户头像 |
 | img | varchar(255) | 用户上传待产证明 |
+| hospital_id | int(11) | 医院id |
 
 
 
@@ -176,6 +179,7 @@
 | --------- | -------- | ------- |
 | id | varchar | ID集，集格式为'1,2,3,4' |
 | status | int | 0关闭1申请2已邮寄  |
+| openid | varchar | 用户openid |
 
 
 + __响应参数__
@@ -196,6 +200,8 @@
 | --------- | -------- | ------- |
 | id | int | ID |
 | remark | varchar | 拒绝理由 |
+| openid | varchar | 用户openid |
+
 
 
 + __响应参数__
