@@ -245,17 +245,8 @@
           img: [
             {required: true, message: "请输入内容", trigger: "blur"}
           ],
-          visit_time: [
-            {type: "date", required: true, message: "请输入内容", trigger: "blur"}
-          ],
-          visit_address: [
-            {required: true, message: "请输入内容", trigger: "blur"}
-          ],
           bespeak_time: [
             {type: "date", required: true, message: "请输入内容", trigger: "blur"}
-          ],
-          is_audit: [
-            {type: "number", required: true, message: "请输入内容", trigger: "blur"}
           ],
         },
         //新增界面数据

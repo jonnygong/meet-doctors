@@ -6,20 +6,20 @@
                     <div class="logo">
                         <img src="../../assets/images/logo.png" style="width:120px;height:20px">
                     </div>
-                    <h5 class="title">中节能物业管理系统后台登录</h5>
+                    <h5 class="title">遇见名医后台管理系统</h5>
                     <ul class="intro">
                         <li><i class="fa fa-arrow-circle-o-right mr5"></i>
-                            杭州快房传媒有限公司座落于钱江新城CBD核心商圈，是都市快报控股子公司，年营业额过亿，是都市快报全媒体阵营的重要一员。
+                            备孕，孕中，产后科普知识发布平台，携手妇产专家提供公益微课堂，分享孕期保健及营养，产后调理及康复，母乳喂养知识及科学育儿指导，关心宝宝健康成长，更关注的是你。
                         </li>
                         <li><i class="fa fa-arrow-circle-o-right mr5"></i>
-                            公司设有媒体中心、运营中心、家居中心、网络中心、客服中心及宁波分中心，主要经营都市快报的房产广告及快房网的运营。都市快报的房产广告，位列浙江省房产投放量第一，最受房产商青睐。
+                            平台增值服务-名医专家面对面，答疑解惑优生育，中华瑰宝膳食方，药食同源月健康。
                         </li>
-                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 公司拥有一支年轻，活力四射，具有激情的团队。团队内有员工100多名，平均年龄29.1岁。
-                        </li>
-                        <li><i class="fa fa-arrow-circle-o-right mr5"></i>
-                            都市快报由杭州日报报业集团主办，于1999年1月1日创刊，是中国第一份四开异型加长报；全国发行，重点覆盖浙江省各地市县，是浙江省发行量最大的报纸。
-                        </li>
-                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 公司网址：	http://www.kfw001.com/</li>
+                        <!--<li><i class="fa fa-arrow-circle-o-right mr5"></i> 公司拥有一支年轻，活力四射，具有激情的团队。团队内有员工100多名，平均年龄29.1岁。-->
+                        <!--</li>-->
+                        <!--<li><i class="fa fa-arrow-circle-o-right mr5"></i>-->
+                            <!--都市快报由杭州日报报业集团主办，于1999年1月1日创刊，是中国第一份四开异型加长报；全国发行，重点覆盖浙江省各地市县，是浙江省发行量最大的报纸。-->
+                        <!--</li>-->
+                        <!--<li><i class="fa fa-arrow-circle-o-right mr5"></i> 公司网址：	http://www.kfw001.com/</li>-->
                     </ul>
                 </div>
             </el-col>

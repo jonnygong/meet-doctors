@@ -44,6 +44,11 @@
                     :min-width="item.width"
                     :sortable="item.sortable">
             </el-table-column>
+            <el-table-column prop="role_ids" label="管理员" min-width="120">
+                <template scope="scope">
+                    {{ roleArray[scope.row.role_ids] }}
+                </template>
+            </el-table-column>
             <!-- 图片显示 -->
             <el-table-column prop="thumb" label="用户头像" width="120">
                 <template scope="scope">
@@ -58,6 +63,8 @@
                         </div>
                     </el-popover>
                 </template>
+            </el-table-column>
+            <el-table-column prop="create_time" label="创建时间" width="180">
             </el-table-column>
             <!-- 状态显示 -->
             <el-table-column prop="status" label="状态" width="100">
@@ -117,30 +124,30 @@
                 <el-form-item label="联系电话" prop="tel">
                     <el-input v-model="editForm.tel" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="所属公司" prop="cp_id">
-                            <el-select v-model.number="editForm.cp_id" placeholder="选择公司" @change="handleSelectComp">
+                <!--<el-row>-->
+                    <!--<el-col :span="12">-->
+                        <el-form-item label="所属角色" prop="role_ids">
+                            <el-select v-model.number="editForm.role_ids" placeholder="选择角色">
                                 <el-option :label="item.name"
                                            :value="item.id"
                                            :key="index"
-                                           v-for="(item, index) in compList"></el-option>
+                                           v-for="(item, index) in roleList"></el-option>
                             </el-select>
                         </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
+                    <!--</el-col>-->
+                    <!--<el-col :span="12">-->
 
 
-                        <el-form-item label="所属部门" prop="dp_id">
-                            <el-select v-model.number="editForm.dp_id" placeholder="选择部门">
-                                <el-option :label="item.name"
-                                           :value="item.id"
-                                           :key="index"
-                                           v-for="(item, index) in departList"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
+                        <!--<el-form-item label="所属部门" prop="dp_id">-->
+                            <!--<el-select v-model.number="editForm.dp_id" placeholder="选择部门">-->
+                                <!--<el-option :label="item.name"-->
+                                           <!--:value="item.id"-->
+                                           <!--:key="index"-->
+                                           <!--v-for="(item, index) in departList"></el-option>-->
+                            <!--</el-select>-->
+                        <!--</el-form-item>-->
+                    <!--</el-col>-->
+                <!--</el-row>-->
                 <el-form-item label="状态" prop="status">
                     <el-select v-model.number="editForm.status" placeholder="请选择状态">
                         <el-option label="开启" :value="1"></el-option>
@@ -179,29 +186,14 @@
                     <el-input v-model="addForm.tel" auto-complete="off"></el-input>
                 </el-form-item>
 
-                <el-row>
-                    <el-col :span="12">
-
-                        <el-form-item label="所属公司" prop="cp_id">
-                            <el-select v-model.number="addForm.cp_id" placeholder="选择公司" @change="handleSelectComp">
-                                <el-option :label="item.name"
-                                           :value="item.id"
-                                           :key="index"
-                                           v-for="(item, index) in compList"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="所属部门" prop="dp_id">
-                            <el-select v-model.number="addForm.dp_id" placeholder="选择部门">
-                                <el-option :label="item.name"
-                                           :value="item.id"
-                                           :key="index"
-                                           v-for="(item, index) in departList"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
+                <el-form-item label="所属角色" prop="role_ids">
+                    <el-select v-model.number="addForm.role_ids" placeholder="选择角色">
+                        <el-option :label="item.name"
+                                   :value="item.id"
+                                   :key="index"
+                                   v-for="(item, index) in roleList"></el-option>
+                    </el-select>
+                </el-form-item>
                 <!--<el-form-item label="状态" prop="status">-->
                     <!--<el-select v-model.number="addForm.status" placeholder="请选择状态">-->
                         <!--<el-option label="开启" :value="1"></el-option>-->
@@ -281,12 +273,6 @@
             width: 180,
             sortable: false
           },
-          {
-            prop: 'create_time',
-            label: '创建时间',
-            width: 200,
-            sortable: false
-          },
         ],
 
         filters: {
@@ -311,6 +297,8 @@
           name: '',
           pid: '',
         },
+        roleList: [],
+        roleArray: [],
 
         editFormVisible: false, //编辑界面是否显示
         editLoading: false,
@@ -342,6 +330,9 @@
           cp_id: [
             {type: 'number', required: true, message: '请选择公司', trigger: 'blur'}
           ],
+          role_ids: [
+            {type: 'number', required: true, message: '请选择角色', trigger: 'blur'}
+          ],
         },
         //编辑界面数据
         editForm: {
@@ -355,7 +346,8 @@
           repassword: '',
           dp_id: '',
           cp_id: '',
-          old_cp_id: ''
+          old_cp_id: '',
+          role_ids: ''
         },
 
         addFormVisible: false,//新增界面是否显示
@@ -388,6 +380,9 @@
           cp_id: [
             {type: 'number', required: true, message: '请选择公司', trigger: 'blur'}
           ],
+          role_ids: [
+            {type: 'number', required: true, message: '请选择角色', trigger: 'blur'}
+          ],
         },
         //新增界面数据
         addForm: {
@@ -400,11 +395,16 @@
           repassword: '',
           dp_id: '',
           cp_id: '',
+          role_ids: ''
         },
       }
     },
 
     methods: {
+      // 格式化更新时间
+      formateTime(row, column) {
+        return ` ${util.formatDate.format(new Date(row[column.property] * 1000), 'yyyy-MM-dd hh:mm:ss')}`
+      },
       // 分页切换
       handleCurrentChange(val) {
         this.page = val;
@@ -440,6 +440,7 @@
         this.total = res.param.pages.total;
         this.pagesize = res.param.pages.pagesize;
         this.list = res.param.list;
+
       },
       // 选择公司变化是触发的方法，传入当前公司id
       handleSelectComp(compId) {
@@ -459,7 +460,19 @@
         if (res === null) return;
         this.compList = res.param.comp;
         this.departSource = res.param.depart;
+
       },
+      //获取角色信息
+      async getRoleData() {
+        let params = {};
+        const res = await this.$http.post(`${MODEL_NAME}/array`, params);
+        if (res === null) return;
+        this.roleList = res.param.role;
+        res.param.role.forEach(item => {
+          this.roleArray[item.id] = item.name
+        });
+      },
+
       /**
        *  处理分类层级，传入 data <层级数组>
        *  返回层级数据
@@ -501,6 +514,7 @@
       //显示编辑界面
       async handleEdit(index, row) {
         this.editFormVisible = true;
+        this.getRoleData();
         let params = {
           id: row.id,
           pid: this.selectRow.pid
@@ -513,6 +527,7 @@
         this.editForm.repassword = '';
         this.compList = res.param.comp;
         this.departSource = res.param.depart;
+        this.editForm.role_ids = Number(res.param.list.role_ids);
       },
       //显示新增界面
       async handleAdd() {
@@ -527,8 +542,10 @@
           repassword: '',
           dp_id: '',
           cp_id: '',
+          role_ids: '',
         };
         this.getCategoryData();
+        this.getRoleData();
       },
       //编辑
       editSubmit() {
@@ -567,6 +584,7 @@
                 repassword: this.addForm.repassword,
                 dp_id: this.addForm.dp_id,
                 cp_id: this.addForm.cp_id,
+                role_ids: this.addForm.role_ids,
               };
               const res = await this.$http.post(`${MODEL_NAME}/Add`, params);
               this.addLoading = false;
@@ -633,6 +651,7 @@
     },
     mounted() {
       this.getListData();
+      this.getRoleData();
     },
     components: {
       'i-uploader': Uploader

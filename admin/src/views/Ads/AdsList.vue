@@ -54,9 +54,9 @@
                     :sortable="item.sortable">
             </el-table-column>
             <!-- 时间戳转日期 -->
-            <el-table-column prop="update_time" label="更新时间" width="180" :formatter="formateTime">
+            <el-table-column prop="start_time" label="开始时间" width="180" :formatter="formateTime">
             </el-table-column>
-            <el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">
+            <el-table-column prop="end_time" label="结束时间" width="180" :formatter="formateTime">
             </el-table-column>
             <el-table-column prop="status" label="状态" width="100">
                 <template scope="scope">

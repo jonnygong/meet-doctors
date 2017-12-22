@@ -78,8 +78,11 @@
                     </el-tag>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" width="200" fixed="right">
+            <el-table-column label="操作" width="320" fixed="right">
                 <template scope="scope">
+                    <el-button type="primary"
+                               size="small"><a :href="`${scope.row.code}`"
+                                                 target="_blank" download="download">二维码下载</a></el-button>
                     <el-button size="small"
                                @click="statusSubmit(scope.$index, scope.row)"
                                :disabled="scope.row.status === -1">

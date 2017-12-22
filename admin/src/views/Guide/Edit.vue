@@ -152,6 +152,11 @@
             label: '导诊微信二维码',
           },
           {
+            type: 'textarea',
+            prop: 'info',
+            label: '导诊简介'
+          },
+          {
             type: 'select',
             prop: 'sex',
             label: '性别',
@@ -198,6 +203,9 @@
           code: [
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],
+          info: [
+            {required: true, message: '请输入内容', trigger: 'blur'}
+          ],
         },
         //新增界面数据
         formData: {
@@ -209,6 +217,7 @@
           hospital_id: '',
           img: '',
           code: '',
+          info: ''
         }
       };
     },

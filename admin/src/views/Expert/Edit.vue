@@ -184,7 +184,7 @@
             label: '出诊时间'
           },
           {
-            type: 'text',
+            type: 'textarea',
             prop: 'specialty',
             label: '特长'
           },

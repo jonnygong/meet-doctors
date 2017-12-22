@@ -76,11 +76,19 @@
                   v-loading="listLoading"
                   @selection-change="selsChange"
                   style="width: 100%;">
-            <el-table-column type="selection" width="55">
-            </el-table-column>
+            <!--<el-table-column type="selection" width="55">-->
+            <!--</el-table-column>-->
 
 
             <el-table-column prop="reg_sn" label="预约单唯一ID" width="160">
+            </el-table-column>
+            <el-table-column prop="status" label="状态" width="100">
+                <template scope="scope">
+                    <el-tag :type="scope.row.status === 1 ? 'gray' : scope.row.status === -1 ? 'danger' : scope.row.status === 2 ? 'warning' : scope.row.status === 3 ? 'success' : 'primary' ">
+                        {{ scope.row.status === 1 ? '交易关闭' : scope.row.status === -1 ? '已删除' : scope.row.status === 2 ? '未付款' : scope.row.status === 3 ? '已付款' : '已完成'
+                        }}
+                    </el-tag>
+                </template>
             </el-table-column>
             <el-table-column prop="name" label="患者姓名" width="120">
             </el-table-column>
@@ -89,6 +97,7 @@
                     {{ sexList[scope.row.sex] }}
                 </template>
             </el-table-column>
+
             <!-- 普通列表显示 -->
             <el-table-column
                     v-for="(item,index) in tableColumn"
@@ -98,14 +107,7 @@
                     :min-width="item.width"
                     :sortable="item.sortable">
             </el-table-column>
-            <el-table-column prop="status" label="状态" width="100">
-                <template scope="scope">
-                    <el-tag :type="scope.row.status === 1 ? 'success' : scope.row.status === -1 ? 'gray' : scope.row.status === 2 ? 'warning' : scope.row.status === 3 ? 'success' : 'primary' ">
-                        {{ scope.row.status === 1 ? '交易关闭' : scope.row.status === -1 ? '已删除' : scope.row.status === 2 ? '未付款' : scope.row.status === 3 ? '已付款' : '已完成'
-                        }}
-                    </el-tag>
-                </template>
-            </el-table-column>
+
             <el-table-column prop="is_audit" label="用户申请审核" min-width="120">
                 <template scope="scope">
                     {{ is_audit[scope.row.is_audit] }}
@@ -154,7 +156,7 @@
             <!--<el-table-column prop="create_time" label="创建时间" width="180" :formatter="formateTime">-->
             <!--</el-table-column>-->
 
-            <el-table-column label="操作" width="150" fixed="right">
+            <el-table-column label="操作" width="400" fixed="right">
                 <template scope="scope">
                     <!--<el-button size="small"-->
                     <!--@click="statusSubmit(scope.$index, scope.row)"-->
@@ -162,33 +164,33 @@
                     <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
                     <!--</el-button>-->
                     <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+                    <el-button type="danger" size="small" @click="batchAction(scope.$index, scope.row, 'close')">交易关闭</el-button>
+                    <el-button type="warning" size="small" @click="batchAction(scope.$index, scope.row, 'notPay')">未付款</el-button>
+                    <el-button type="success" size="small" @click="batchAction(scope.$index, scope.row, 'pay')">已付款</el-button>
+                    <el-button type="primary" size="small" @click="batchAction(scope.$index, scope.row, 'finish')">已经完成</el-button>
+                    <!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>-->
                 </template>
             </el-table-column>
         </el-table>
 
         <!--工具条-->
         <el-col :span="24" class="toolbar">
-            <el-button type="danger"
-                       @click="batchAction('remove')"
-                       :disabled="this.sels.length===0">批量删除
-            </el-button>
-            <el-button type="danger"
-                       @click="batchAction('close')"
-                       :disabled="this.sels.length===0">交易关闭
-            </el-button>
-            <el-button type="warning"
-                       @click="batchAction('notPay')"
-                       :disabled="this.sels.length===0">未付款
-            </el-button>
-            <el-button type="success"
-                       @click="batchAction('pay')"
-                       :disabled="this.sels.length===0">已付款
-            </el-button>
-            <el-button type="primary"
-                       @click="batchAction('finish')"
-                       :disabled="this.sels.length===0">已经完成
-            </el-button>
+            <!--<el-button type="danger"-->
+                       <!--@click="batchAction('close')"-->
+                       <!--:disabled="this.sels.length===0">交易关闭-->
+            <!--</el-button>-->
+            <!--<el-button type="warning"-->
+                       <!--@click="batchAction('notPay')"-->
+                       <!--:disabled="this.sels.length===0">未付款-->
+            <!--</el-button>-->
+            <!--<el-button type="success"-->
+                       <!--@click="batchAction('pay')"-->
+                       <!--:disabled="this.sels.length===0">已付款-->
+            <!--</el-button>-->
+            <!--<el-button type="primary"-->
+                       <!--@click="batchAction('finish')"-->
+                       <!--:disabled="this.sels.length===0">已经完成-->
+            <!--</el-button>-->
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
                            :page-size="pagesize"
@@ -399,7 +401,9 @@
       async statusSubmit(index, row) {
         let params = {
           id: row.id,
-          status: 1 - row.status
+          guide_id: row.guide_id,
+          oldstatus: row.status,
+          status: -1,
         };
 
         const res = await this.$http.post(`${MODEL_NAME}/status`, params);
@@ -414,15 +418,15 @@
         this.sels = sels;
       },
       //批量删除
-      batchAction(action) {
+      batchAction(index, row, action) {
         // 三种操作：remove disable active
-        let id = this.sels.map(item => item.id).toString();
+//        let id = this.sels.map(item => item.id).toString();
         const actions = {
-          'remove': {
-            tip: '删除',
-            api: `${MODEL_NAME}/status`,
-            status: -1
-          },
+//          'remove': {
+//            tip: '删除',
+//            api: `${MODEL_NAME}/status`,
+//            status: -1
+//          },
           'close': {
             tip: '交易关闭',
             api: `${MODEL_NAME}/status`,
@@ -450,7 +454,9 @@
           this.listLoading = true;
           // 非批量删除，带上 status
           let params = (Object.assign({
-            id: id + '',
+            id: row.id,
+            guide_id: row.guide_id,
+            oldstatus: row.status,
             status: actions[action].status
           }, params));
           const res = await this.$http.post(actions[action].api, params);

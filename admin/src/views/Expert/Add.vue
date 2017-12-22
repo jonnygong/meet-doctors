@@ -183,7 +183,7 @@
             label: '出诊时间'
           },
           {
-            type: 'text',
+            type: 'textarea',
             prop: 'specialty',
             label: '特长'
           },
@@ -322,16 +322,16 @@
           if (valid) {
             this.$confirm('确认提交吗？', '提示', {}).then(async () => {
               this.formLoading = true;
-              // 处理时间为时间戳
-              let _next_open_ = this.formData.visit_time;
-              if (typeof this.formData.visit_time === 'number') {
-                _next_open_ = this.formData.visit_time / 1000
-              } else {
-                _next_open_ = new Date(this.formData.visit_time).getTime() / 1000
-              }
+//              // 处理时间为时间戳
+//              let _next_open_ = this.formData.visit_time;
+//              if (typeof this.formData.visit_time === 'number') {
+//                _next_open_ = this.formData.visit_time / 1000
+//              } else {
+//                _next_open_ = new Date(this.formData.visit_time).getTime() / 1000
+//              }
               let params = Object.assign({}, this.formData);
               params.content = this.getUEContent('content'); // 富文本内容
-              params.visit_time = _next_open_; // 后台接收10位时间戳，需要转换
+//              params.visit_time = _next_open_; // 后台接收10位时间戳，需要转换
               const res = await this.$http.post(`${MODEL_NAME}/add`, params);
               this.formLoading = false;
               if (res === null) return;

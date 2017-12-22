@@ -86,6 +86,18 @@
             <el-form-item label="多图片上传" prop="img">
                 <i-muti-uploader :value="formData.img" ref="album"></i-muti-uploader>
             </el-form-item>
+            <!--<el-form-item label="视频上传" prop="video_url">-->
+                <!--<el-input v-model="formData.video_url" auto-complete="off"></el-input>-->
+                <!--<el-upload-->
+                        <!--:action="`${baseUrl}/Video/video`"-->
+                        <!--name="file"-->
+                        <!--:with-credentials="true"-->
+                        <!--:show-file-list="false"-->
+                        <!--:on-success="handleUploadSuccess"-->
+                        <!--:on-error="handleUploadError">-->
+                    <!--<el-button type="primary" style="margin-top: 10px">上传数据</el-button>-->
+                <!--</el-upload>-->
+            <!--</el-form-item>-->
             <!-- 富文本 -->
             <el-form-item label="文字" prop="content">
                 <UE :defaultMsg="formData.content" ref="content"></UE>
@@ -105,6 +117,8 @@
   import Uploader from '@/components/Uploader';
   import BaiduMap from '@/components/BaiduMap';
   import MutiUploader from "@/components/MutiUploader";
+  import configs from '@/configs/api';
+  const {baseUrl} = configs;
 
   const MODEL_NAME = 'Video'; // http://api.zhongjiao.kfw001.com/webadmin/控制器/方法 -> 接口控制器名称
 
@@ -141,17 +155,7 @@
           {
             type: 'upload',
             prop: 'cover',
-            label: '封面图片'
-          },
-          {
-            type: 'text',
-            prop: 'title',
-            label: '视频标题'
-          },
-          {
-            type: 'text',
-            prop: 'info',
-            label: '视频简介'
+            label: '封面'
           },
           {
             type: 'text',
@@ -163,6 +167,16 @@
             prop: 'sort',
             label: '排序',
             placeholder: '请输入排序' // 不加则显示缺省内容
+          },
+          {
+            type: 'text',
+            prop: 'title',
+            label: '视频标题'
+          },
+          {
+            type: 'text',
+            prop: 'info',
+            label: '视频简介'
           },
           {
             type: 'select',
@@ -225,7 +239,7 @@
             {required: true, message: '请输入内容', trigger: 'blur'}
           ],
           img: [
-            {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: '请输入内容'}
           ],
           content: [
             {validator: validateContent, trigger: 'blur'}
@@ -247,7 +261,8 @@
           hospital_id: '',
           long_time: '',
           is_receive: '',
-        }
+        },
+        baseUrl: baseUrl
       }
     },
     methods: {
@@ -258,6 +273,26 @@
       },
       handleCancel() {
         this.$router.back();
+      },
+      handleUploadSuccess(response, file, fileList) {
+        if (response.status === '200') {
+          this.$message({
+            message: '上传成功',
+            type: 'success'
+          });
+          this.formData.video_url = response.param.path
+        } else {
+          this.$message({
+            message: response.info,
+            type: 'warning'
+          });
+        }
+      },
+      handleUploadError(err, file, fileList) {
+        this.$message({
+          message: '上传失败',
+          type: 'warning'
+        });
       },
       async getArrayData() {
         const res = await this.$http.post(`${MODEL_NAME}/array`);
@@ -275,6 +310,8 @@
       },
       //新增
       formSubmit() {
+
+        this.formData.img = this.getImageList("album"); // 多图上传
         this.$refs.formData.validate((valid) => {
           if (valid) {
             this.$confirm('确认提交吗？', '提示', {}).then(async () => {
@@ -282,7 +319,7 @@
 
               let params = Object.assign({}, this.formData);
               params.content = this.getUEContent('content'); // 富文本内容
-              params.img = this.getImageList("album"); // 多图上传
+
               const res = await this.$http.post(`${MODEL_NAME}/add`, params);
               this.formLoading = false;
               if (res === null) return;

@@ -171,12 +171,12 @@
 //            width: 120,
 //            sortable: false
 //          },
-          {
-            prop: 'income',
-            label: '收入',
-            width: 120,
-            sortable: false
-          },
+//          {
+//            prop: 'income',
+//            label: '收入',
+//            width: 120,
+//            sortable: false
+//          },
           {
             prop: 'sort',
             label: '排序',
