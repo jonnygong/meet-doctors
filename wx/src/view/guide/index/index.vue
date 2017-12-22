@@ -20,7 +20,7 @@
 
     <div class="exp-index-content">
       <mt-navbar v-model="selected">
-        <mt-tab-item v-for="(item, index) in types" :key="index" :id="item.id">
+        <mt-tab-item v-for="(item, index) in types" :key="index" :id="item.id" @click.native="apiForGuide(item.api, index)">
           {{ item.name }}
         </mt-tab-item>
       </mt-navbar>
@@ -64,7 +64,8 @@
             </div>
             <div class="item-right">
               <button @click="toOrder(list.id)">查 看</button>
-              <button @click="apply(item.id, list.id, list.openid)" class="blue">就医确认</button>
+              <button @click="apply(item.id, list.id, list.openid)" class="blue" v-if="list.visit_time === '1970年1月1日'" v-show="false">就医确认</button>
+              <button @click="apply(item.id, list.id, list.openid)" class="blue" v-else>就医确认</button>
             </div>
           </div>
           <!-- 已完成 -->
@@ -137,11 +138,11 @@ export default {
       ],
       selected: 1,
       types: [
-        { id: 1, name: '未支付', lists: [] },
-        { id: 2, name: '支付审核', lists: [] },
-        { id: 3, name: '专家待看', lists: [] },
-        { id: 4, name: '已完成', lists: [] },
-        { id: 5, name: '已关闭', lists: [] },
+        { id: 1, name: '未支付', api: 'guideUnpaid', lists: [] },
+        { id: 2, name: '支付审核', api: 'guidePayAudit', lists: [] },
+        { id: 3, name: '专家待看', api: 'guideToSee', lists: [] },
+        { id: 4, name: '已完成', api: 'guideFinish', lists: [] },
+        { id: 5, name: '已关闭', api: 'guideClose', lists: [] },
       ],
       img: [],
       mask: false,
@@ -203,13 +204,13 @@ export default {
         id: id,
         openid: openid
       });
-      if(res.status === '200') {
-        Toast({
-          message: '正在刷新页面，请稍后...'
-        })
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000)
+      if(api === 'guideAudit') {
+        this.apiForGuide('guideUnpaid', 0);
+        this.apiForGuide('guidePayAudit', 1);
+      }else if(api === 'guideRecovery') {
+        this.apiForGuide('guideClose', 4);
+      }else if(api === 'guideIsClose') {
+        this.apiForGuide('guideUnpaid', 0);
       }
     },
     // 关闭预约单
@@ -226,14 +227,7 @@ export default {
         openid: this.openid
       });
       this.mask = false;
-      if(res.status === '200') {
-        Toast({
-          message: '正在刷新页面，请稍后...'
-        })
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000)
-      }
+      this.apiForGuide('guideToSee', 2);
     },
     // 删除图片
     DelImg(index) {
@@ -248,14 +242,6 @@ export default {
     this.apiForCount();
     // 未支付
     this.apiForGuide('guideUnpaid', 0);
-    // 支付审核
-    this.apiForGuide('guidePayAudit', 1);
-    // 专家待看
-    this.apiForGuide('guideToSee', 2);
-    // 已完成
-    this.apiForGuide('guideFinish', 3);
-    // 已关闭
-    this.apiForGuide('guideClose', 4);
   }
 }
 </script>
