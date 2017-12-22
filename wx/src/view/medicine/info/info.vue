@@ -60,7 +60,8 @@ export default {
         tel: "",
         address: "",
         img: [],
-        guide_id: "1"
+        guide_id: "",
+        hospital_id: Number(localStorage.getItem('hospital_id'))
       },
       hide: false,
       options: []
@@ -82,9 +83,7 @@ export default {
       if (!tel.test(this.params.tel)) {
         Toast({
           message:
-            this.params.tel.length == 0
-              ? "请输入联系电话！"
-              : "请输入正确的联系电话！"
+            this.params.tel.length == 0 ? "请输入联系电话！" : "请输入正确的联系电话！"
         });
       }
     },
@@ -129,6 +128,7 @@ export default {
           value: item.id.toString()
         });
       });
+      this.params.guide_id = res.param[0].id.toString();
     }
   },
   mounted() {
