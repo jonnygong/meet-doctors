@@ -108,7 +108,9 @@ export default {
     // 提交表单
     async apiForSubmit() {
       const res = await this.$http.post('patientDocElistRegister', this.params);
-      this.handleMsgBox(res.param);
+      if(res.status === '200') {
+        this.handleMsgBox(res.param);
+      }
     },
     // 表单提交成功后执行
     handleMsgBox(id) {
