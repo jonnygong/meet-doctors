@@ -26,7 +26,7 @@
             <span>体重：{{ params.weight }}kg</span>
             <span>年龄：{{ params.age }}</span>
             <!-- 就诊时间为0，显示预约时间。就诊时间不为0，显示就诊时间 -->
-            <span v-if="params.visit_time == 0">预约时间：{{ params.bespeak_time }}</span>
+            <span v-if="params.visit_time == '1970年1月1日'">预约时间：{{ params.bespeak_time }}</span>
             <span v-else style="color: red;">就诊时间：{{ params.visit_time }}</span>
           </div>
           <div class="option" v-if="index == 1">
@@ -67,7 +67,8 @@ export default {
       });
       this.params = res.param;
       this.params.bespeak_time = formatFullDate(this.params.bespeak_time);
-      this.params.img = res.param.img.split(',')
+      this.params.visit_time = formatFullDate(this.params.visit_time);
+      this.params.img = res.param.img.split(',');
     }
   },
   mounted() {

@@ -18,7 +18,7 @@
         readonly  
         @click.native="open('picker')">
       </mt-field>
-      <mt-field v-if="params.visit_time != 0" label="就诊时间" type="text" v-model="visit_time">
+      <mt-field v-if="params.visit_time != 0" label="就诊时间" type="text" v-model="visit_time" readonly>
         <span class="red"></span>
       </mt-field>
     </div>

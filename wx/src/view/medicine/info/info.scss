@@ -26,7 +26,7 @@
         display: flex;
         align-items: center;
         &-title{
-          width: 10.5rem;
+          width: 105px;
           text-align: left;
           font-size: 1.2rem;
           color: #535353;
@@ -92,6 +92,9 @@
         padding: 0;
       }
     }
+    &-four{
+      margin-top: 1.5rem;
+    }
   }
   .btn{
     text-align: center;
@@ -100,7 +103,7 @@
       width: 11.7rem;
       height: 3.2rem;
       border-radius: 1.6rem;
-      margin-top: 2.5rem;
+      margin: 2.5rem 0;
     }
   }
 }
