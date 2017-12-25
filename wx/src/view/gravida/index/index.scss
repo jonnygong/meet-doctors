@@ -77,4 +77,13 @@
       }
     }
   }
+  .page-infinite-loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: .5rem;
+    span{
+      margin-right: .5rem;
+    }
+  }
 }

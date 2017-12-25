@@ -97,6 +97,8 @@ const guide = {
   guideDetails: '/Wx/Guide/details',
   // 医导：填写就诊时间地址
   guideVisit: '/Wx/Guide/visit',
+  // 医导：获取今日药膳完成量，本周完成量，本月完成量
+  userCount: '/Wx/Guide/usercount',
   // 医导：获取选择该医导的用户信息
   guideGetUser: '/Wx/Guide/getuser'
 }

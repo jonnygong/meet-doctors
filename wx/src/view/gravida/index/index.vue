@@ -20,7 +20,13 @@
     </mt-navbar>
     <!-- 视频列表 -->
     <mt-tab-container v-model="selected">
-      <mt-tab-container-item v-for="(item, index) in categorys" :key="index" :id="item.id">
+      <mt-tab-container-item 
+        v-for="(item, index) in categorys" 
+        :key="index" 
+        :id="item.id"
+        v-infinite-scroll="loadMore" 
+        infinite-scroll-disabled="loading" 
+        infinite-scroll-distance="50">
         <ul>
           <li v-for="(li, lindex) in lists" :key="lindex">
             <router-link :to="{ path: '/gravida/detail/' + li.id}">
@@ -32,6 +38,11 @@
         </ul>
       </mt-tab-container-item>
     </mt-tab-container>
+
+    <p v-show="loading" class="page-infinite-loading">
+      <mt-spinner type="fading-circle"></mt-spinner>
+      加载中...
+    </p>
   </div>
 </template>
 
@@ -42,7 +53,12 @@ export default {
       banners: [],
       selected: '',
       categorys: [],
-      lists: []
+      lists: [],
+      // 上拉加载数据
+      loading: false,
+      allLoaded: false,
+      page: 1,
+      id: ''
     }
   },
   methods: {
@@ -59,10 +75,38 @@ export default {
     },
     // 获取视频列表
     async apiForList(id) {
+      this.id = id;
       const res = await this.$http.post('patientGraVideoList', {
-        category_id: id
+        category_id: id,
+        page: 1
       });
       this.lists = res.param;
+      this.loading = false;
+      this.allLoaded = false;
+      this.page = 1;
+    },
+    // 上拉加载数据
+    loadMore() {
+      console.log(this.allLoaded);
+      if(this.allLoaded) {
+        this.loading = false;
+      }else {
+        this.loading = true;
+        setTimeout(async () => {
+          this.page++;
+          const res = await this.$http.post('patientGraVideoList', {
+            category_id: this.id,
+            page: this.page
+          });
+          console.log(res.param.length);
+          if(res.param.length === 0) {
+            this.allLoaded = true;
+          }else {
+            this.lists = this.lists.concat(res.param);
+          }
+          this.loading = false;
+        }, 1500)
+      }
     }
   },
   mounted() {
@@ -73,6 +117,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../../../style/reset.scss';
+@import '~@/style/reset.scss';
 @import 'index.scss';
 </style>
