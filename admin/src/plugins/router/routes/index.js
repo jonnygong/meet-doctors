@@ -480,19 +480,37 @@ let routes = [
             path: 'list',
             component: () => import('@/views/Recipient/List.vue'),
             name: '药膳领取用户列表',
-            meta: {requiresAuth: true, alias: 'Admin/Recipient/list'}
+            meta: {requiresAuth: true, alias: 'Admin/Recipient/all'}
         },
+          {
+            path: 'listtoday',
+            component: () => import('@/views/Recipient/ListToday.vue'),
+            name: '药膳领取用户列表',
+            meta: {requiresAuth: true, alias: 'Admin/Recipient/today'}
+          },
+          {
+            path: 'listthree',
+            component: () => import('@/views/Recipient/ListThree.vue'),
+            name: '药膳领取用户列表',
+            meta: {requiresAuth: true, alias: 'Admin/Recipient/three'}
+          },
+          {
+            path: 'listmonth',
+            component: () => import('@/views/Recipient/ListMonth.vue'),
+            name: '药膳领取用户列表',
+            meta: {requiresAuth: true, alias: 'Admin/Recipient/month'}
+          },
             {
                 path: 'list/edit/:id',
                 component: () => import('@/views/Recipient/Edit.vue'),
                 name: '药膳领取用户编辑',
-                meta: {requiresAuth: true, alias: 'Admin/Recipient/list'}
+                meta: {requiresAuth: true, alias: 'Admin/Recipient/all'}
             },
             {
                 path: 'list/add',
                 component: () => import('@/views/Recipient/Add.vue'),
                 name: '药膳领取用户新增',
-                meta: {requiresAuth: true, alias: 'Admin/Recipient/list'}
+                meta: {requiresAuth: true, alias: 'Admin/Recipient/all'}
             }
         ]
     },

@@ -4,7 +4,7 @@
         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
             <el-form :inline="true" :model="filters">
                 <!--<el-form-item>-->
-                <!--<el-input v-model="filters.value" placeholder="关键词"></el-input>-->
+                <!--<el-input v-model="filters.value" placeholder="搜索创建时间"></el-input>-->
                 <!--</el-form-item>-->
                 <el-form-item>
                     <el-select v-model="filters.status" placeholder="请选择订单状态">
@@ -37,7 +37,7 @@
                     </el-select>
                 </el-form-item>
             </el-form>
-                <el-form :inline="true" :model="filters">
+            <el-form :inline="true" :model="filters">
                 <el-form-item>
                     <el-date-picker
                             v-model="filters.bespeak_time"
@@ -45,7 +45,7 @@
                             placeholder="选择预约日期">
                     </el-date-picker>
                     <!--<el-button type="primary"-->
-                               <!--@click="this.filters.bespeak_time = ''">清空-->
+                    <!--@click="this.filters.bespeak_time = ''">清空-->
                     <!--</el-button>-->
                 </el-form-item>
 
@@ -164,10 +164,15 @@
                     <!--{{ scope.row.status === 1 ? '停用' : scope.row.status === 0 ? '启用' : '已删除' }}-->
                     <!--</el-button>-->
                     <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button type="danger" size="small" @click="batchAction(scope.$index, scope.row, 'close')">交易关闭</el-button>
-                    <el-button type="warning" size="small" @click="batchAction(scope.$index, scope.row, 'notPay')">未付款</el-button>
-                    <el-button type="success" size="small" @click="batchAction(scope.$index, scope.row, 'pay')">已付款</el-button>
-                    <el-button type="primary" size="small" @click="batchAction(scope.$index, scope.row, 'finish')">已经完成</el-button>
+                    <el-button type="danger" size="small" @click="batchAction(scope.$index, scope.row, 'close')">交易关闭
+                    </el-button>
+                    <el-button type="warning" size="small" @click="batchAction(scope.$index, scope.row, 'notPay')">未付款
+                    </el-button>
+                    <el-button type="success" size="small" @click="batchAction(scope.$index, scope.row, 'pay')">已付款
+                    </el-button>
+                    <el-button type="primary" size="small" @click="batchAction(scope.$index, scope.row, 'finish')">
+                        已经完成
+                    </el-button>
                     <!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>-->
                 </template>
             </el-table-column>
@@ -176,20 +181,20 @@
         <!--工具条-->
         <el-col :span="24" class="toolbar">
             <!--<el-button type="danger"-->
-                       <!--@click="batchAction('close')"-->
-                       <!--:disabled="this.sels.length===0">交易关闭-->
+            <!--@click="batchAction('close')"-->
+            <!--:disabled="this.sels.length===0">交易关闭-->
             <!--</el-button>-->
             <!--<el-button type="warning"-->
-                       <!--@click="batchAction('notPay')"-->
-                       <!--:disabled="this.sels.length===0">未付款-->
+            <!--@click="batchAction('notPay')"-->
+            <!--:disabled="this.sels.length===0">未付款-->
             <!--</el-button>-->
             <!--<el-button type="success"-->
-                       <!--@click="batchAction('pay')"-->
-                       <!--:disabled="this.sels.length===0">已付款-->
+            <!--@click="batchAction('pay')"-->
+            <!--:disabled="this.sels.length===0">已付款-->
             <!--</el-button>-->
             <!--<el-button type="primary"-->
-                       <!--@click="batchAction('finish')"-->
-                       <!--:disabled="this.sels.length===0">已经完成-->
+            <!--@click="batchAction('finish')"-->
+            <!--:disabled="this.sels.length===0">已经完成-->
             <!--</el-button>-->
             <el-pagination layout="prev, pager, next"
                            @current-change="handleCurrentChange"
@@ -284,7 +289,11 @@
     methods: {
       // 格式化更新时间
       formateTime(row, column) {
-        return ` ${util.formatDate.format(new Date(row[column.property] * 1000), 'yyyy-MM-dd hh:mm:ss')}`
+        if (row[column.property] == 0) {
+          return '/';
+        } else {
+          return ` ${util.formatDate.format(new Date(row[column.property] * 1000), 'yyyy-MM-dd hh:mm:ss')}`
+        }
       },
       handleCurrentChange(val) {
         this.page = val;

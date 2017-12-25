@@ -5,31 +5,6 @@
             <el-form :inline="true" :model="filters">
 
                 <el-form-item>
-                    <el-select v-model="filters.value" placeholder="请选择搜索字段">
-                        <el-option
-                                v-for="(item,index) in filters.options"
-                                :key="index"
-                                :label="item.name"
-                                :value="item.id">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item>
-                    <el-date-picker v-model.date="filters.createTime"
-                                    align="right"
-                                    type="date"
-                                    placeholder="请选择时间"
-                                    style="width: 100%;"></el-date-picker>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary"
-                               icon="search"
-                               @click="getListData">搜索
-                    </el-button>
-                </el-form-item>
-
-
-                <el-form-item>
                     <el-button type="primary"
                                @click="getListData">刷新
                     </el-button>
@@ -181,17 +156,7 @@
 
         ],
         filters: {
-          value: '',
-          key: 'goods_id',
-          options: [
-            {value: 'goods_id', label: '产品'},
-          ],
 
-
-          createTime: '',
-//          createTimeOptions: [
-//            {value: 'create_time', label: '提交时间'},
-//          ]
         },
         options: {
           goods: [],
@@ -234,11 +199,9 @@
 
         let params = {
           page: this.page,
-//          key: this.filters.key, // 可选参数查询
-          goods_id: this.filters.value, // 可选参数查询
-          create_time: typeof this.filters.createTime === 'object' ? this.filters.createTime.getTime() / 1000 : ''   // 可选参数查询
-        };
-        const res = await this.$http.post(`${MODEL_NAME}/all`, params);
+
+           };
+        const res = await this.$http.post(`${MODEL_NAME}/today`, params);
         this.listLoading = false;
         if (res === null) return;
         this.total = res.param.pages.total;

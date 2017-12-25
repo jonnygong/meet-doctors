@@ -39,7 +39,7 @@ const SET_SIDE_NAV = (state, nav) => {
   // 权限菜单对应的路由地址
     const route = {
         "系统管理": {iconCls: 'fa fa-archive', url: ''},
-        "Admin/Source/list": {iconCls: '', url: '/system/organization'},
+        // "Admin/Source/list": {iconCls: '', url: '/system/organization'},
         "Admin/Admin/list": {iconCls: '', url: '/system/user/index'},
         "Admin/Role/list": {iconCls: '', url: '/system/auth'},
         "医院管理": {iconCls: 'fa fa-shield', url: ''},
@@ -64,7 +64,10 @@ const SET_SIDE_NAV = (state, nav) => {
         "产品管理": {iconCls: 'fa fa-cubes', url: ''},
         "Admin/Goods/list": {iconCls: '', url: '/goods/list'},
         "领取用户管理": {iconCls: 'fa fa-balance-scale', url: ''},
-        "Admin/Recipient/list": {iconCls: '', url: '/recipient/list'},
+        "Admin/Recipient/all": {iconCls: '', url: '/recipient/list'},
+        "Admin/Recipient/today": {iconCls: '', url: '/recipient/listtoday'},
+        "Admin/Recipient/three": {iconCls: '', url: '/recipient/listthree'},
+        "Admin/Recipient/month": {iconCls: '', url: '/recipient/listmonth'},
         "统计管理": {iconCls: 'fa fa-bar-chart', url: ''},
         "Admin/Count/tomorrow": {iconCls: '', url: '/count/tomorrow'},
         "Admin/Count/todayorder": {iconCls: '', url: '/count/todayorder'},
