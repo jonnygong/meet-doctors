@@ -1,4 +1,45 @@
 .guide-list{
+  &-nav{
+    width: 100%;
+    background: $white;
+    border-bottom: 1px solid #dddde1;
+    ul{
+      display: flex;
+      li{
+        width: 12.5rem;
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 1.2rem;
+        position: relative;
+        h4{
+          color: #808080;
+          margin-bottom: .5rem;
+        }
+        b{
+          font-style: normal;
+          color: $deepBlue;
+        }
+        &:after{
+          content: '';
+          position: absolute;
+          width: 1px;
+          height: 2rem;
+          background: #d6d7dc;
+          right: 0;
+          top: 1.8rem;
+        }
+        &:last-child{
+          &:after{
+            content: '';
+            width: 0;
+          }
+        }
+      }
+    }
+  }
+  .mint-navbar{
+    margin-top: .5rem;
+  }
   .info{
     display: flex;
     align-items: center;
