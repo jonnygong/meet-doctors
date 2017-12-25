@@ -75,6 +75,8 @@ const patient = {
 const guide = {
   // 医导：获取今日预约量，本周完成量，本月完成量
   guideCount: '/Wx/Guide/count',
+  // 医导：获取今日药膳完成量，本周完成量，本月完成量
+  userCount: '/Wx/Guide/usercount',
   // 医导：未支付
   guideUnpaid: '/Wx/Guide/unpaid',
   // 医导：未支付-关闭功能
