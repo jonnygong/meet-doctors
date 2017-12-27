@@ -36,6 +36,16 @@
                     {{ options.hospital[scope.row.hospital_id] }}
                 </template>
             </el-table-column>
+             <el-table-column prop="name" label="用户名称" min-width="120">
+            </el-table-column>
+            <el-table-column prop="status" label="状态" width="120">
+                <template scope="scope">
+                    <el-tag :type="scope.row.status === 0 ? 'gray' : scope.row.status === 1 ? 'warning' : scope.row.status === 2 ? 'success' : 'primary'">
+                        {{ scope.row.status === 0 ? '审核未通过' : scope.row.status === 1 ? '待审核' : scope.row.status === 2 ? '审核通过' : '确认已邮寄'
+                        }}
+                    </el-tag>
+                </template>
+            </el-table-column>
             <!-- 普通列表显示 -->
             <el-table-column
                     v-for="(item,index) in tableColumn"
@@ -62,14 +72,7 @@
             </el-table-column>
             <el-table-column prop="create_time" label="提交时间" width="180" :formatter="formateTime">
             </el-table-column>
-            <el-table-column prop="status" label="状态" width="120">
-                <template scope="scope">
-                    <el-tag :type="scope.row.status === 0 ? 'gray' : scope.row.status === 1 ? 'warning' : scope.row.status === 2 ? 'success' : 'primary'">
-                        {{ scope.row.status === 0 ? '审核未通过' : scope.row.status === 1 ? '待审核' : scope.row.status === 2 ? '审核通过' : '确认已邮寄'
-                        }}
-                    </el-tag>
-                </template>
-            </el-table-column>
+            
             <el-table-column label="操作" width="180" fixed="right">
                 <template scope="scope">
                     <!--<el-button size="small"-->
@@ -134,12 +137,12 @@
       return {
         // 列表表头数据
         tableColumn: [
-          {
-            prop: 'name',
-            label: '用户名称',
-            width: 120,
-            sortable: false
-          },
+          // {
+          //   prop: 'name',
+          //   label: '用户名称',
+          //   width: 120,
+          //   sortable: false
+          // },
           {
             prop: 'tel',
             label: '用户电话',
