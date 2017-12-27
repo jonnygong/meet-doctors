@@ -4,9 +4,9 @@
 
 ## 目录  
 
-├─assets            #图片库
+├─assets            图片库
 ├─components      
-│  └─upload         #图片上传组件
+│  └─upload         图片上传组件
 ├─plugins           #插件库
 │  ├─axios        
 │  │  └─fn          #配置文件
