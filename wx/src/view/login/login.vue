@@ -58,8 +58,8 @@ export default {
     return {
       height: document.documentElement.clientHeight,
       menus: [
-        { title: '快捷登录', info: { tel: localStorage.getItem('tel'), yzm: '' } },
-        { title: '账户登录', info: { tel: localStorage.getItem('tel'), pwd: '' } }
+        { title: '账户登录', info: { tel: localStorage.getItem('tel'), pwd: '' } },
+        { title: '快捷登录', info: { tel: localStorage.getItem('tel'), yzm: '' } }
       ],
       isActive: 0,
       show: 0,
@@ -96,8 +96,8 @@ export default {
       if(res.status === '200') {
         this.dis = true;
         this.clean = setInterval(() => {
-          this.sendCode = `已发送(${this.seconds}s)`;
           this.seconds--;
+          this.sendCode = `已发送(${this.seconds}s)`;
           if(this.seconds <= 0) {
             clearInterval(this.clean);
           }
