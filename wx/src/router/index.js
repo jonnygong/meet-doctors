@@ -22,6 +22,9 @@ import Med_Info from '@/view/medicine/info/info.vue'
 import Personal from '@/view/personal/index/index.vue'
 import Per_Info from '@/view/personal/info/info.vue'
 
+import Art_List from '@/view/article/list/list.vue'
+import Art_Detail from '@/view/article/detail/detail.vue'
+
 // 专家模块
 import Expert from '@/view/expert/index/index.vue'
 import Expert_Order from '@/view/expert/order/order.vue'
@@ -44,30 +47,30 @@ const router = new Router({
       component: Index,
       children: [
         // 遇见名医
-        { 
-          path: '/doctor/:id', 
-          component: Doctor, 
+        {
+          path: '/doctor/:id',
+          component: Doctor,
           meta: { title: '遇见名医' }
         },
-        { 
-          path: '/doctor/list/:id', 
-          component: Doc_List, 
+        {
+          path: '/doctor/list/:id',
+          component: Doc_List,
           meta: { title: '专家列表' }
         },
-        { 
-          path: '/doctor/detail/:id', 
-          component: Doc_Detail, 
+        {
+          path: '/doctor/detail/:id',
+          component: Doc_Detail,
           meta: { title: '专家信息' }
         },
         // 孕妇课堂
-        { 
-          path: '/gravida', 
-          component: Gravida, 
+        {
+          path: '/gravida',
+          component: Gravida,
           meta: { title: '孕妇课堂' }
         },
-        { 
-          path: '/gravida/detail/:id', 
-          component: Gra_Detail, 
+        {
+          path: '/gravida/detail/:id',
+          component: Gra_Detail,
           meta: { title: '视频观看' }
         },
         {
@@ -92,9 +95,9 @@ const router = new Router({
           meta: { title: '药膳介绍' }
         },
         // 个人中心
-        { 
-          path: '/personal', 
-          component: Personal, 
+        {
+          path: '/personal',
+          component: Personal,
           meta: { title: '个人中心' }
         }
       ]
@@ -164,6 +167,17 @@ const router = new Router({
       path: '/guide/list/:id',
       component: Guide_List,
       meta: { title: '领取药膳名单' }
+    },
+    // 文章模块
+    {
+      path: '/article/:id',
+      component: Art_List,
+      meta: { title: '文章列表' }
+    },
+    {
+      path: '/article/detail/:id',
+      component: Art_Detail,
+      meta: { title: '文章详情' }
     },
     {
       path: '*',

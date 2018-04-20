@@ -114,7 +114,20 @@ const expert = {
   expertDetails: '/Wx/Expert/details'
 }
 
-const api = Object.assign({}, login, patient, guide, expert)
+const article = {
+  // 文章分类列表
+  articleCategory: '/Wx/Article/category',
+  // 文章列表接口(包括搜索)
+  articleList: '/Wx/Article/list',
+  // 文章详情接口
+  articleInfo: '/Wx/Article/info',
+  // 文章浏览量统计
+  articleClick: '/Wx/Article/click',
+  // 分享配置接口
+  apiForConfig: 'http://api.mp.kfw001.com/auth/wechat/jssdk'
+}
+
+const api = Object.assign({}, login, patient, guide, expert, article)
 
 export default {
   // 接口请求baseUrl

@@ -62,7 +62,7 @@ axios.defaults.transformResponse = function _transformResponse( res ){
     // 处理错误码
     // 返回object对象到response[data]
     const { status, info, param } = res;
-    if(status === '200') {
+    if(status === '200' || status === true) {
         return res;
     }else{
         // 556未登录状态下重定向路由，10000授权过期后重新发起授权
